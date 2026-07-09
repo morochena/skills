@@ -1,0 +1,6 @@
+interface:
+  display_name: "Debug Work"
+  short_description: "Diagnose broken or slow behavior"
+  default_prompt: "Use $debug-work to diagnose this bug or performance issue."
+policy:
+  allow_implicit_invocation: false

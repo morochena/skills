@@ -1,0 +1,6 @@
+interface:
+  display_name: "Start Work"
+  short_description: "Choose the right workflow for a task"
+  default_prompt: "Use $start-work to choose the right workflow for this task."
+policy:
+  allow_implicit_invocation: false

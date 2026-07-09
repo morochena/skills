@@ -1,0 +1,6 @@
+interface:
+  display_name: "Brainblast"
+  short_description: "Explore product ideas from many angles"
+  default_prompt: "Use $brainblast to explore this idea against the product context."
+policy:
+  allow_implicit_invocation: false

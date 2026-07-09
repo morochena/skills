@@ -1,0 +1,6 @@
+interface:
+  display_name: "Shape Work"
+  short_description: "Clarify fuzzy work before planning"
+  default_prompt: "Use $shape-work to clarify this idea before we plan or build."
+policy:
+  allow_implicit_invocation: false

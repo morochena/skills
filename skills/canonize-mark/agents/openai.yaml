@@ -1,0 +1,6 @@
+interface:
+  display_name: "Canonize Mark"
+  short_description: "Mark non-canon docs safely"
+  default_prompt: "Use $canonize-mark to normalize docs/canon/language.md and docs/canon/trajectory.md, update agent adapters, and mark ADRs, temporary docs, and stale docs in place."
+policy:
+  allow_implicit_invocation: false

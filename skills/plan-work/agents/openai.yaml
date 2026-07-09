@@ -1,0 +1,6 @@
+interface:
+  display_name: "Plan Work"
+  short_description: "Create a parallelizable agent plan"
+  default_prompt: "Use $plan-work to create a parallelizable implementation plan."
+policy:
+  allow_implicit_invocation: false
