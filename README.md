@@ -37,48 +37,45 @@ The intended value is a calmer workflow: clarify the work, preserve the importan
 
 Start with the smallest useful workflow.
 
-For clear tasks, ask the agent to do the work directly. For fuzzy tasks, use `start-work` or `shape-work` first. For medium and large work, use `plan-work` to expose independent streams, blocking edges, integration points, and verification strategy before running `do-work`.
+For clear tasks, ask the agent to do the work directly. For fuzzy implementation work, use `start-work` or `shape-work` first. For medium and large implementation work, use `plan-work` to expose independent streams, blocking edges, integration points, and verification strategy before running `do-work`.
 
 ```txt
 start-work
   -> direct action for trivial/small clear tasks
-  -> brainblast for open-ended idea exploration
   -> shape-work for fuzzy medium/large work
   -> plan-work for coordinated or parallelizable work
   -> do-work for implementation
   -> review-work for post-build quality review
-  -> debug-work for broken or slow behavior
   -> canonize for documentation hygiene
 ```
+
+`brainblast` and `debug-work` sit outside the main implementation workflow. Use `brainblast` before shaping when the idea is still exploratory. Use `debug-work` when the problem is broken behavior rather than planned product work.
 
 The suite is explicit-invocation by default. Each skill opts out of implicit invocation so the agent does not pull in extra workflow unless you ask for it.
 
 ## Routing Logic
 
-`start-work` routes by the kind and complexity of work, not by a fixed process checklist.
+`start-work` routes implementation work by complexity and clarity, not by a fixed process checklist.
 
 ```mermaid
 flowchart TD
-  A["Start with task context"] --> B{"What kind of work is this?"}
-  B -->|"Broken, slow, flaky, surprising"| D["debug-work"]
-  B -->|"Review or quality pass"| R["review-work"]
-  B -->|"Open-ended idea"| BB["brainblast"]
-  B -->|"Clear implementation task"| C{"How complex?"}
-  B -->|"Fuzzy product, domain, or architecture"| S["shape-work"]
-
-  C -->|"Trivial"| T["Do directly"]
-  C -->|"Small"| SP["Brief chat plan, then do directly"]
-  C -->|"Medium"| M{"Are requirements settled?"}
-  C -->|"Large"| L["shape-work -> plan-work -> do-work"]
-
-  M -->|"No"| S
-  M -->|"Yes"| P["plan-work -> do-work"]
-  S -->|"Ready to execute"| P
-  BB -->|"Promising but fuzzy"| S
-  BB -->|"Ready to execute"| P
-  D -->|"Fix is clear"| DW["do-work or direct fix"]
-  D -->|"Needs design decision"| S
-  R -->|"Fix findings"| DW
+  A["Implementation task context"] --> B{"How complex is it?"}
+  B -->|"Trivial"| T["Do directly"]
+  B -->|"Small"| S1["Brief chat plan"]
+  S1 --> D1["Do directly"]
+  B -->|"Medium"| M{"Are requirements settled?"}
+  M -->|"No"| SH["shape-work"]
+  M -->|"Yes"| P["plan-work"]
+  B -->|"Large"| SH
+  SH -->|"Ready to execute"| P
+  P --> DW["do-work"]
+  DW --> R{"Need quality pass?"}
+  R -->|"Yes"| RW["review-work"]
+  R -->|"No"| C{"Durable docs changed?"}
+  RW --> C
+  C -->|"Yes"| CZ["canonize"]
+  C -->|"No"| Done["Done"]
+  CZ --> Done
 ```
 
 | Branch | Use when | Default next move |
@@ -87,9 +84,13 @@ flowchart TD
 | Small | Requirements are clear, but a short assumption check helps. | Brief chat plan, then implement. |
 | Medium | Several files, domain terms, or design choices are involved. | `shape-work` if fuzzy; otherwise `plan-work`. |
 | Large | Multiple areas, blocking edges, or parallel streams are likely. | `shape-work`, then `plan-work`, then `do-work`. |
-| Open-ended | The idea may be interesting, but is not requirements yet. | `brainblast`. |
-| Debug | Something is broken, slow, flaky, or surprising. | `debug-work`. |
-| Review | There is an implementation or diff to critique. | `review-work`. |
+
+Adjacent modes:
+
+| Mode | Use when | How it rejoins |
+| --- | --- | --- |
+| `brainblast` | The idea may be interesting, but is not requirements yet. | Hand off to `shape-work` or `plan-work` only if the idea becomes concrete. |
+| `debug-work` | Something is broken, slow, flaky, or surprising. | Fix directly when obvious; otherwise hand off to `shape-work`, `plan-work`, or `do-work` depending on what the diagnosis reveals. |
 
 ## Agent Compatibility
 
