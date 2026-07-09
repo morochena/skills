@@ -53,6 +53,44 @@ start-work
 
 The suite is explicit-invocation by default. Each skill opts out of implicit invocation so the agent does not pull in extra workflow unless you ask for it.
 
+## Routing Logic
+
+`start-work` routes by the kind and complexity of work, not by a fixed process checklist.
+
+```mermaid
+flowchart TD
+  A["Start with task context"] --> B{"What kind of work is this?"}
+  B -->|"Broken, slow, flaky, surprising"| D["debug-work"]
+  B -->|"Review or quality pass"| R["review-work"]
+  B -->|"Open-ended idea"| BB["brainblast"]
+  B -->|"Clear implementation task"| C{"How complex?"}
+  B -->|"Fuzzy product, domain, or architecture"| S["shape-work"]
+
+  C -->|"Trivial"| T["Do directly"]
+  C -->|"Small"| SP["Brief chat plan, then do directly"]
+  C -->|"Medium"| M{"Are requirements settled?"}
+  C -->|"Large"| L["shape-work -> plan-work -> do-work"]
+
+  M -->|"No"| S
+  M -->|"Yes"| P["plan-work -> do-work"]
+  S -->|"Ready to execute"| P
+  BB -->|"Promising but fuzzy"| S
+  BB -->|"Ready to execute"| P
+  D -->|"Fix is clear"| DW["do-work or direct fix"]
+  D -->|"Needs design decision"| S
+  R -->|"Fix findings"| DW
+```
+
+| Branch | Use when | Default next move |
+| --- | --- | --- |
+| Trivial | The task is obvious, local, and low-risk. | Do it directly. |
+| Small | Requirements are clear, but a short assumption check helps. | Brief chat plan, then implement. |
+| Medium | Several files, domain terms, or design choices are involved. | `shape-work` if fuzzy; otherwise `plan-work`. |
+| Large | Multiple areas, blocking edges, or parallel streams are likely. | `shape-work`, then `plan-work`, then `do-work`. |
+| Open-ended | The idea may be interesting, but is not requirements yet. | `brainblast`. |
+| Debug | Something is broken, slow, flaky, or surprising. | `debug-work`. |
+| Review | There is an implementation or diff to critique. | `review-work`. |
+
 ## Agent Compatibility
 
 The core skill instructions live in `SKILL.md` and are written to be agent-neutral. They assume only that an agent can read files, inspect a codebase, edit files when asked, and optionally coordinate worker agents when the host platform supports that.
@@ -153,29 +191,3 @@ npx skills add /Users/morochena/projects/skills -g --skill '*' -y
 ```
 
 Omit `-g` to install into the current project only. Use `-a <agent>` to target a specific agent ecosystem.
-
-## Layout
-
-```txt
-skills/
-  brainblast/
-    SKILL.md
-  start-work/
-    SKILL.md
-  shape-work/
-    SKILL.md
-  plan-work/
-    SKILL.md
-  do-work/
-    SKILL.md
-  review-work/
-    SKILL.md
-  debug-work/
-    SKILL.md
-  canonize/
-    SKILL.md
-  canonize-mark/
-    SKILL.md
-```
-
-There is no root `SKILL.md` on purpose. Each skill lives under `skills/` so installers can discover them independently.
