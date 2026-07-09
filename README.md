@@ -2,22 +2,81 @@
 
 Personal skills for agent-led software development.
 
-This is an opinionated workflow package for working with coding agents while keeping the human in charge of taste, scope, and direction. The skills are designed for a style of development where the agent does more of the mechanical work, while the developer keeps the important judgment calls visible: what problem is being solved, what complexity is worth introducing, what should be verified, and which project truths should become durable context.
+An opinionated workflow package for coding agents where the agent does more of the mechanical work, and you keep the judgment calls: what problem is being solved, what complexity is worth introducing, what should be verified, and which project truths should become durable context.
 
-## Rationale
+## Quick start
 
-Agent-led development works best when the agent has enough structure to move quickly, but not so much process that every task turns into ceremony.
+1. Install the package (see [Install](#install)).
+2. Prefer **explicit** skill calls (`$start-work`, `$do-work`, etc.).
+3. Unsure how to approach something? Start with `$start-work`.
+4. Clear small task? Just do it — no skill required.
+5. Fuzzy product/engineering idea? `$shape-work` → `$plan-work` → `$do-work`.
+6. Something broken? `$debug-work`, not the full plan pipeline.
 
-These skills aim for a few defaults:
+### Do / don't
 
-- **Explicit invocation.** Skills should be called when they are useful, not constantly inferred in the background.
-- **Code as communication.** Implementation should be optimized for future readers, not just for getting a diff to pass.
-- **Minimize complexity.** Prefer straightforward code, clear names, and local patterns. Avoid abstractions that add more cognitive load than they remove.
-- **Pragmatic verification.** Tests and checks should buy confidence. They are tools, not rituals.
-- **Canon over sediment.** Durable project truth belongs in `docs/canon/`. Temporary plans, ADR drafts, roadmaps, and generated notes should not quietly become permanent instructions.
-- **Parallel where useful.** Medium and large work should be shaped into independent streams when possible, with one coordinating agent session delegating to worker agents when the platform supports it.
+| Do | Don't |
+| --- | --- |
+| Call one skill at a time when you need structure | Turn every task into shape → plan → do |
+| Use `$start-work` as the router when the path is unclear | Assume the agent will auto-pick the right process |
+| Keep plans in chat for small/medium work | Default to heavy plan files |
+| Use this suite's `$plan-work` / `$do-work` | Mix this with the agent's generic Plan mode and double-process the work |
+| Use `$debug-work` when something is broken | Force broken behavior through the full product workflow |
 
-The intended value is a calmer workflow: clarify the work, preserve the important context, plan for parallel execution when it helps, implement with readable defaults, and clean up the documentation surface afterward.
+### If you only install three
+
+| Skill | Why |
+| --- | --- |
+| `$start-work` | Routes you to the smallest useful workflow |
+| `$do-work` | Implementation defaults: readable code, low ceremony, pragmatic verification |
+| `$debug-work` | Diagnosis loop for broken, flaky, or surprising behavior |
+
+Add the rest when you hit fuzzy product work (`$shape-work`, `$plan-work`) or documentation mess (`$canonize`).
+
+### One example
+
+```txt
+$start-work — "add team invites without overbuilding the org model"
+  → $shape-work   (settle language and boundaries)
+  → $plan-work    (streams, blockers, verification)
+  → $do-work
+  → $review-work  (optional quality pass)
+  → $canonize     (if durable docs changed)
+```
+
+## What is a skill? (TLDR)
+
+Skills are reusable playbooks the agent loads on demand. You invoke them by name (for example `$start-work`). This package is **explicit-invocation by default**: the agent should not silently run the whole workflow unless you ask.
+
+You do not need a deep model of skills to use this package. Install them, call the ones you need, and let `$start-work` choose when you are unsure.
+
+## Install
+
+This is a multi-skill package intended for use with [skills](https://skills.sh).
+
+From GitHub:
+
+```bash
+npx skills add morochena/skills
+```
+
+That opens an interactive prompt where you can choose which skills to install.
+
+Optional commands:
+
+```bash
+npx skills add morochena/skills --list
+npx skills add morochena/skills -g --skill '*'
+npx skills add morochena/skills -g --skill start-work
+```
+
+From a local checkout while developing:
+
+```bash
+npx skills add /path/to/skills
+```
+
+Omit `-g` to install into the current project only. Use `-a <agent>` to target a specific agent ecosystem.
 
 ## Skills
 
@@ -33,11 +92,9 @@ The intended value is a calmer workflow: clarify the work, preserve the importan
 | `canonize` | Normalize `docs/canon/` and remove planning sediment. |
 | `canonize-mark` | Normalize canon while preserving and marking non-canonical docs. |
 
-## Intended Usage
+## Default flow
 
 Start with the smallest useful workflow.
-
-For clear tasks, ask the agent to do the work directly. For fuzzy implementation work, use `start-work` or `shape-work` first. For medium and large implementation work, use `plan-work` to expose independent streams, blocking edges, integration points, and verification strategy before running `do-work`.
 
 ```txt
 start-work
@@ -51,27 +108,25 @@ start-work
 
 `brainblast` and `debug-work` sit outside the main implementation workflow. Use `brainblast` before shaping when the idea is still exploratory. Use `debug-work` when the problem is broken behavior rather than planned product work.
 
-The suite is explicit-invocation by default. Each skill opts out of implicit invocation so the agent does not pull in extra workflow unless you ask for it.
+## Routing
 
-## Routing Logic
-
-`start-work` routes implementation work by complexity and clarity, not by a fixed process checklist.
+`start-work` routes by complexity and clarity, not by a fixed process checklist.
 
 ```mermaid
-flowchart TD
-  A["Implementation task context"] --> B{"How complex is it?"}
+flowchart LR
+  A["Task"] --> B{"Complexity?"}
   B -->|"Trivial"| T["Do directly"]
   B -->|"Small"| S1["Brief chat plan"]
   S1 --> D1["Do directly"]
-  B -->|"Medium"| M{"Are requirements settled?"}
+  B -->|"Medium"| M{"Requirements settled?"}
   M -->|"No"| SH["shape-work"]
   M -->|"Yes"| P["plan-work"]
   B -->|"Large"| SH
-  SH -->|"Ready to execute"| P
+  SH --> P
   P --> DW["do-work"]
-  DW --> R{"Need quality pass?"}
+  DW --> R{"Quality pass?"}
   R -->|"Yes"| RW["review-work"]
-  R -->|"No"| C{"Durable docs changed?"}
+  R -->|"No"| C{"Docs changed?"}
   RW --> C
   C -->|"Yes"| CZ["canonize"]
   C -->|"No"| Done["Done"]
@@ -92,7 +147,7 @@ Adjacent modes:
 | `brainblast` | The idea may be interesting, but is not requirements yet. | Hand off to `shape-work` or `plan-work` only if the idea becomes concrete. |
 | `debug-work` | Something is broken, slow, flaky, or surprising. | Fix directly when obvious; otherwise hand off to `shape-work`, `plan-work`, or `do-work` depending on what the diagnosis reveals. |
 
-## Workflow Shape
+## Skill details
 
 ### `start-work`
 
@@ -161,30 +216,17 @@ Use this for broken, flaky, slow, or surprising behavior. It is a diagnosis loop
 
 Use these to keep project documentation trustworthy. `canonize` absorbs durable truth into `docs/canon/` and removes stale planning sediment. `canonize-mark` keeps non-canonical docs in place but marks them so agents know they are not trusted canon.
 
-## Install
+## Rationale
 
-This is a multi-skill package intended for use with [skills](https://skills.sh).
+Agent-led development works best when the agent has enough structure to move quickly, but not so much process that every task turns into ceremony.
 
-From GitHub:
+These skills aim for a few defaults:
 
-```bash
-npx skills add morochena/skills
-```
+- **Explicit invocation.** Skills should be called when they are useful, not constantly inferred in the background.
+- **Code as communication.** Implementation should be optimized for future readers, not just for getting a diff to pass.
+- **Minimize complexity.** Prefer straightforward code, clear names, and local patterns. Avoid abstractions that add more cognitive load than they remove.
+- **Pragmatic verification.** Tests and checks should buy confidence. They are tools, not rituals.
+- **Canon over sediment.** Durable project truth belongs in `docs/canon/`. Temporary plans, ADR drafts, roadmaps, and generated notes should not quietly become permanent instructions.
+- **Parallel where useful.** Medium and large work should be shaped into independent streams when possible, with one coordinating agent session delegating to worker agents when the platform supports it.
 
-That opens an interactive prompt where you can choose which skills to install.
-
-Optional commands:
-
-```bash
-npx skills add morochena/skills --list
-npx skills add morochena/skills -g --skill '*'
-npx skills add morochena/skills -g --skill start-work
-```
-
-From a local checkout while developing:
-
-```bash
-npx skills add /Users/morochena/projects/skills
-```
-
-Omit `-g` to install into the current project only. Use `-a <agent>` to target a specific agent ecosystem.
+The intended value is a calmer workflow: clarify the work, preserve the important context, plan for parallel execution when it helps, implement with readable defaults, and clean up the documentation surface afterward.
