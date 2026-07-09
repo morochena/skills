@@ -92,12 +92,6 @@ Adjacent modes:
 | `brainblast` | The idea may be interesting, but is not requirements yet. | Hand off to `shape-work` or `plan-work` only if the idea becomes concrete. |
 | `debug-work` | Something is broken, slow, flaky, or surprising. | Fix directly when obvious; otherwise hand off to `shape-work`, `plan-work`, or `do-work` depending on what the diagnosis reveals. |
 
-## Agent Compatibility
-
-The core skill instructions live in `SKILL.md` and are written to be agent-neutral. They assume only that an agent can read files, inspect a codebase, edit files when asked, and optionally coordinate worker agents when the host platform supports that.
-
-Some skill directories include `agents/openai.yaml` metadata for UI labels and invocation policy in OpenAI-compatible skill environments. Other agent runtimes can ignore that metadata and use the `SKILL.md` files directly.
-
 ## Workflow Shape
 
 ### `start-work`
@@ -174,21 +168,23 @@ This is a multi-skill package intended for use with [skills](https://skills.sh).
 From GitHub:
 
 ```bash
-# List skills
+npx skills add morochena/skills
+```
+
+That opens an interactive prompt where you can choose which skills to install.
+
+Optional commands:
+
+```bash
 npx skills add morochena/skills --list
-
-# Install all skills globally
-npx skills add morochena/skills -g --skill '*' -y
-
-# Install one skill globally
+npx skills add morochena/skills -g --skill '*'
 npx skills add morochena/skills -g --skill start-work
 ```
 
 From a local checkout while developing:
 
 ```bash
-npx skills add /Users/morochena/projects/skills --list
-npx skills add /Users/morochena/projects/skills -g --skill '*' -y
+npx skills add /Users/morochena/projects/skills
 ```
 
 Omit `-g` to install into the current project only. Use `-a <agent>` to target a specific agent ecosystem.
