@@ -1,55 +1,54 @@
 ---
 name: debug-work
-description: Diagnose broken, flaky, slow, or surprising behavior through reproduction, localization, hypothesis testing, and pragmatic fixes. Use when the user explicitly invokes $debug-work, reports a bug or performance regression, wants triage-style investigation without issue-tracker ceremony, or needs a verified diagnosis before implementation.
+description: Run a red-to-green diagnosis loop for broken, flaky, slow, or surprising behavior.
 ---
 
 # Debug Work
 
-## Overview
-
-Debug behavior before rewriting it. The goal is to reproduce, localize, explain, and then fix or brief the fix with evidence.
-
-This is not an issue-tracker triage workflow. Avoid labels, state machines, and ceremony unless the user explicitly asks for tracker work.
+Establish a trustworthy red signal, explain it, then turn it green or brief the unresolved decision with evidence.
 
 ## Workflow
 
-1. State the claim.
+1. Define the claim.
 
-   Write the observed behavior, expected behavior, affected surface, and any known reproduction steps. If a key reproduction detail is missing and cannot be discovered locally, ask one specific question.
+   State the observed behavior, expected behavior, affected surface, and known reproduction path. Discover missing technical facts locally; ask one focused question only when a user-only detail blocks the investigation.
 
-2. Gather facts.
+   Completion criterion: the claim distinguishes expected from observed behavior and identifies the smallest surface that can prove the difference.
 
-   Inspect relevant code, logs, tests, recent changes, configuration, and canon. Look up codebase facts instead of asking the user.
+2. Establish red.
 
-3. Reproduce or narrow.
+   Inspect relevant code, logs, tests, recent changes, configuration, and canon. Run the smallest command, test, measurement, or manual path that reliably exposes the behavior. When full reproduction is expensive, establish a narrower proxy signal.
 
-   Run the smallest command, test, or manual path that can confirm the behavior. If full reproduction is expensive, find a narrower signal.
+   Completion criterion: a repeatable red signal exists, or the report states exactly what prevented reproduction and what narrower evidence was established.
 
-4. Localize.
+3. Localize the fault.
 
-   Trace from symptom to boundary: input, state, data model, side effect, render path, network call, cache, concurrency, environment, or dependency. Prefer evidence over vibes.
+   Trace the red signal across the relevant boundaries: input, state, data model, side effect, render path, network call, cache, concurrency, environment, or dependency. For performance work, measure where time or resources are spent. For UI work, inspect rendered behavior when possible.
 
-5. Test hypotheses.
+   Completion criterion: the failing boundary is narrow enough to form falsifiable hypotheses, and the evidence rules out unrelated layers.
 
-   Make one hypothesis at a time. Use targeted instrumentation, temporary logging, focused tests, or code reading to falsify it.
+4. Falsify hypotheses.
 
-6. Fix or brief.
+   Test one hypothesis at a time with targeted instrumentation, temporary logging, focused tests, measurements, or code reading. Prefer the simplest explanation that accounts for all observed evidence.
 
-   If the fix is clear and the user asked for resolution, implement the smallest readable fix. If the fix needs a decision or larger design, produce a concise brief and recommend `$shape-work` or `$plan-work`.
+   Completion criterion: one hypothesis explains the red signal and predicts a confirming change, or every remaining hypothesis and missing discriminator is reported.
 
-7. Verify.
+5. Resolve or brief.
 
-   Re-run the reproduction and the most relevant regression checks. Add a test only when it protects meaningful behavior or prevents likely recurrence.
+   When resolution is authorized and the diagnosis is conclusive, implement the smallest readable change at the localized boundary. When resolution needs a product decision or larger design, produce a concise brief and recommend `$shape-work` or `$plan-work`.
 
-8. Report.
+   Completion criterion: the change follows from the diagnosis without unrelated rewriting, or the brief identifies the exact decision that prevents a safe fix.
 
-   Explain the cause, the evidence, the fix or recommended fix, and what was verified.
+6. Turn the signal green.
 
-## Debugging Taste
+   Re-run the red signal and the highest-signal regression checks. Add a test when it protects meaningful behavior or a likely recurrence. Remove temporary instrumentation unless it is useful permanent observability.
 
-- Prefer boring explanations over clever ones.
-- Do not rewrite large areas before locating the fault.
-- Keep temporary instrumentation out of the final diff unless it is useful permanent observability.
-- Treat flaky bugs as state, time, ordering, isolation, or environment problems until proven otherwise.
-- Treat performance bugs as measurement problems first, implementation problems second.
-- For UI bugs, inspect the rendered behavior when possible instead of trusting code shape alone.
+   Completion criterion: the original red signal is green, relevant regression checks pass, and every unrun check or residual uncertainty is explicit.
+
+7. Report the diagnosis.
+
+   Explain the cause, decisive evidence, fix or recommended fix, and verification.
+
+   Completion criterion: the user can distinguish what was observed, what was inferred, what changed, and what remains uncertain.
+
+For flaky behavior, investigate state, time, ordering, isolation, and environment before widening the search.

@@ -1,6 +1,6 @@
 interface:
   display_name: "Start Work"
-  short_description: "Choose the right workflow for a task"
-  default_prompt: "Use $start-work to choose the right workflow for this task."
+  short_description: "Route a task to the smallest workflow"
+  default_prompt: "Use $start-work to route this task to the smallest useful workflow."
 policy:
   allow_implicit_invocation: false

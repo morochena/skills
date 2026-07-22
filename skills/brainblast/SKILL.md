@@ -1,21 +1,17 @@
 ---
 name: brainblast
-description: Explore product, feature, architecture, or creative engineering ideas from multiple angles before deciding whether to shape, plan, or build. Use when the user explicitly invokes $brainblast, wants brainstorming grounded in the current product context, asks to explore an idea without committing to implementation, or wants divergent perspectives synthesized into promising directions.
+description: Diverge through grounded lenses, then converge on promising product or engineering directions.
 ---
 
 # Brainblast
 
-## Overview
-
-Explore an idea without prematurely turning it into a plan. Use product context, canon, and several deliberate lenses to help the user find the most interesting, useful, and practical shape of the idea.
-
-This skill is divergent first and convergent only at the end. Keep it chat-first. Do not edit files, update canon, create plans, or start implementation unless the user explicitly asks.
+Diverge before converging. Keep the exploration in chat and hand off to another skill only after the user chooses a direction.
 
 ## Workflow
 
-1. Load product context.
+1. Ground the idea.
 
-   Read relevant canon when present:
+   Read relevant canon when present, especially:
 
    - `docs/canon/language.md`
    - `docs/canon/product.md`
@@ -23,15 +19,19 @@ This skill is divergent first and convergent only at the end. Keep it chat-first
    - `docs/canon/system.md`
    - `docs/canon/engineering.md`
 
-   Inspect the codebase only enough to ground the conversation. Do not over-research before ideating.
+   Inspect enough of the codebase to separate product facts from assumptions. Stop once further inspection would not materially change the exploration.
 
-2. Restate the idea.
+   Completion criterion: every fact used to constrain the idea is source-grounded, and every remaining uncertainty is labeled as an assumption.
 
-   Put the idea in the product's language. Say what it seems to be about, why it might matter, and what assumptions are already visible.
+2. Frame the idea.
 
-3. Explore through lenses.
+   Restate the idea in the product's language. Name the beneficiary, the problem or opportunity, why it might matter, and the visible assumptions.
 
-   Generate perspectives from several lenses. Use the relevant ones; skip lenses that do not fit.
+   Completion criterion: the framing is concrete enough that the user can correct the premise before divergence begins.
+
+3. Diverge through lenses.
+
+   Explore every materially relevant lens:
 
    - `User value`: who benefits, what gets easier, what pain disappears.
    - `Product fit`: how it supports or conflicts with the current product direction.
@@ -42,19 +42,21 @@ This skill is divergent first and convergent only at the end. Keep it chat-first
    - `Delight pass`: what would make it unusually useful, polished, or memorable.
    - `Weird option`: one non-obvious version that might reveal a better direction.
 
-4. Synthesize.
+   Completion criterion: each relevant lens contributes a distinct observation or is explicitly marked inapplicable; the skeptic and weird-option lenses are included unless they genuinely do not fit.
 
-   Collapse the exploration into a few promising directions. Name the tradeoffs. Avoid pretending there is consensus when there are multiple good paths.
+4. Converge on directions.
+
+   Synthesize a small set of genuinely distinct directions. For each, name its value, tradeoffs, assumptions, and simplest plausible shape. Preserve meaningful disagreement between viable directions.
+
+   Completion criterion: the directions are distinguishable by a material choice, and the user can compare their consequences.
 
 5. Ask what to pull next.
 
-   End by asking which direction the user wants to explore, sharpen, or discard. If the idea is ready to converge, recommend `$shape-work`. If it is ready to execute, recommend `$plan-work`.
+   Recommend the strongest direction while keeping alternatives visible. Ask one focused question about what to explore, sharpen, or discard. Recommend `$shape-work` when material decisions remain and `$plan-work` when intent is settled.
 
-## Council Pattern
+   Completion criterion: the response ends with one clear recommendation and one user choice, without creating files or starting implementation.
 
-You may simulate a lightweight council of perspectives, but keep it low ceremony. Do not create named personas unless that helps the user read the tradeoffs.
-
-Prefer this rhythm:
+## Output Shape
 
 ```md
 ## Idea In Context
@@ -69,12 +71,3 @@ Prefer this rhythm:
 
 ## What To Pull Next
 ```
-
-## Boundaries
-
-- Do not write to `docs/canon/` by default.
-- Do not write `docs/plans/` by default.
-- Do not start implementation.
-- Do not over-index on consensus; productive disagreement is useful.
-- Do not force every idea to become work.
-- Keep the tone exploratory, candid, and concrete.

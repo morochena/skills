@@ -1,76 +1,59 @@
 ---
 name: canonize-mark
-description: Canonize project documentation in preservation mode. Use when the user wants to create, update, normalize, or audit durable project docs while leaving ADRs, plans, specs, milestones, roadmaps, proposals, temporary docs, or stale docs in place; mark planning sediment instead of deleting it; maintain docs/canon/language.md and docs/canon/* with conservative cleanup; update agent adapters when present.
+description: Canonize durable project truth while preserving and visibly marking planning sediment in place.
 ---
 
 # Canonize Mark
 
-Preserve non-canonical docs while making their status explicit. This is the conservative variant of `canonize`: it normalizes durable canon, then marks ADRs, temporary docs, and stale docs in place so they cannot silently steer future agents.
+Preserve non-canonical documents while making their status unmistakable. Normalize durable canon, absorb active constraints, and mark planning sediment in place so future agents can distinguish it from trusted truth.
 
 ## Workflow
 
-1. Load the canon rules.
+1. Inventory and classify the documentation surface.
 
-   Read the sibling skill at `../canonize/SKILL.md`, then follow its inspection, classification, canon layout, adapter, product trajectory, writing, and reporting rules.
+   Read repository instructions, root documentation, `docs/` indexes, and every relevant in-scope Markdown file. Inspect source and configuration only as needed to ground documentation claims. Exclude generated tool state, vendored documentation, dependency checkouts, build output, and nested projects outside the requested scope.
 
-   Completion criterion: you can classify the repo's relevant markdown as `canonical`, `adapter`, `protected-reference`, `temporary`, `stale`, or `unknown` using the same rules as `canonize`.
+   Classify every in-scope document:
 
-2. Apply the preservation override.
+   - `canonical`: maintained current truth future agents should trust.
+   - `adapter`: agent-specific wiring that points to canon.
+   - `protected-reference`: maintained operational, contribution, security, policy, or license material.
+   - `temporary`: active plans, drafts, specs, ADRs, handoffs, investigations, or proposals.
+   - `stale`: obsolete planning or generated documentation whose active constraints are obsolete or already absorbed.
+   - `unknown`: potentially useful material that cannot yet be classified or source-grounded.
 
-   Replace `canonize`'s removal step with this behavior:
+   Treat ADR and decision-record files as temporary or stale source material in preservation mode.
 
-   - Keep `temporary`, `stale`, and `unknown` docs in their current paths, including ADR and decision-record directories.
-   - Rewrite durable facts from those docs into canon before marking them.
-   - Add or update status metadata so the file's non-canonical status is visible.
-   - Remove canon links that make non-canon files look authoritative.
-   - Keep adapters as adapters that point at `docs/canon/`; do not turn preserved sediment into agent-consumption wiring.
-   - Preserve existing frontmatter fields and document content unless a narrow edit is needed to mark status.
+   Completion criterion: every relevant root or `docs/` Markdown file has one classification; every claim intended for canon has a repository source or an uncertainty marker; every excluded file is accounted for by an explicit scope rule.
 
-   Completion criterion: every temporary or stale doc remains in place and carries an explicit non-canonical status, including every ADR-like file.
+2. Normalize canon and absorb active constraints.
 
-3. Mark non-canon docs.
+   Before editing canon or status markers, read [references/preservation-model.md](references/preservation-model.md) for canonical homes, writing rules, and marking formats. Prefer a coherent existing `docs/canon/` convention; otherwise use the model in that reference.
 
-   Prefer frontmatter when the file already has frontmatter or the repo commonly uses it:
+   Rewrite durable facts from temporary and stale material into present-tense canon. Convert decision history into current constraints and represent each active meaning once.
 
-   ```md
-   ---
-   status: temporary
-   canonical: false
-   last_reviewed: YYYY-MM-DD
-   ---
-   ```
+   Completion criterion: language canon lives in `docs/canon/language.md`, every temporary or stale document has been checked for durable facts, and each active constraint has one canonical home.
 
-   For stale docs:
+3. Update adapters and authority links.
 
-   ```md
-   ---
-   status: stale
-   canonical: false
-   last_reviewed: YYYY-MM-DD
-   ---
-   ```
+   Make existing adapters point to the canon read order. Point authoritative links only to canon or protected references. When an unknown document could otherwise appear authoritative, identify it as unknown and non-authoritative in the nearest maintained index or adapter without presenting it as guidance. Keep adapters compact and preserve the repository's existing agent ecosystems.
 
-   When adding frontmatter would clash with the repo's style, add a first visible note instead:
+   Completion criterion: adapters make canon discoverable, duplicate no canon at length, and present no temporary, stale, or unknown document as authoritative.
 
-   ```md
-   > Status: temporary, non-canonical. This file is preserved for reference and should not guide implementation unless promoted into canon.
-   ```
+4. Mark planning sediment in place.
 
-   Completion criterion: a future agent can tell at a glance that the file is not canon or a protected decision constraint.
+   Preserve each temporary or stale document at its current path and retain its content and existing metadata. Add or update the repository-appropriate status marker from the preservation reference. Preserve `unknown` documents without modification and report them for human judgment.
 
-4. Report the result.
+   Completion criterion: every temporary or stale document, including every ADR-like file, remains in place and is visibly marked with its exact non-canonical status; every unknown remains unmodified.
 
-   Summarize changed canon files, adapter changes, ADRs marked temporary or stale, other docs marked temporary or stale, unknown docs left unmodified, and any facts that still need human judgment.
+5. Reconcile the preserved documentation surface.
 
-   Completion criterion: the user can tell what is trusted canon and which preserved docs are non-canonical.
+   Verify status markers, canonical ownership, adapter links, and references among maintained documentation. Make canon the destination for active truth while leaving preserved material available as explicitly non-authoritative context.
 
-## Success Criteria
+   Completion criterion: a future agent can identify canon, protected references, temporary material, stale material, and unknowns without inferring status from directory names.
 
-The skill is working when:
+6. Report the result.
 
-- Canon is stable across future agent sessions.
-- Language canon lives in `docs/canon/language.md`.
-- Adapters point at canon rather than owning canon.
-- ADRs, temporary docs, and stale docs remain available but clearly non-canonical.
-- Stale plans cannot steer implementation.
-- Important decisions survive as current constraints, not historical artifacts.
+   Summarize changed canon files, adapter changes, temporary and stale documents marked, protected and unknown documents left intact, authority-link cleanup, and facts requiring human judgment.
+
+   Completion criterion: the user can account for every in-scope document and distinguish trusted canon from every preserved non-canonical category.

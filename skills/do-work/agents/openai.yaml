@@ -1,6 +1,6 @@
 interface:
   display_name: "Do Work"
-  short_description: "Coordinate implementation from a plan"
-  default_prompt: "Use $do-work to implement this plan with coordinated worker agents where useful."
+  short_description: "Coordinate and integrate implementation"
+  default_prompt: "Use $do-work to coordinate, integrate, and verify this settled implementation plan."
 policy:
   allow_implicit_invocation: false

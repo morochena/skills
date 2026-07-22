@@ -1,6 +1,6 @@
 interface:
   display_name: "Improve Architecture"
-  short_description: "Audit and align a codebase architecture"
-  default_prompt: "Use $improve-architecture to document this repository’s architecture and audit the codebase for inconsistencies."
+  short_description: "Establish a contract and audit conformance"
+  default_prompt: "Use $improve-architecture to establish this repository’s architecture contract and audit conformance."
 policy:
   allow_implicit_invocation: false

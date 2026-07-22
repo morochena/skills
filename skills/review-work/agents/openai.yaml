@@ -1,6 +1,6 @@
 interface:
   display_name: "Review Work"
-  short_description: "Review code for clarity and quality"
-  default_prompt: "Use $review-work to review this implementation for quality and clarity."
+  short_description: "Run a findings-first implementation review"
+  default_prompt: "Use $review-work to run a findings-first review of this implementation."
 policy:
   allow_implicit_invocation: false
