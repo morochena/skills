@@ -1,13 +1,13 @@
 ---
 name: start-work
-description: Choose the right personal workflow for engineering or product work. Use when the user explicitly invokes $start-work, asks how to approach a task, starts fuzzy work, wants to decide whether to shape/plan/debug/review/implement, or wants guidance on parallelization, documentation, verification, or worktree ceremony before acting.
+description: Choose the right personal workflow for engineering or product work. Use when the user explicitly invokes $start-work, asks how to approach a task, starts fuzzy work, wants to decide whether to shape/plan/debug/review/implement/audit architecture, or wants guidance on parallelization, documentation, verification, or worktree ceremony before acting.
 ---
 
 # Start Work
 
 ## Overview
 
-Pick the smallest workflow that will handle the work well. Prefer direct action for clear tasks, shaping for fuzzy decisions, planning for coordination, debugging for broken behavior, and review for quality assessment.
+Pick the smallest workflow that will handle the work well. Prefer direct action for clear tasks, shaping for fuzzy decisions, planning for coordination, debugging for broken behavior, review for change quality, and architecture improvement for repository-wide structural consistency.
 
 This skill is a router, not an orchestrator. Recommend the next move and optionally start the first question, but do not silently invoke a larger process unless the user asks.
 
@@ -30,6 +30,7 @@ Classify the task into one of these buckets:
 - `large`: The work spans multiple areas, has blocking edges, or benefits from parallel lanes. Recommend `$shape-work` then `$plan-work`; write a temporary plan only when needed.
 - `debug`: Something is broken, slow, flaky, or surprising. Recommend `$debug-work`.
 - `review`: The user wants critique or a quality pass. Recommend `$review-work`.
+- `architecture`: The user wants the repository's architecture documented, audited, or made more consistent. Recommend `$improve-architecture`.
 
 ## Decision Rules
 

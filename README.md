@@ -89,6 +89,7 @@ Omit `-g` to install into the current project only. Use `-a <agent>` to target a
 | `do-work` | Execute a plan, using worker agents in the current workspace where useful. |
 | `review-work` | Review implementation quality, clarity, scope, tests, and polish. |
 | `debug-work` | Diagnose broken, flaky, slow, or surprising behavior. |
+| `improve-architecture` | Document architectural intent and audit the codebase for inconsistencies. |
 | `canonize` | Normalize `docs/canon/` and remove planning sediment. |
 | `canonize-mark` | Normalize canon while preserving and marking non-canonical docs. |
 
@@ -107,6 +108,8 @@ start-work
 ```
 
 `brainblast` and `debug-work` sit outside the main implementation workflow. Use `brainblast` before shaping when the idea is still exploratory. Use `debug-work` when the problem is broken behavior rather than planned product work.
+
+`improve-architecture` is a focused structural audit. It establishes or reads `docs/architecture.md`, checks the codebase against that contract, and writes a remediation roadmap without refactoring production code by default.
 
 ## Routing
 
@@ -146,6 +149,7 @@ Adjacent modes:
 | --- | --- | --- |
 | `brainblast` | The idea may be interesting, but is not requirements yet. | Hand off to `shape-work` or `plan-work` only if the idea becomes concrete. |
 | `debug-work` | Something is broken, slow, flaky, or surprising. | Fix directly when obvious; otherwise hand off to `shape-work`, `plan-work`, or `do-work` depending on what the diagnosis reveals. |
+| `improve-architecture` | The repository lacks a clear architecture contract or applies its patterns inconsistently. | Hand the agreed findings to `plan-work` or implement a selected finding with `do-work`. |
 
 ## Skill details
 
@@ -211,6 +215,10 @@ Use this after implementation or when reviewing a diff. It focuses on correctnes
 ### `debug-work`
 
 Use this for broken, flaky, slow, or surprising behavior. It is a diagnosis loop: state the claim, gather facts, reproduce or narrow the signal, localize the fault, test hypotheses, then fix or brief the fix.
+
+### `improve-architecture`
+
+Use this when the question is not whether one change is good, but whether the repository applies its own architectural decisions consistently. It creates or validates `docs/architecture.md`, audits representative end-to-end paths and cross-cutting patterns, then writes `docs/architecture-audit.md` with evidence, impact, target states, and safe migration order. It favors local constraints and reduced cognitive load over universal pattern prescriptions.
 
 ### `canonize` and `canonize-mark`
 

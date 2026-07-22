@@ -7,7 +7,7 @@ description: Clarify fuzzy engineering, product, architecture, or domain work be
 
 ## Overview
 
-Interview the user until the work is clear enough to plan or build. Resolve one decision at a time, recommend an answer for each question, and look up codebase facts instead of asking the user to restate them.
+Interview the user until the work is clear enough to plan or build. Resolve one decision at a time, recommend an answer for each question, offer easy-to-select options, and look up codebase facts instead of asking the user to restate them.
 
 Shape work in chat first. Write to canon only when a durable term or constraint has clearly settled.
 
@@ -23,7 +23,7 @@ Shape work in chat first. Write to canon only when a durable term or constraint 
 
 3. Interview one decision at a time.
 
-   Ask one question, include the recommended answer, and wait. Do not ask a questionnaire. Do not answer for the user on product or design decisions.
+   Ask one question, offer concise options, identify the recommended answer, and wait. Do not ask a questionnaire. Do not answer for the user on product or design decisions.
 
 4. Sharpen language.
 
@@ -46,6 +46,30 @@ Shape work in chat first. Write to canon only when a durable term or constraint 
 6. Stop at shared understanding.
 
    End with a concise summary of the settled decisions, open questions, canon updates, and the recommended next step, usually `$plan-work`.
+
+## Decision Prompts
+
+Prefer the environment's native structured-choice prompt when one is available and permitted in the current mode. Keep it to one decision with two to four mutually exclusive options, put the recommended option first, and explain the material tradeoff in one sentence per option.
+
+When no native choice prompt is available, use lettered options so the user can answer with a single character:
+
+```md
+Which account model should we use?
+
+A. One workspace per account (Recommended) — simpler permissions and ownership.
+B. Multiple workspaces per account — more flexible, but introduces membership and switching now.
+
+Reply `A` or `B`, or type a different answer.
+```
+
+Use `A`, `B`, `C`, and so on consistently within one question. Do not require replies such as "yes," "agreed," or a restatement of the option. When confirming a recommendation, still provide explicit choices such as:
+
+```md
+A. Use the recommended direction
+B. Revisit the decision
+```
+
+Offer only viable alternatives. Do not invent a false binary or hide a meaningful tradeoff to make the prompt shorter. If the decision is genuinely exploratory and cannot yet be reduced to honest options, ask one focused open-ended question instead.
 
 ## Canon Boundaries
 
