@@ -1,6 +1,6 @@
 interface:
   display_name: "Start Work"
-  short_description: "Route a task to the smallest workflow"
-  default_prompt: "Use $start-work to route this task to the smallest useful workflow."
+  short_description: "Route by uncertainty, risk, and coordination"
+  default_prompt: "Use $start-work to choose the smallest evidence-producing workflow for this task."
 policy:
   allow_implicit_invocation: false

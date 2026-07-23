@@ -1,11 +1,11 @@
 ---
 name: canonize-mark
-description: Canonize durable project truth while preserving and visibly marking planning sediment in place.
+description: Canonize durable non-derivable project intent while preserving and visibly marking planning sediment in place.
 ---
 
 # Canonize Mark
 
-Preserve non-canonical documents while making their status unmistakable. Normalize durable canon, absorb active constraints, and mark planning sediment in place so future agents can distinguish it from trusted truth.
+Preserve non-canonical documents while making their status unmistakable. Let code, configuration, schemas, and tests own mechanically discoverable truth. Normalize durable intent, reconcile active constraints, and mark planning sediment in place so future agents can distinguish it from trusted truth.
 
 ## Workflow
 
@@ -24,21 +24,25 @@ Preserve non-canonical documents while making their status unmistakable. Normali
 
    Treat ADR and decision-record files as temporary or stale source material in preservation mode.
 
-   Completion criterion: every relevant root or `docs/` Markdown file has one classification; every claim intended for canon has a repository source or an uncertainty marker; every excluded file is accounted for by an explicit scope rule.
+   For each candidate claim, identify whether its proper authority is executable—code, configuration, schema, test, or generated output—or prose canon.
 
-2. Normalize canon and absorb active constraints.
+   Completion criterion: every relevant root or `docs/` Markdown file has one classification; every candidate claim has an authoritative home, repository source, or uncertainty marker; every excluded file is accounted for by an explicit scope rule.
+
+2. Normalize canon and reconcile active constraints.
 
    Before editing canon or status markers, read [references/preservation-model.md](references/preservation-model.md) for canonical homes, writing rules, and marking formats. Prefer a coherent existing `docs/canon/` convention; otherwise use the model in that reference.
 
-   Rewrite durable facts from temporary and stale material into present-tense canon. Convert decision history into current constraints and represent each active meaning once.
+   Preserve vocabulary, intent, invariants, boundaries, non-goals, and rationale that executable sources cannot express safely. Remove mechanically discoverable duplication from canon or replace it with a stable pointer to its source.
 
-   Completion criterion: language canon lives in `docs/canon/language.md`, every temporary or stale document has been checked for durable facts, and each active constraint has one canonical home.
+   When a temporary document names a constraint that should be enforced in code, configuration, schema, or tests, verify the existing enforcement. Preserve an established normative constraint as intent and report any enforcement gap instead of claiming that implementation conforms. Treat an unaccepted constraint as an unresolved decision.
+
+   Completion criterion: language canon lives in `docs/canon/language.md`, every temporary or stale document has been checked for durable intent and active constraints, and each meaning has one prose or executable authority.
 
 3. Update adapters and authority links.
 
-   Make existing adapters point to the canon read order. Point authoritative links only to canon or protected references. When an unknown document could otherwise appear authoritative, identify it as unknown and non-authoritative in the nearest maintained index or adapter without presenting it as guidance. Keep adapters compact and preserve the repository's existing agent ecosystems.
+   Make existing adapters point to the canon read order. Point authoritative links only to canon, protected references, or stable executable sources. When an unknown document could otherwise appear authoritative, identify it as unknown and non-authoritative in the nearest maintained index or adapter without presenting it as guidance. Keep adapters compact and preserve the repository's existing agent ecosystems.
 
-   Completion criterion: adapters make canon discoverable, duplicate no canon at length, and present no temporary, stale, or unknown document as authoritative.
+   Completion criterion: adapters make canon and authoritative executable sources discoverable, duplicate no canon at length, and present no temporary, stale, or unknown document as authoritative.
 
 4. Mark planning sediment in place.
 
@@ -48,7 +52,7 @@ Preserve non-canonical documents while making their status unmistakable. Normali
 
 5. Reconcile the preserved documentation surface.
 
-   Verify status markers, canonical ownership, adapter links, and references among maintained documentation. Make canon the destination for active truth while leaving preserved material available as explicitly non-authoritative context.
+   Verify status markers, canonical ownership, executable authority, adapter links, and references among maintained documentation. Make canon the destination for non-derivable intent and executable sources the destination for mechanics while leaving preserved material available as explicitly non-authoritative context.
 
    Completion criterion: a future agent can identify canon, protected references, temporary material, stale material, and unknowns without inferring status from directory names.
 

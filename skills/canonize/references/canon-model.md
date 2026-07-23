@@ -19,8 +19,20 @@ For a large or multi-domain repository, add a context-specific canon file only w
 - `language.md`: domain and product terms, roles, business concepts, codebase-specific meanings, and naming boundaries.
 - `product.md`: North Star, current product, product boundaries, and non-negotiables.
 - `trajectory.md`: current directional themes, directional boundaries, and the rule for reviewing trajectory.
-- `system.md`: current architecture, modules, data flow, runtime boundaries, services, persistence, authorization, and invariants.
-- `engineering.md`: code organization, testing, APIs, UI, errors, naming, dependencies, and common commands.
+- `system.md`: durable architectural intent, runtime boundaries, authorization rules, invariants, and tradeoffs that source structure cannot explain safely.
+- `engineering.md`: non-obvious engineering constraints, naming boundaries, testing intent, and conventions whose rationale is not mechanically discoverable.
+
+Do not create every file by default. Create a canonical home only when durable content needs it.
+
+## Authority
+
+Use the nearest trustworthy source:
+
+1. Code, configuration, schemas, and tests own mechanically discoverable or enforceable behavior.
+2. Generated views may summarize executable sources but do not create intent.
+3. Canon owns vocabulary, product intent, invariants, boundaries, non-goals, and rationale that executable sources cannot express safely.
+
+Do not mirror module trees, routes, schemas, commands, dependency lists, or test inventories in canon. Omit them or point to the stable executable source. When a stated constraint should be enforced but is not, record an enforcement gap rather than presenting the prose as proof.
 
 Use this metadata when the repository has no stronger convention:
 
@@ -64,13 +76,15 @@ Keep active direction and boundaries here; move executable work into temporary p
 
 ## Canon writing
 
-Write canon in present tense as specific, compact, source-grounded current state. State active constraints rather than decision history.
+Write canon in present tense as specific, compact, source-grounded current intent. State active constraints rather than decision history.
 
 ```md
 Mutations use server actions by default. API routes serve endpoints that must support non-React clients.
 ```
 
 Represent uncertainty explicitly instead of converting a wish or weak inference into truth. Each meaning has one canonical home; adapters and protected references may point to it rather than restate it.
+
+When a constraint can be enforced at reasonable cost, prefer a type, test, lint rule, schema, or configuration check. Keep only the non-derivable intent or rationale in canon.
 
 ## Agent consumption
 

@@ -1,6 +1,6 @@
 interface:
   display_name: "Do Work"
-  short_description: "Coordinate and integrate implementation"
-  default_prompt: "Use $do-work to coordinate, integrate, and verify this settled implementation plan."
+  short_description: "Implement in small verifiable slices"
+  default_prompt: "Use $do-work to implement this settled intent through small working slices and risk-matched verification."
 policy:
   allow_implicit_invocation: false

@@ -4,7 +4,7 @@ Use this reference to structure and prioritize conformance findings.
 
 ## Report structure
 
-Use `docs/architecture-audit.md` unless the user specifies another path.
+Use this structure in chat by default. Write `docs/architecture-audit.md` only when the user requests a persistent report or the findings must coordinate a cross-session remediation program.
 
 ```md
 # Architecture Audit

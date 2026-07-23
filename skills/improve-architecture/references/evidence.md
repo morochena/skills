@@ -29,11 +29,23 @@ Use evidence in this order:
 
 1. User-stated constraints and decisions.
 2. Explicit architecture documentation and accepted decision records.
-3. Adopted framework conventions.
-4. Dependency direction and runtime behavior.
-5. Recurring repository patterns.
+3. Executed tests, dependency queries, traces, runtime behavior, and configuration.
+4. Adopted framework conventions.
+5. Static dependency direction and recurring repository patterns.
 
 A repeated pattern is evidence, not proof of intent. Record contradictions between stronger and weaker sources.
+
+## Evidence production
+
+Prefer the cheapest non-destructive signal that can falsify the suspected rule or violation:
+
+- dependency or import queries for boundary direction;
+- focused tests for business-rule placement and behavioral seams;
+- type checks, linters, or architecture tests for enforceable constraints;
+- traces or runtime inspection for actual data and control flow;
+- generated graphs or inventories for broad orientation, followed by targeted source checks.
+
+Treat generated output as evidence, not durable intent. Keep it temporary unless the repository already maintains it as an automated artifact.
 
 ## Rule confidence
 

@@ -1,6 +1,6 @@
 interface:
   display_name: "Plan Work"
-  short_description: "Map lanes, critical paths, and scope"
-  default_prompt: "Use $plan-work to map parallel lanes, the critical path, integration ownership, and verifiable scope."
+  short_description: "Plan coordination from established evidence"
+  default_prompt: "Use $plan-work to coordinate shared boundaries, blocking edges, ownership, and verification from established evidence."
 policy:
   allow_implicit_invocation: false

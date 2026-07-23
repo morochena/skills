@@ -29,7 +29,7 @@ Prioritize issues in this order:
 
 2. Read intent.
 
-   Read the plan, issue, chat context, or canon needed to know what the change was supposed to do.
+   Read the request, issue, chat context, canon, acceptance tests, prototypes, or other observed artifacts needed to know what the change was supposed to do.
 
    Completion criterion: every intended outcome and explicit non-goal has a source; missing intent is recorded as an open question rather than guessed.
 

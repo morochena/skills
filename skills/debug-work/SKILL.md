@@ -35,7 +35,7 @@ Establish a trustworthy red signal, explain it, then turn it green or brief the 
 
 5. Resolve or brief.
 
-   When resolution is authorized and the diagnosis is conclusive, implement the smallest readable change at the localized boundary. When resolution needs a product decision or larger design, produce a concise brief and recommend `$shape-work` or `$plan-work`.
+   When resolution is authorized and the diagnosis is conclusive, implement the smallest readable change at the localized boundary. When resolution needs a product decision, produce a concise brief and recommend `$shape-work`. Recommend `$plan-work` only when the diagnosed fix creates durable coordination, migration order, shared-interface ownership, or a costly commitment.
 
    Completion criterion: the change follows from the diagnosis without unrelated rewriting, or the brief identifies the exact decision that prevents a safe fix.
 

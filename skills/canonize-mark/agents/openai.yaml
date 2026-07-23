@@ -1,6 +1,6 @@
 interface:
   display_name: "Canonize Mark"
-  short_description: "Canonize truth and mark planning sediment"
-  default_prompt: "Use $canonize-mark to normalize durable canon and visibly mark planning sediment in place."
+  short_description: "Keep durable intent and mark planning sediment"
+  default_prompt: "Use $canonize-mark to preserve non-derivable intent and visibly mark planning sediment in place."
 policy:
   allow_implicit_invocation: false

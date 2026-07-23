@@ -52,7 +52,7 @@ Diverge before converging. Keep the exploration in chat and hand off to another 
 
 5. Ask what to pull next.
 
-   Recommend the strongest direction while keeping alternatives visible. Ask one focused question about what to explore, sharpen, or discard. Recommend `$shape-work` when material decisions remain and `$plan-work` when intent is settled.
+   Recommend the strongest direction while keeping alternatives visible. Ask one focused question about what to explore, sharpen, or discard. Recommend `$shape-work` when material decisions remain, `$do-work` when intent is settled and execution is clear, and `$plan-work` only when durable coordination or a costly commitment requires it.
 
    Completion criterion: the response ends with one clear recommendation and one user choice, without creating files or starting implementation.
 

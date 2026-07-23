@@ -1,6 +1,6 @@
 interface:
   display_name: "Canonize"
-  short_description: "Canonize truth and remove planning sediment"
-  default_prompt: "Use $canonize to absorb durable truth into canon, then remove planning sediment."
+  short_description: "Keep durable intent and remove planning sediment"
+  default_prompt: "Use $canonize to preserve non-derivable intent, defer executable truth to source, and remove planning sediment."
 policy:
   allow_implicit_invocation: false
