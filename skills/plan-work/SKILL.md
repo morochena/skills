@@ -102,3 +102,5 @@ Use the applicable sections from this format; omit empty ceremony:
 ```
 
 The plan is complete when another agent can distinguish evidence from assumptions, account for the entire scope, start every unblocked stream, recognize every dependency, integrate through one owner, and verify each outcome without rediscovering intent.
+
+When the plan contains costly assumptions, migrations, novel architecture, shared boundaries, or broad blast radius, recommend an explicit `$challenge-plan` pass before `$do-work`. Do not start the next skill automatically.

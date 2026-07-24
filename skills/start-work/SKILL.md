@@ -21,6 +21,7 @@ Act as a router, not an orchestrator. Inspect only enough local context to choos
 
    - Explore an idea without committing to requirements: recommend `$brainblast`.
    - Diagnose broken, flaky, slow, or surprising behavior: recommend `$debug-work`.
+   - Adversarially stress-test a completed plan before implementation: recommend `$challenge-plan`.
    - Review an existing change: recommend `$review-work`.
    - Establish or audit repository architecture: recommend `$improve-architecture`.
    - Normalize canon and remove planning sediment: recommend `$canonize`.

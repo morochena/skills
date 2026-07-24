@@ -42,7 +42,7 @@ Add the rest when you hit fuzzy product work (`$shape-work`), real coordination 
 $start-work — "add team invites without overbuilding the org model"
   → $shape-work   (settle boundaries; probe the invite flow if seeing it helps)
     ├─ local implementation → $do-work
-    └─ shared interfaces or parallel work → $plan-work → $do-work
+    └─ shared interfaces or parallel work → $plan-work → $challenge-plan → $do-work
   → $review-work  (optional quality pass)
   → $canonize     (if durable docs changed)
 ```
@@ -89,6 +89,7 @@ Omit `-g` to install into the current project only. Use `-a <agent>` to target a
 | `brainblast` | Explore ideas from multiple angles before shaping or planning. |
 | `shape-work` | Resolve product and design decisions through conversation or cheap working probes. |
 | `plan-work` | Coordinate parallel work, shared boundaries, migrations, or costly commitments. |
+| `challenge-plan` | Adversarially stress-test a completed plan before implementation. |
 | `do-work` | Implement settled intent in small verifiable slices. |
 | `review-work` | Review implementation quality, clarity, scope, tests, and polish. |
 | `debug-work` | Diagnose broken, flaky, slow, or surprising behavior. |
@@ -105,6 +106,7 @@ start-work
   -> direct action for clear, local, reversible work
   -> shape-work for unresolved intent or an evidence-producing probe
   -> plan-work only for coordination, migration order, or costly commitments
+  -> challenge-plan for a consequential pre-build stress test
   -> do-work for the smallest verifiable implementation slice
   -> review-work for post-build quality review
   -> canonize for documentation hygiene
@@ -126,7 +128,10 @@ flowchart LR
   SH --> C
   C -->|"Yes"| P["plan-work"]
   C -->|"No"| DW["do-work or direct action"]
-  P --> DW
+  P --> CP{"Consequential stress test?"}
+  CP -->|"Yes"| CH["challenge-plan"]
+  CP -->|"No"| DW
+  CH --> DW
   DW --> R{"Quality pass?"}
   R -->|"Yes"| RW["review-work"]
   R -->|"No"| DC{"Docs changed?"}
@@ -148,6 +153,7 @@ Adjacent modes:
 | Mode | Use when | How it rejoins |
 | --- | --- | --- |
 | `brainblast` | The idea may be interesting, but is not requirements yet. | Hand off to `shape-work` when decisions remain; otherwise use `do-work` or `plan-work` when coordination requires it. |
+| `challenge-plan` | A completed plan contains costly assumptions, migrations, novel architecture, shared boundaries, or broad blast radius. | Hand off to `plan-work` for revisions, `shape-work` for newly exposed product decisions, or `do-work` when ready. |
 | `debug-work` | Something is broken, slow, flaky, or surprising. | Fix directly when obvious; otherwise use `shape-work` for product decisions, `plan-work` for coordination, or `do-work` for a settled fix. |
 | `improve-architecture` | The repository lacks a clear architecture contract or applies its patterns inconsistently. | Assess in chat, document durable intent, or implement a selected bounded finding. |
 
@@ -201,6 +207,10 @@ docs/plans/<slug>.md
 ```
 
 Those files should use temporary frontmatter and later be absorbed or removed by `canonize`.
+
+### `challenge-plan`
+
+Use this after `plan-work` when the cost of a mistaken plan warrants an adversarial pass. Five independent lenses test reuse opportunities, goal alignment, alternative approaches, failure modes, and evidence-backed deliverability. Their anonymized cross-review produces a `Ready`, `Revise`, or `Replan` verdict with concrete amendments rather than a pile of speculative objections.
 
 ### `do-work`
 

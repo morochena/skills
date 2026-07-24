@@ -1,0 +1,6 @@
+interface:
+  display_name: "Challenge Plan"
+  short_description: "Adversarial council review for implementation plans"
+  default_prompt: "Use $challenge-plan to stress-test this completed plan before implementation."
+policy:
+  allow_implicit_invocation: false
