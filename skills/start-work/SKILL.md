@@ -1,6 +1,7 @@
 ---
 name: start-work
 description: Route work by intent, uncertainty, reversibility, coordination, and risk to direct action, evidence-producing shaping, planning, or specialized workflows.
+disable-model-invocation: true
 ---
 
 # Start Work

@@ -1,6 +1,7 @@
 ---
 name: brainblast
 description: Diverge through grounded lenses, then converge on promising product or engineering directions.
+disable-model-invocation: true
 ---
 
 # Brainblast

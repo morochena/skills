@@ -1,6 +1,7 @@
 ---
 name: canonize-mark
 description: Canonize durable non-derivable project intent while preserving and visibly marking planning sediment in place.
+disable-model-invocation: true
 ---
 
 # Canonize Mark

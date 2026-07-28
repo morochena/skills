@@ -1,6 +1,7 @@
 ---
 name: review-work
 description: Run a findings-first review of implementation correctness, scope, risk, readability, and verification.
+disable-model-invocation: true
 ---
 
 # Review Work

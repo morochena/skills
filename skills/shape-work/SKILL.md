@@ -1,6 +1,7 @@
 ---
 name: shape-work
 description: Resolve material product or design decisions through grounded conversation or cheap reversible probes until work is ready to build or coordinate.
+disable-model-invocation: true
 ---
 
 # Shape Work

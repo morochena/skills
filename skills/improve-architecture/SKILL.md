@@ -1,6 +1,7 @@
 ---
 name: improve-architecture
 description: Assess, document, or improve repository architecture through observed evidence, concise durable intent, bounded remediation, and executable guardrails.
+disable-model-invocation: true
 ---
 
 # Improve Architecture

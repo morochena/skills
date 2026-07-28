@@ -1,6 +1,7 @@
 ---
 name: do-work
 description: Implement settled intent or a coordination plan through small working slices, continuous integration, and risk-matched verification.
+disable-model-invocation: true
 ---
 
 # Do Work

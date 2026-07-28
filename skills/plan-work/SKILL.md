@@ -1,6 +1,7 @@
 ---
 name: plan-work
 description: Plan durable coordination for parallel work, shared interfaces, migrations, costly commitments, or cross-session handoff from established evidence.
+disable-model-invocation: true
 ---
 
 # Plan Work

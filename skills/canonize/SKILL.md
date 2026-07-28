@@ -1,6 +1,7 @@
 ---
 name: canonize
 description: Canonize durable non-derivable project intent and remove planning sediment after active constraints are reconciled with executable sources.
+disable-model-invocation: true
 ---
 
 # Canonize

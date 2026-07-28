@@ -1,6 +1,7 @@
 ---
 name: debug-work
 description: Run a red-to-green diagnosis loop for broken, flaky, slow, or surprising behavior.
+disable-model-invocation: true
 ---
 
 # Debug Work
