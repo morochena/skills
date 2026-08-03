@@ -1,0 +1,4 @@
+interface:
+  display_name: "Initialize Project"
+  short_description: "Create durable project instructions"
+  default_prompt: "Use $init-project to create or update this repository's AGENTS.md with lifecycle, product precedent, long-term architecture, and maturity-based test rules."

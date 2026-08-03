@@ -9,16 +9,18 @@ The governing rule is simple: reduce the riskiest uncertainty with the cheapest 
 ## Quick start
 
 1. Install the package (see [Install](#install)).
-2. Prefer **explicit** skill calls (`$start-work`, `$do-work`, etc.).
-3. Unsure how to approach something? Start with `$start-work`.
-4. Clear small task? Just do it — no skill required.
-5. Fuzzy product/engineering idea? Use `$shape-work`, then `$do-work` when intent settles.
-6. Something broken? `$debug-work`, not the full plan pipeline.
+2. For a new project, use `$init-project` to create its `AGENTS.md`.
+3. Prefer **explicit** skill calls (`$start-work`, `$do-work`, etc.).
+4. Unsure how to approach something? Start with `$start-work`.
+5. Clear small task? Just do it — no skill required.
+6. Fuzzy product/engineering idea? Use `$shape-work`, then `$do-work` when intent settles.
+7. Something broken? `$debug-work`, not the full plan pipeline.
 
 ### Do / don't
 
 | Do | Don't |
 | --- | --- |
+| Use `$init-project` to record lifecycle and test policy | Make agents guess whether compatibility matters |
 | Call one skill at a time when you need structure | Turn every task into shape → plan → do |
 | Use `$start-work` as the router when the path is unclear | Assume the agent will auto-pick the right process |
 | Use a cheap working probe when it will answer the question | Turn testable uncertainty into speculative prose |
@@ -85,6 +87,7 @@ Omit `-g` to install into the current project only. Use `-a <agent>` to target a
 
 | Skill | Use |
 | --- | --- |
+| `init-project` | Create project instructions with lifecycle, product precedent, durable architecture, and verification rules. |
 | `start-work` | Choose the right workflow for a task. |
 | `brainblast` | Explore ideas from multiple angles before shaping or planning. |
 | `shape-work` | Resolve product and design decisions through conversation or cheap working probes. |
@@ -115,6 +118,8 @@ start-work
 `brainblast` and `debug-work` sit outside the main implementation workflow. Use `brainblast` before shaping when the idea is still exploratory. Use `debug-work` when the problem is broken behavior rather than planned product work.
 
 `improve-architecture` is a focused structural workflow. It can assess in chat, document durable architectural intent, or implement a selected bounded improvement with an executable guardrail.
+
+`init-project` is a setup workflow. It creates or updates `AGENTS.md` with an explicit `pre-release` or `released` lifecycle, product precedent, durable architecture, and a verification policy based on feature maturity and churn.
 
 ## Routing
 
@@ -152,12 +157,17 @@ Adjacent modes:
 
 | Mode | Use when | How it rejoins |
 | --- | --- | --- |
+| `init-project` | The repository needs durable agent instructions or an explicit lifecycle. | Return to the requested work after project setup. |
 | `brainblast` | The idea may be interesting, but is not requirements yet. | Hand off to `shape-work` when decisions remain; otherwise use `do-work` or `plan-work` when coordination requires it. |
 | `challenge-plan` | A completed plan contains costly assumptions, migrations, novel architecture, shared boundaries, or broad blast radius. | Hand off to `plan-work` for revisions, `shape-work` for newly exposed product decisions, or `do-work` when ready. |
 | `debug-work` | Something is broken, slow, flaky, or surprising. | Fix directly when obvious; otherwise use `shape-work` for product decisions, `plan-work` for coordination, or `do-work` for a settled fix. |
 | `improve-architecture` | The repository lacks a clear architecture contract or applies its patterns inconsistently. | Assess in chat, document durable intent, or implement a selected bounded finding. |
 
 ## Skill details
+
+### `init-project`
+
+Use this when a project needs a root `AGENTS.md` or its current instructions do not state the project lifecycle. It records whether the project is `pre-release` or `released`. It tells agents to study established product patterns and choose a long-term architecture before they build a solution. It also defines three baked levels and three churn levels so agents can match durable test investment to feature maturity without skipping basic verification.
 
 ### `start-work`
 

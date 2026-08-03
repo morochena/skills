@@ -20,6 +20,7 @@ Act as a router, not an orchestrator. Inspect only enough local context to choos
 
    Use the first matching branch:
 
+   - Initialize or revise repository agent instructions: recommend `$init-project`.
    - Explore an idea without committing to requirements: recommend `$brainblast`.
    - Diagnose broken, flaky, slow, or surprising behavior: recommend `$debug-work`.
    - Adversarially stress-test a completed plan before implementation: recommend `$challenge-plan`.
