@@ -1,6 +1,6 @@
 ---
 name: challenge-plan
-description: Adversarially stress-test a completed implementation plan before execution through independent review lenses, anonymized cross-review, and an evidence-weighted readiness verdict. Use after plan-work when a plan has costly assumptions, shared boundaries, migrations, novel architecture, broad blast radius, or the user asks for a council, pressure test, red-team review, or adversarial plan review.
+description: Adversarially stress-test a completed implementation plan before execution through independent review lenses, anonymized cross-review, and an evidence-weighted readiness verdict. Use when the user asks for a council, pressure test, red-team review, or adversarial plan review, or when plan-work identifies a named high-impact commitment that is hard to reverse, has a material evidence gap, and lets independent review test a named decision or risk before implementation. Do not use only because a plan has multiple streams, shared interfaces, migrations, novel architecture, or broad scope.
 disable-model-invocation: true
 ---
 

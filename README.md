@@ -44,7 +44,10 @@ Add the rest when you hit fuzzy product work (`$shape-work`), real coordination 
 $start-work — "add team invites without overbuilding the org model"
   → $shape-work   (settle boundaries; probe the invite flow if seeing it helps)
     ├─ local implementation → $do-work
-    └─ shared interfaces or parallel work → $plan-work → $challenge-plan → $do-work
+    └─ shared interfaces or parallel work → $plan-work
+       ├─ all other cases → $do-work
+       └─ hard-to-reverse, high-impact commitment with an evidence gap that review can test
+          → $challenge-plan → $do-work
   → $review-work  (optional quality pass)
   → $canonize     (if durable docs changed)
 ```
@@ -109,7 +112,7 @@ start-work
   -> direct action for clear, local, reversible work
   -> shape-work for unresolved intent or an evidence-producing probe
   -> plan-work only for coordination, migration order, or costly commitments
-  -> challenge-plan for a consequential pre-build stress test
+  -> challenge-plan only for a hard-to-reverse, high-impact commitment with an evidence gap that review can test
   -> do-work for the smallest verifiable implementation slice
   -> review-work for post-build quality review
   -> canonize for documentation hygiene
@@ -133,7 +136,7 @@ flowchart LR
   SH --> C
   C -->|"Yes"| P["plan-work"]
   C -->|"No"| DW["do-work or direct action"]
-  P --> CP{"Consequential stress test?"}
+  P --> CP{"Hard-to-reverse, high-impact commitment with an evidence gap that review can test?"}
   CP -->|"Yes"| CH["challenge-plan"]
   CP -->|"No"| DW
   CH --> DW
@@ -159,7 +162,7 @@ Adjacent modes:
 | --- | --- | --- |
 | `init-project` | The repository needs durable agent instructions or an explicit lifecycle. | Return to the requested work after project setup. |
 | `brainblast` | The idea may be interesting, but is not requirements yet. | Hand off to `shape-work` when decisions remain; otherwise use `do-work` or `plan-work` when coordination requires it. |
-| `challenge-plan` | A completed plan contains costly assumptions, migrations, novel architecture, shared boundaries, or broad blast radius. | Hand off to `plan-work` for revisions, `shape-work` for newly exposed product decisions, or `do-work` when ready. |
+| `challenge-plan` | A completed plan has a named high-impact commitment that is hard to reverse, has a material evidence gap, and lets independent review test a named decision or risk before implementation. | Hand off to `plan-work` for revisions, `shape-work` for newly exposed product decisions, or `do-work` when ready. |
 | `debug-work` | Something is broken, slow, flaky, or surprising. | Fix directly when obvious; otherwise use `shape-work` for product decisions, `plan-work` for coordination, or `do-work` for a settled fix. |
 | `improve-architecture` | The repository lacks a clear architecture contract or applies its patterns inconsistently. | Assess in chat, document durable intent, or implement a selected bounded finding. |
 
@@ -220,7 +223,7 @@ Those files should use temporary frontmatter and later be absorbed or removed by
 
 ### `challenge-plan`
 
-Use this after `plan-work` when the cost of a mistaken plan warrants an adversarial pass. Five independent lenses test reuse opportunities, goal alignment, alternative approaches, failure modes, and evidence-backed deliverability. Their anonymized cross-review produces a `Ready`, `Revise`, or `Replan` verdict with concrete amendments rather than a pile of speculative objections.
+Use this after `plan-work` when a named high-impact commitment is hard to reverse, current evidence leaves a credible failure unresolved, and independent review can test the risk before implementation. Shared interfaces, migrations, parallel work, or broad scope do not qualify by themselves. Five independent lenses test reuse opportunities, goal alignment, alternative approaches, failure modes, and evidence-backed deliverability. Their anonymized cross-review produces a `Ready`, `Revise`, or `Replan` verdict with concrete amendments.
 
 ### `do-work`
 

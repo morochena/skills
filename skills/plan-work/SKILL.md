@@ -70,6 +70,18 @@ A large change alone does not require a plan. When intent is settled and the wor
 
    Completion criterion: every scope item maps to one implementation stream or critical-path step and one verification method; every blocking edge and shared boundary appears in the execution order.
 
+8. Choose the next move.
+
+   Default to `$do-work` after the plan is complete. If the user asked for an adversarial plan review, name `$challenge-plan` as the next move. Otherwise, recommend `$challenge-plan` only when all these conditions are true:
+
+   - The plan contains a named commitment that will be costly or difficult to reverse after implementation starts.
+   - Established evidence leaves a credible high-impact failure unresolved.
+   - Independent review can test a named decision or risk before implementation starts.
+
+   When you recommend `$challenge-plan`, state the commitment, evidence gap, credible effect, and review question. Shared interfaces, migrations, parallel lanes, task size, novel architecture, and broad scope do not qualify by themselves. If a small reversible implementation slice can reduce the risk, recommend `$do-work` and name that slice.
+
+   Completion criterion: the next move follows from a specific unresolved risk or defaults to `$do-work`; plan structure alone does not trigger another review.
+
 ## Output Format
 
 Use the applicable sections from this format; omit empty ceremony:
@@ -100,8 +112,8 @@ Use the applicable sections from this format; omit empty ceremony:
 ## Full-Scope Check
 
 ## Coordinator Notes
+
+## Next Move
 ```
 
 The plan is complete when another agent can distinguish evidence from assumptions, account for the entire scope, start every unblocked stream, recognize every dependency, integrate through one owner, and verify each outcome without rediscovering intent.
-
-When the plan contains costly assumptions, migrations, novel architecture, shared boundaries, or broad blast radius, recommend an explicit `$challenge-plan` pass before `$do-work`. Do not start the next skill automatically.
