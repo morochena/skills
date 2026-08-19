@@ -1,6 +1,6 @@
 ---
 name: plan-work
-description: Plan durable coordination for parallel work, shared interfaces, migrations, costly commitments, or cross-session handoff from established evidence.
+description: Plan and refine durable coordination for parallel work, shared interfaces, migrations, costly commitments, or cross-session handoff from established evidence. Apply a proportional internal review before returning one execution-ready plan.
 disable-model-invocation: true
 ---
 
@@ -70,17 +70,19 @@ A large change alone does not require a plan. When intent is settled and the wor
 
    Completion criterion: every scope item maps to one implementation stream or critical-path step and one verification method; every blocking edge and shared boundary appears in the execution order.
 
-8. Choose the next move.
+8. Review and refine the draft.
 
-   Default to `$do-work` after the plan is complete. If the user asked for an adversarial plan review, name `$challenge-plan` as the next move. Otherwise, recommend `$challenge-plan` only when all these conditions are true:
+   Read [references/adversarial-review.md](references/adversarial-review.md). Apply its standard review to every draft. Run its deep independent review automatically only when the plan meets a listed high-consequence signal and has a material evidence gap.
 
-   - The plan contains a named commitment that will be costly or difficult to reverse after implementation starts.
-   - Established evidence leaves a credible high-impact failure unresolved.
-   - Independent review can test a named decision or risk before implementation starts.
+   Apply accepted amendments directly to the draft. Preserve the scope ledger, rerun the traceability check, and return the refined plan rather than a separate review report. Do not hand the plan to another review workflow.
 
-   When you recommend `$challenge-plan`, state the commitment, evidence gap, credible effect, and review question. Shared interfaces, migrations, parallel lanes, task size, novel architecture, and broad scope do not qualify by themselves. If a small reversible implementation slice can reduce the risk, recommend `$do-work` and name that slice.
+   Completion criterion: the final plan includes all material evidence-backed amendments, rejects speculative objections, and remains traceable to the original scope.
 
-   Completion criterion: the next move follows from a specific unresolved risk or defaults to `$do-work`; plan structure alone does not trigger another review.
+9. Choose the next move.
+
+   Recommend `$do-work` when the refined plan is executable. Recommend `$shape-work` only when review exposes a user-owned product or design decision that prevents safe execution. Do not add another planning or review step.
+
+   Completion criterion: the next move starts execution or resolves one exact user-owned decision.
 
 ## Output Format
 
@@ -112,6 +114,8 @@ Use the applicable sections from this format; omit empty ceremony:
 ## Full-Scope Check
 
 ## Coordinator Notes
+
+## Review Applied
 
 ## Next Move
 ```

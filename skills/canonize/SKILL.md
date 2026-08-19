@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Canonize
 
-Maintain a small, trusted canon in `docs/canon/`. Let code, configuration, schemas, and tests own mechanically discoverable truth. Treat root agent files as adapters and ADRs, plans, specs, proposals, and handoffs as source material whose active constraints must be reconciled before removal.
+Maintain a small, trusted canon in `docs/canon/`. Let code, configuration, schemas, and tests own mechanically discoverable truth. Maintain search hygiene: a search for a project concept should return current executable sources or canon instead of superseded plans, specs, or research. Treat root agent files as adapters and ADRs, plans, specs, proposals, and handoffs as source material whose active constraints must be reconciled before removal.
 
 Use `$canonize-mark` when the user wants non-canonical documents preserved in place.
 
@@ -59,9 +59,9 @@ Use `$canonize-mark` when the user wants non-canonical documents preserved in pl
 
 6. Reconcile references and canon ownership.
 
-   Search maintained documentation and adapters for the paths and titles of removed files. Rewrite stale links, remove competing canonical statements, and verify the canon file metadata and ownership rules from the reference.
+   Search maintained documentation and adapters for the paths and titles of removed files. Also search for important project terms from removed documents. Rewrite stale links, remove competing canonical statements, and verify the canon file metadata and ownership rules from the reference.
 
-   Completion criterion: no removed path or title remains as a live reference; every durable meaning has one prose or executable owner; every canonical file changed in this run was genuinely reviewed.
+   Completion criterion: no removed path or title remains as a live reference; representative searches for important project concepts return current executable sources or canon without competing statements from temporary or stale documentation; every durable meaning has one prose or executable owner; every canonical file changed in this run was genuinely reviewed.
 
 7. Report the result.
 

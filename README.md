@@ -44,10 +44,7 @@ Add the rest when you hit fuzzy product work (`$shape-work`), real coordination 
 $start-work — "add team invites without overbuilding the org model"
   → $shape-work   (settle boundaries; probe the invite flow if seeing it helps)
     ├─ local implementation → $do-work
-    └─ shared interfaces or parallel work → $plan-work
-       ├─ all other cases → $do-work
-       └─ hard-to-reverse, high-impact commitment with an evidence gap that review can test
-          → $challenge-plan → $do-work
+    └─ shared interfaces or parallel work → $plan-work (review and refine) → $do-work
   → $review-work  (optional quality pass)
   → $canonize     (if durable docs changed)
 ```
@@ -94,8 +91,8 @@ Omit `-g` to install into the current project only. Use `-a <agent>` to target a
 | `start-work` | Choose the right workflow for a task. |
 | `brainblast` | Explore ideas from multiple angles before shaping or planning. |
 | `shape-work` | Resolve product and design decisions through conversation or cheap working probes. |
-| `plan-work` | Coordinate parallel work, shared boundaries, migrations, or costly commitments. |
-| `challenge-plan` | Adversarially stress-test a completed plan before implementation. |
+| `plan-work` | Coordinate work, then review and refine the plan in the same run. |
+| `challenge-plan` | Run a user-requested adversarial review of an existing plan. |
 | `do-work` | Implement settled intent in small verifiable slices. |
 | `review-work` | Review implementation quality, clarity, scope, tests, and polish. |
 | `debug-work` | Diagnose broken, flaky, slow, or surprising behavior. |
@@ -111,8 +108,7 @@ Start with the smallest useful workflow.
 start-work
   -> direct action for clear, local, reversible work
   -> shape-work for unresolved intent or an evidence-producing probe
-  -> plan-work only for coordination, migration order, or costly commitments
-  -> challenge-plan only for a hard-to-reverse, high-impact commitment with an evidence gap that review can test
+  -> plan-work only for coordination, migration order, or costly commitments; review is included
   -> do-work for the smallest verifiable implementation slice
   -> review-work for post-build quality review
   -> canonize for documentation hygiene
@@ -136,10 +132,8 @@ flowchart LR
   SH --> C
   C -->|"Yes"| P["plan-work"]
   C -->|"No"| DW["do-work or direct action"]
-  P --> CP{"Hard-to-reverse, high-impact commitment with an evidence gap that review can test?"}
-  CP -->|"Yes"| CH["challenge-plan"]
-  CP -->|"No"| DW
-  CH --> DW
+  P --> PR["proportional review and refinement"]
+  PR --> DW
   DW --> R{"Quality pass?"}
   R -->|"Yes"| RW["review-work"]
   R -->|"No"| DC{"Docs changed?"}
@@ -162,7 +156,7 @@ Adjacent modes:
 | --- | --- | --- |
 | `init-project` | The repository needs durable agent instructions or an explicit lifecycle. | Return to the requested work after project setup. |
 | `brainblast` | The idea may be interesting, but is not requirements yet. | Hand off to `shape-work` when decisions remain; otherwise use `do-work` or `plan-work` when coordination requires it. |
-| `challenge-plan` | A completed plan has a named high-impact commitment that is hard to reverse, has a material evidence gap, and lets independent review test a named decision or risk before implementation. | Hand off to `plan-work` for revisions, `shape-work` for newly exposed product decisions, or `do-work` when ready. |
+| `challenge-plan` | The user explicitly asks for a council, pressure test, red-team review, or adversarial review of an existing plan. | Return a readiness verdict, then hand off to `plan-work`, `shape-work`, or `do-work` as needed. |
 | `debug-work` | Something is broken, slow, flaky, or surprising. | Fix directly when obvious; otherwise use `shape-work` for product decisions, `plan-work` for coordination, or `do-work` for a settled fix. |
 | `improve-architecture` | The repository lacks a clear architecture contract or applies its patterns inconsistently. | Assess in chat, document durable intent, or implement a selected bounded finding. |
 
@@ -211,7 +205,7 @@ Use this when the idea is still fuzzy. The agent resolves one decision at a time
 
 ### `plan-work`
 
-Use this when the work needs coordination, migration order, shared-interface ownership, a costly commitment, or a durable handoff. The plan records established evidence, remaining assumptions, scope, blocking edges, integration points, verification, and a full-scope check.
+Use this when the work needs coordination, migration order, shared-interface ownership, a costly commitment, or a durable handoff. The plan records established evidence, remaining assumptions, scope, blocking edges, integration points, verification, and a full-scope check. It reviews every draft and applies a deep independent council automatically only for a concrete high-consequence commitment with a material evidence gap. It returns one refined plan, then recommends `do-work` when the plan is executable.
 
 Plans usually stay in chat. Write a file only when coordination must survive the current execution context:
 
@@ -223,7 +217,7 @@ Those files should use temporary frontmatter and later be absorbed or removed by
 
 ### `challenge-plan`
 
-Use this after `plan-work` when a named high-impact commitment is hard to reverse, current evidence leaves a credible failure unresolved, and independent review can test the risk before implementation. Shared interfaces, migrations, parallel work, or broad scope do not qualify by themselves. Five independent lenses test reuse opportunities, goal alignment, alternative approaches, failure modes, and evidence-backed deliverability. Their anonymized cross-review produces a `Ready`, `Revise`, or `Replan` verdict with concrete amendments.
+Use this only when you explicitly want a separate adversarial review of an existing plan. Five independent lenses test reuse opportunities, goal alignment, alternative approaches, failure modes, and evidence-backed deliverability. Their anonymized cross-review produces a `Ready`, `Revise`, or `Replan` verdict. Normal Plan Work already includes proportional review and refinement.
 
 ### `do-work`
 

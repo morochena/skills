@@ -1,6 +1,6 @@
 interface:
   display_name: "Plan Work"
-  short_description: "Plan coordination from established evidence"
-  default_prompt: "Use $plan-work to coordinate shared boundaries, blocking edges, ownership, and verification from established evidence."
+  short_description: "Plan, review, and refine coordinated work"
+  default_prompt: "Use $plan-work to plan, review, and refine this coordinated work from established evidence."
 policy:
   allow_implicit_invocation: false
