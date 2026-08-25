@@ -243,7 +243,7 @@ Use this for broken, flaky, slow, or surprising behavior. It is a diagnosis loop
 
 ### `create-verification-skill`
 
-Use this when a project has no repeatable way to control its real app surface and capture proof. It inspects the repository, creates an explicit project-local `verify-<app>` skill and feature map, then runs one mapped feature from launch through cleanup before handoff.
+Use this when a project has no repeatable way to control its real app surface and capture proof. It inspects the repository, creates a project-local `verify-<app>` skill and feature map, then runs one mapped feature from launch through cleanup before handoff. Project verifiers permit automatic selection by default. Configure an individual verifier as explicit-only only when that project needs it.
 
 ### `maintain-verification-skill`
 

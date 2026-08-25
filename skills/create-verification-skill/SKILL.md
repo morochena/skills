@@ -2,7 +2,6 @@
 name: create-verification-skill
 description: Create and prove a project-local verification skill that controls a web UI, CLI, desktop app, API, mobile app, or library through its real user surface.
 license: MIT
-disable-model-invocation: true
 ---
 
 # Create Verification Skill
@@ -37,7 +36,7 @@ Use the current workspace. Do not create a branch or pull request unless the use
 
 3. Write the generated skill.
 
-   Create `SKILL.md` with `name: verify-<app>`, a description that names the app and surface, and `disable-model-invocation: true`. Create `agents/openai.yaml` with matching interface text and `policy.allow_implicit_invocation: false`. Direct invocation stays explicit. `$do-work` and `$review-work` can read the verifier as repository guidance when their scope affects a mapped user surface.
+   Create `SKILL.md` with `name: verify-<app>` and a description that names the app, surface, and matching verification work. Create `agents/openai.yaml` with matching interface text. Keep automatic selection enabled by default for the project-local verifier. Add `policy.allow_implicit_invocation: false` only when the user requests an explicit-only verifier. `$do-work` and `$review-work` can also read the verifier as repository guidance when their scope affects a mapped user surface.
 
    Include these sections with project-specific commands and handles:
 
