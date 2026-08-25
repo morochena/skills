@@ -23,6 +23,8 @@ Act as a router, not an orchestrator. Inspect only enough local context to choos
    - Initialize or revise repository agent instructions: recommend `$init-project`.
    - Explore an idea without committing to requirements: recommend `$brainblast`.
    - Diagnose broken, flaky, slow, or surprising behavior: recommend `$debug-work`.
+   - Create a project-local way to control and prove real app behavior: recommend `$create-verification-skill`.
+   - Audit or correct an existing project-local verification skill: recommend `$maintain-verification-skill`.
    - Adversarially stress-test a completed plan before implementation: recommend `$challenge-plan`.
    - Review an existing change: recommend `$review-work`.
    - Establish or audit repository architecture: recommend `$improve-architecture`.

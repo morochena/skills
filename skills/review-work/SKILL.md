@@ -32,11 +32,15 @@ Prioritize issues in this order:
 
    Read the request, issue, chat context, canon, acceptance tests, prototypes, or other observed artifacts needed to know what the change was supposed to do.
 
+   When the change affects a user-facing surface, look for an existing project-local `verify-*` skill in the repository's skill root. If it covers the surface, read the applicable feature files as review evidence. Do not create, repair, or maintain the verifier during a read-only review.
+
    Completion criterion: every intended outcome and explicit non-goal has a source; missing intent is recorded as an open question rather than guessed.
 
 3. Trace affected behavior.
 
    Review the diff, affected call paths, state transitions, data boundaries, user-visible behavior, and relevant tests. Run focused checks that distinguish a suspected issue from a harmless pattern.
+
+   When a matching project-local verifier exists, run its doctor check and the affected feature recipes when they use isolated scratch state. Follow its evidence and cleanup rules. Do not run recipes that can affect live services, user data, money, or people without separate authorization. Report stale verifier instructions or unsafe prerequisites as verification gaps; do not correct them inside `$review-work`.
 
    Look for vague names, mixed abstraction levels, leaky abstractions, costly indirection, hidden control flow, behavior tested through implementation details, and inconsistency with established local patterns.
 

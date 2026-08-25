@@ -31,6 +31,8 @@ Use the current workspace. Create a branch or worktree only when the user reques
 
    Read relevant canon, existing patterns, tests, package commands, and affected modules. Identify pre-existing user changes that overlap the work.
 
+   When the work changes a user-facing surface, look for an existing project-local `verify-*` skill in the repository's skill root. If it covers the surface, read its applicable feature files and add those user paths to the verification work. Do not create or maintain a verifier inside `$do-work`.
+
    Completion criterion: each intended outcome has a grounded implementation location, a verification path, and a safe relationship to existing changes.
 
 3. Build the first evidence-producing slice.
@@ -53,7 +55,9 @@ Use the current workspace. Create a branch or worktree only when the user reques
 
 6. Verify the integrated behavior.
 
-   Run broader checks at integration boundaries and the highest-signal end-to-end path available. When a check is unavailable or disproportionately expensive, run the best substitute and explain the gap.
+   Run broader checks at integration boundaries and the highest-signal end-to-end path available. When a matching project-local verifier exists, run its doctor check and the feature recipes affected by the change. Follow its isolation, evidence, and cleanup rules. Do not run unrelated mapped features.
+
+   Treat this verifier use as part of `$do-work`; it does not start `$create-verification-skill` or `$maintain-verification-skill`. When a check is unavailable or disproportionately expensive, run the best substitute and explain the gap.
 
    Completion criterion: every changed behavior has a passing check or an explicit verification gap, and integration checks cover every changed shared boundary.
 

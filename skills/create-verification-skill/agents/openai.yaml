@@ -1,0 +1,6 @@
+interface:
+  display_name: "Create Verification Skill"
+  short_description: "Build a project-local real-app verifier"
+  default_prompt: "Use $create-verification-skill to build and prove a project-local verification skill for this repository."
+policy:
+  allow_implicit_invocation: false

@@ -96,6 +96,8 @@ Omit `-g` to install into the current project only. Use `-a <agent>` to target a
 | `do-work` | Implement settled intent in small verifiable slices. |
 | `review-work` | Review implementation quality, clarity, scope, tests, and polish. |
 | `debug-work` | Diagnose broken, flaky, slow, or surprising behavior. |
+| `create-verification-skill` | Create and prove a project-local skill that controls the real app and records its user-facing feature map. |
+| `maintain-verification-skill` | Audit a project-local verification skill against source and live user behavior. |
 | `improve-architecture` | Assess, document, or improve architecture with evidence and executable guardrails. |
 | `canonize` | Normalize `docs/canon/` and remove planning sediment. |
 | `canonize-mark` | Normalize canon while preserving and marking non-canonical docs. |
@@ -158,6 +160,8 @@ Adjacent modes:
 | `brainblast` | The idea may be interesting, but is not requirements yet. | Hand off to `shape-work` when decisions remain; otherwise use `do-work` or `plan-work` when coordination requires it. |
 | `challenge-plan` | The user explicitly asks for a council, pressure test, red-team review, or adversarial review of an existing plan. | Return a readiness verdict, then hand off to `plan-work`, `shape-work`, or `do-work` as needed. |
 | `debug-work` | Something is broken, slow, flaky, or surprising. | Fix directly when obvious; otherwise use `shape-work` for product decisions, `plan-work` for coordination, or `do-work` for a settled fix. |
+| `create-verification-skill` | The project has no repeatable way to control and prove its real user surface. | Use the generated `verify-<app>` skill during later implementation and review work. |
+| `maintain-verification-skill` | An existing verifier or feature map needs a full source and live audit. | Return a clean result, a coherent proven correction, or a precise blocker. |
 | `improve-architecture` | The repository lacks a clear architecture contract or applies its patterns inconsistently. | Assess in chat, document durable intent, or implement a selected bounded finding. |
 
 ## Skill details
@@ -223,15 +227,27 @@ Use this only when you explicitly want a separate adversarial review of an exist
 
 Use this to implement settled intent or execute a coordination plan. Start with the smallest slice that can run and teach the agent something. Worker agents can handle independent streams in the current workspace when the platform supports them, but shared interfaces, architecture, and final verification stay with the coordinator.
 
+When the changed user surface has a project-local `verify-<app>` skill, `do-work` uses its applicable feature recipes for final verification. It does not create or maintain the verifier automatically.
+
 Branches or worktrees are not the default. Use them when you explicitly want checkout isolation.
 
 ### `review-work`
 
 Use this after implementation or when reviewing a diff. It focuses on correctness, scope fidelity, readability, complexity, naming, abstraction quality, pragmatic test coverage, performance, polish, and edge cases.
 
+When the reviewed user surface has a project-local `verify-<app>` skill, `review-work` uses its applicable feature recipes with isolated scratch state. It reports verifier drift but does not repair it during a read-only review.
+
 ### `debug-work`
 
 Use this for broken, flaky, slow, or surprising behavior. It is a diagnosis loop: state the claim, gather facts, reproduce or narrow the signal, localize the fault, test hypotheses, then fix or brief the fix.
+
+### `create-verification-skill`
+
+Use this when a project has no repeatable way to control its real app surface and capture proof. It inspects the repository, creates an explicit project-local `verify-<app>` skill and feature map, then runs one mapped feature from launch through cleanup before handoff.
+
+### `maintain-verification-skill`
+
+Use this to audit an existing project-local verifier. It checks every mapped feature against source, runs every feature through one coordinated live pass, and leaves only corrections that it proves. Product regressions stay out of the verifier diff and are reported separately.
 
 ### `improve-architecture`
 
@@ -252,7 +268,14 @@ These skills aim for a few defaults:
 - **Code as communication.** Implementation should be optimized for future readers, not just for getting a diff to pass.
 - **Minimize complexity.** Prefer straightforward code, clear names, and local patterns. Avoid abstractions that add more cognitive load than they remove.
 - **Pragmatic verification.** Tests and checks should buy confidence. They are tools, not rituals.
+- **Real user proof.** A project-local verifier can preserve exact launch, control, evidence, and cleanup knowledge when ordinary test commands do not prove the full user path.
 - **Canon over sediment.** Code, configuration, schemas, and tests own mechanically discoverable truth. Canon preserves durable intent and constraints they cannot express.
 - **Parallel where useful.** Shape work into independent streams only where independence is real, with one coordinating agent session owning shared boundaries and final integration.
 
 The intended value is a calmer workflow: clarify what matters, test uncertainty cheaply, coordinate only where needed, implement with readable defaults, and preserve only the context the repository cannot express for itself.
+
+## Acknowledgments
+
+This suite draws on ideas and working patterns from [pstack](https://github.com/cursor/plugins/tree/main/pstack) and [Matt Pocock's agent skills](https://github.com/mattpocock/skills). It adapts those influences to this suite's explicit, evidence-first workflow.
+
+`create-verification-skill` and `maintain-verification-skill` are direct adaptations of pstack's [creation](https://github.com/cursor/plugins/blob/main/pstack/skills/create-verification-skill/SKILL.md) and [maintenance](https://github.com/cursor/plugins/blob/main/pstack/skills/maintain-verification-skill/SKILL.md) workflows. Each adapted skill includes the upstream MIT License.
