@@ -43,11 +43,11 @@ Before implementation of a new or changed feature, classify it on both axes:
 - Baked level: `1` (unbaked), `2` (moderately baked), or `3` (very baked).
 - Churn: `high`, `medium`, or `low`.
 
-Baked level sets test depth:
+Inspect existing coverage before adding tests. Reuse tests that already protect the relevant behavior. Baked level sets the required depth of coverage for the changed behavior; add or update tests only to close meaningful gaps or satisfy explicit requirements:
 
 - Level 1 — unbaked: The behavior is exploratory or unsettled. Do not add durable automated regression tests for it. Use only the minimum smoke check, type check, manual check, or disposable probe needed to show that the slice works.
-- Level 2 — moderately baked: The main contract is settled, but details can change. Add a small number of high-level contract or integration tests for the stable behavior and critical failure path. Avoid exhaustive variants and tests of internal structure.
-- Level 3 — very baked: The behavior is stable and its regression cost matters. Add broad regression coverage for main paths, important edge cases, failure and recovery behavior, and integration boundaries.
+- Level 2 — moderately baked: The main contract is settled, but details can change. Use a small number of high-level contract or integration tests for the stable behavior and critical failure path. Avoid exhaustive variants and tests of internal structure.
+- Level 3 — very baked: The behavior is stable and its regression cost matters. Ensure regression coverage includes main paths, important edge cases, failure and recovery behavior, and integration boundaries affected by the change.
 
 Churn sets test coupling:
 
@@ -60,5 +60,7 @@ Use baked level to decide how much to test. Use churn to decide where to test. W
 Treat the two axes as independent. Never use stable behavior as proof of low churn. Never use frequent code changes as proof that behavior is unbaked.
 
 These classifications do not remove the need to verify a change. They control durable regression investment. Always test established behavior whose failure can affect security, permissions, money, user data, data integrity, or irreversible side effects. Keep tests already required by an accepted specification or regression contract.
+
+Complete required checks and reuse passing results from the current run when they cover the final code and relevant environment. Once relevant checks pass, stop. Repeat checks only when relevant changes invalidate results, or a failure or unresolved concern justifies another run. Expand checks only for an uncovered risk, failure, or explicit requirement.
 
 State the selected baked level and churn, with a short reason, in the implementation ledger or plan. If the classification is not supplied, infer it from settled project evidence. Ask the user only when the choice would materially change scope, risk, or acceptance.

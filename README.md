@@ -172,7 +172,7 @@ Use this when a project needs a root `AGENTS.md` or its current instructions do 
 
 ### `start-work`
 
-Use this when the path is unclear. It classifies the task and recommends the smallest workflow that fits: direct action, shaping, planning, debugging, reviewing, or documentation cleanup.
+Use this when the path is unclear. For a routing-only request, it recommends the smallest workflow that fits: direct action, shaping, planning, debugging, reviewing, or documentation cleanup. If you also requested implementation, it can complete clear, local, reversible work directly when intent is settled and no shared boundary needs coordination. It does not invoke another workflow skill automatically.
 
 `start-work` works best after the agent has at least a little context. You can invoke it at the beginning with a rough idea, or after chatting for a while when the conversation starts turning into real work.
 

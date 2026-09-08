@@ -26,7 +26,7 @@ Keep prose in chat. Keep probes disposable unless the user asks to preserve them
 
 3. Choose the next decision and evidence source.
 
-   Select the highest-leverage unresolved decision. Decide whether repository inspection, conversation, or a working probe can best reduce its uncertainty.
+   Select the highest-leverage unresolved decision. If no material user decision remains, proceed to capture settled canon and test readiness without another question. Otherwise, decide whether repository inspection, conversation, or a working probe can best reduce its uncertainty.
 
    Use a probe when it is cheap, reversible, and materially more informative than prose:
 
@@ -41,9 +41,11 @@ Keep prose in chat. Keep probes disposable unless the user asks to preserve them
 
 4. Produce evidence or ask.
 
-   Run and inspect the chosen probe before drawing conclusions. Report what it demonstrates and what it cannot demonstrate. When a probe would add little, offer only viable, mutually exclusive options, put the recommendation first, and explain the material tradeoff of each. Use one focused open question when honest options do not yet exist.
+   Run and inspect the chosen probe before drawing conclusions. Report what it demonstrates and what it cannot demonstrate. Ask only when a material user decision remains unresolved by the request and settled context. When a probe would add little, offer only viable, mutually exclusive options, put the recommendation first, and explain the material tradeoff of each. Use one focused open question when honest options do not yet exist.
 
-   Completion criterion for each turn: exactly one user-owned decision is presented, the recommendation is explicit, and the evidence is observable rather than hypothetical.
+   While an answer is pending, continue authorized repository checks or other work that does not depend on it. Wait for the answer before work that depends on the decision; elapsed time does not settle it.
+
+   Completion criterion for each turn: at most one unresolved material user decision is presented, with an explicit recommendation when evidence supports one. No question repeats a settled decision or delays the readiness check when intent is clear.
 
 5. Sharpen language.
 

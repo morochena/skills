@@ -36,13 +36,13 @@ When the gate is met:
 4. Synthesize by evidence. Reject speculative, duplicate, and low-impact findings. Classify retained findings as `Blocker`, `Material`, or `Watch`.
 5. Apply `Blocker` and `Material` amendments to the draft. Put each `Watch` item in execution-time verification. Rerun the scope and traceability checks.
 
-If subagents are unavailable, run the five lenses as separate passes before synthesis. Do not let one pass influence the findings of a later pass.
+If subagents are unavailable, use the five lenses for a structured self-review, then apply the same evidence and amendment rules. State that all passes shared one context and do not provide independent review. Do not simulate separate advisors or anonymized cross-review.
 
 ## Result
 
 Return one refined plan. Include `Review Applied` only when it helps execution:
 
-- State `Standard` or `Deep`, and name the deep-review signal when applicable.
+- State `Standard` or `Deep`, and name the deep-review signal when applicable. If deep review used the fallback, always label it `Deep — structured self-review` and disclose the shared-context limitation.
 - List material changes that the review made to the plan.
 - Record a rejected concern only when it is likely to return during execution.
 

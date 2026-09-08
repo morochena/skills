@@ -21,7 +21,7 @@ Use the current workspace. Create a branch or worktree only when the user reques
 
 1. Establish the implementation ledger.
 
-   Read the user's request, settled chat context, or coordination plan. Record the goal, non-goals, acceptance signals, and every intended outcome. Route unresolved user-owned product decisions to `$shape-work`.
+   Read the user's request, settled chat context, or coordination plan. Record the goal, non-goals, acceptance signals, and every intended outcome. Keep this ledger compact; show it only when it helps the user assess scope or make a decision. Route unresolved user-owned product decisions to `$shape-work`.
 
    Do not return to `$plan-work` merely because execution structure was not written in advance. Use it only when implementation reveals real parallel coordination, migration order, shared-interface ownership, a costly commitment, or a cross-session handoff.
 
@@ -29,7 +29,7 @@ Use the current workspace. Create a branch or worktree only when the user reques
 
 2. Inspect the repo.
 
-   Read relevant canon, existing patterns, tests, package commands, and affected modules. Identify pre-existing user changes that overlap the work.
+   Read relevant canon, existing patterns, tests, package commands, and affected modules. Identify pre-existing user changes that overlap the work. Inspect existing coverage before adding tests; add tests only for meaningful gaps or required behavior.
 
    When the work changes a user-facing surface, look for an existing project-local `verify-*` skill in the repository's skill root. If it covers the surface, read its applicable feature files and add those user paths to the verification work. Do not create or maintain a verifier inside `$do-work`.
 
@@ -55,7 +55,9 @@ Use the current workspace. Create a branch or worktree only when the user reques
 
 6. Verify the integrated behavior.
 
-   Run broader checks at integration boundaries and the highest-signal end-to-end path available. When a matching project-local verifier exists, run its doctor check and the feature recipes affected by the change. Follow its isolation, evidence, and cleanup rules. Do not run unrelated mapped features.
+   Check changed integration boundaries and use the highest-signal end-to-end path appropriate to the change. Reuse passing results from this run when they cover the final code and relevant environment. When a matching project-local verifier exists, run its doctor check and the feature recipes affected by the change unless valid results already cover them. Follow its isolation, evidence, and cleanup rules. Do not run unrelated mapped features.
+
+   Complete required checks. Once relevant checks pass, stop verification. Repeat checks only when changes to code, dependencies, or the environment invalidate their results, or a failure or unresolved concern justifies another run. Expand coverage only for an uncovered risk, failure, or explicit requirement.
 
    Treat this verifier use as part of `$do-work`; it does not start `$create-verification-skill` or `$maintain-verification-skill`. When a check is unavailable or disproportionately expensive, run the best substitute and explain the gap.
 
@@ -69,6 +71,6 @@ Use the current workspace. Create a branch or worktree only when the user reques
 
 8. Report.
 
-   Summarize completed outcomes, user-deferred or blocked work, files changed, checks run, verification gaps, and residual risk.
+   For a small change, report the result, verification, and any unresolved issue in a short paragraph. For larger work, add the scope and file details needed to assess completion. Always disclose user-deferred or blocked outcomes and material verification gaps or residual risk. Omit empty categories and do not reproduce the ledger by default.
 
    Completion criterion: the user can account for every intended outcome and judge the implementation's remaining risk.
