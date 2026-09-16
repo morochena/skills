@@ -18,8 +18,6 @@ Use the current workspace. Do not create a branch or pull request unless the use
 
    If a suitable verification skill already exists, stop and recommend `$maintain-verification-skill` unless the user explicitly requested replacement.
 
-   Completion criterion: the target app, skill root, and output path are known, and no existing verifier will be overwritten by accident.
-
 2. Interview the repository.
 
    Discover facts locally. Ask the user only for intent or access that the repository cannot supply.
@@ -31,8 +29,6 @@ Use the current workspace. Do not create a branch or pull request unless the use
    - **Isolate:** Find how to separate ports, data directories, profiles, and sessions. If concurrent instances are not safe, make the generated skill refuse to control an unowned instance.
 
    Do not write instructions for a checkout that you cannot build or start. Diagnose a broken baseline and report the blocker. You can add clearly named verification scaffolding inside the generated skill, but do not change product code as part of this workflow without separate user authorization.
-
-   Completion criterion: every launch, control, observation, and isolation instruction has a source or a successful local check.
 
 3. Write the generated skill.
 
@@ -49,15 +45,11 @@ Use the current workspace. Do not create a branch or pull request unless the use
 
    Do not leave placeholders, invented selectors, untested commands, or hidden setup knowledge.
 
-   Completion criterion: a new agent can launch, check, control, observe, and clean up the app by reading only the generated skill and its owned files.
-
 4. Seed the feature map.
 
    Read [references/feature-map.md](references/feature-map.md). Create `features/README.md` and one file for each of the three to five most important user-facing features that the repository shows. Use routes, commands, menus, help text, and product documentation as evidence.
 
    Record every known user entry point for each mapped feature. A successful check of one entry point does not prove the other entry points.
-
-   Completion criterion: the index matches the feature files, and each feature has an exact control recipe and an observable end state.
 
 5. Prove the generated skill.
 
@@ -72,10 +64,12 @@ Use the current workspace. Do not create a branch or pull request unless the use
 
    After each failed attempt, run the generated cleanup before the next attempt. Fix verification-skill instructions or owned helpers that fail, and repeat the affected checks.
 
-   Completion criterion: one mapped feature passes through the documented path, cleanup leaves no owned process or scratch state, and proof artifacts remain.
-
 6. Report the result.
 
    Report the generated skill path, primary surface, control method, feature-map coverage, proof that you ran, and any access or environment gap. Recommend `$maintain-verification-skill` for a later audit; do not suggest a fixed schedule unless the user asks.
 
-   Completion criterion: the user can find the verifier, understand what it proves, and see what remains unverified.
+## Completion
+
+- The generated skill and feature map contain source-grounded commands, selectors, prerequisites, and observable results, with no hidden setup or placeholders.
+- One mapped feature passes the documented launch, doctor, control, evidence, and cleanup path. No owned process or scratch state remains; evidence is preserved.
+- Report the verifier path, mapped coverage, actual proof, and any access or verification gap.

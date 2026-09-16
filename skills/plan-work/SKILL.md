@@ -1,123 +1,57 @@
 ---
 name: plan-work
-description: Plan and refine durable coordination for parallel work, shared interfaces, migrations, costly commitments, or cross-session handoff from established evidence. Apply a proportional internal review before returning one execution-ready plan.
+description: Plan work that needs coordination across shared interfaces, migrations, parallel streams, or costly commitments. Review and refine the plan before execution.
 disable-model-invocation: true
 ---
 
 # Plan Work
 
-Coordinate settled work that has real blocking edges, shared ownership, migration order, costly commitments, or handoff needs.
+Coordinate settled work with real dependencies, shared ownership, migration order, costly commitments, or handoff needs. Task size alone does not require a plan.
 
-A large change alone does not require a plan. When intent is settled and the work is reversible, locally discoverable, and incrementally verifiable, recommend `$do-work` instead.
+## Scope and Authorization
 
-## Workflow
+For a planning-only request, return the refined plan without implementing it. When the user also requests implementation, continue through implementation and required checks once the plan is ready. Do not ask for approval already supplied by the request or settled conversation. This continuation does not invoke another skill or authorize extra scope or external actions.
 
-1. Confirm planning is warranted and choose the artifact.
+When no coordination is needed, keep any requested plan brief. Implement directly if authorized; otherwise recommend direct work or `$do-work`. Ask only for an unresolved material decision or missing authorization that affects the next action. Continue independent authorized work while waiting.
 
-   Identify the coordination state that must survive: parallel lanes, shared interfaces, migration order, costly or irreversible choices, or cross-session handoff. If none exists, stop and recommend `$do-work`.
+## Build the Plan
 
-   Keep the plan in chat when it will remain available for the execution window. Write `docs/plans/<slug>.md` only when durable coordination requires a file, using:
+Read only the code, canon, tests, and prior results needed to establish affected boundaries and intent. Run a cheap non-destructive check or disposable probe when a technical assumption could change the plan. Separate observed evidence from unproven assumptions, and name a useful check for each material assumption.
 
-   ```md
-   ---
-   status: temporary
-   owner: plan-work
-   created: YYYY-MM-DD
-   cleanup: absorb-with-canonize
-   ---
-   ```
+Record the goal, constraints, non-goals, acceptance signals, and every requested outcome. Mark user-chosen deferrals explicitly. Do not silently reduce scope to make the plan easier to execute.
 
-   Completion criterion: the plan exists because coordination must persist, and it lives in the smallest artifact that can preserve that state.
+For each outcome, identify its implementation location, dependencies, and verification. Create independent work streams only when they help. Each stream needs an owner, required context, likely files, expected output, and checks. Keep sequential work on the critical path.
 
-2. Establish evidence.
+Give one coordinator ownership of shared interfaces, overlapping files, migrations, architecture decisions, and final integration. State what makes each dependent step ready to start. Use the current workspace; propose branches or worktrees only when the user requests isolation or likely conflicts justify asking.
 
-   Read relevant canon, current code, tests, prior shaping results, prototypes, logs, traces, and other observed artifacts. Route unresolved user-owned decisions to `$shape-work`. Run the cheapest non-destructive check or disposable probe when a technical assumption could materially change the plan.
-
-   Record:
-
-   - `Evidence Established`: observed facts and artifact results the plan may rely on.
-   - `Unproven Assumptions`: remaining claims that could change execution, with the cheapest useful discriminator.
-
-   Completion criterion: the plan distinguishes observed behavior from inference and contains no cheaply testable assumption masquerading as fact.
-
-3. Establish the scope ledger.
-
-   State the goal, constraints, non-goals, and every intended outcome. Record user-chosen deferrals explicitly in a `Full-Scope Check`.
-
-   Completion criterion: every requested outcome is in scope, a named non-goal, or an explicit user deferral.
-
-4. Design work streams.
-
-   Identify independent streams only where independence is real. For each stream, list likely files or modules, required context, expected outputs, and verification. Keep sequential work on the critical path instead of forcing parallel lanes.
-
-   Completion criterion: every scope item belongs to a stream or the critical path, and each independent stream can run from the context and outputs stated in the plan.
-
-5. Map the critical path.
-
-   Identify decisions, shared interfaces, migrations, generated types, design dependencies, and stream outputs that block later work. Separate immediately runnable lanes from dependent lanes.
-
-   Completion criterion: every dependency has a prerequisite, downstream consumer, and point at which it becomes unblocked.
-
-6. Assign integration ownership.
-
-   Give one coordinator ownership of shared interfaces, overlapping files, migrations, architecture-sensitive choices, and final integration. Use the current workspace; propose branches or worktrees only when the user requests isolation or likely conflicts justify asking.
-
-   Completion criterion: every integration point has one owner, and no streams have incompatible authority over the same boundary.
-
-7. Prove traceability.
-
-   Cross-check the scope ledger against streams, blocking edges, integration points, and verification.
-
-   Completion criterion: every scope item maps to one implementation stream or critical-path step and one verification method; every blocking edge and shared boundary appears in the execution order.
-
-8. Review and refine the draft.
-
-   Read [references/adversarial-review.md](references/adversarial-review.md). Apply its standard review to every draft. Run its deep independent review automatically only when the plan meets a listed high-consequence signal and has a material evidence gap.
-
-   Apply accepted amendments directly to the draft. Preserve the scope ledger, rerun the traceability check, and return the refined plan rather than a separate review report. Do not hand the plan to another review workflow.
-
-   Completion criterion: the final plan includes all material evidence-backed amendments, rejects speculative objections, and remains traceable to the original scope.
-
-9. Choose the next move.
-
-   Recommend `$do-work` when the refined plan is executable. Recommend `$shape-work` only when review exposes a user-owned product or design decision that prevents safe execution. Do not add another planning or review step.
-
-   Completion criterion: the next move starts execution or resolves one exact user-owned decision.
-
-## Output Format
-
-Use the applicable sections from this format; omit empty ceremony:
+Keep the plan in chat unless coordination must survive the current execution context. For a durable plan, write `docs/plans/<slug>.md` with:
 
 ```md
-# <Plan Name>
-
-## Goal
-
-## Scope
-
-## Non-Goals
-
-## Evidence Established
-
-## Unproven Assumptions
-
-## Canon To Read
-
-## Work Streams
-
-## Blocking Edges
-
-## Integration Points
-
-## Verification Strategy
-
-## Full-Scope Check
-
-## Coordinator Notes
-
-## Review Applied
-
-## Next Move
+---
+status: temporary
+owner: plan-work
+created: YYYY-MM-DD
+cleanup: absorb-with-canonize
+---
 ```
 
-The plan is complete when another agent can distinguish evidence from assumptions, account for the entire scope, start every unblocked stream, recognize every dependency, integrate through one owner, and verify each outcome without rediscovering intent.
+## Review and Refine
+
+Read [references/adversarial-review.md](references/adversarial-review.md) when reviewing the draft. Apply the standard review once. Use deep independent review only for a listed high-consequence commitment with a material evidence gap.
+
+Apply accepted amendments to the plan and check that every requested outcome still has an owner, execution path, and verification method. Resolve material findings before affected implementation. Do not add another review workflow by default.
+
+## Deliver or Execute
+
+For a planning-only request, return one refined plan. Use headings that help the reader find scope, evidence, assumptions, execution order, ownership, and verification. Link canon only where the plan needs it, with a reason to read each file. Omit empty sections and separate review transcripts.
+
+For an authorized implementation request, carry out the plan in useful working slices. Follow repository instructions and relevant verification guidance. Fix failures caused by the change, complete required checks, and clean up temporary artifacts. Reuse valid check results; repeat or expand checks only for invalidated results, failures, or uncovered risks. Do not stop after the first slice or merely recommend another skill.
+
+Report the result, checks, and any user-deferred or blocked outcome. When implementation is not requested, recommend one next move. If a material user decision blocks work, state that exact decision and complete any independent authorized work.
+
+## Completion
+
+- Every requested outcome is covered or explicitly deferred by the user; facts and assumptions remain distinct.
+- The plan identifies dependencies, one owner for each shared boundary, and a verification method for each outcome.
+- Accepted review findings are resolved in the plan; remaining risks have a named check or decision.
+- A planning-only request ends with a usable plan. An implementation request ends with verified work or a precise blocker and completed independent work.

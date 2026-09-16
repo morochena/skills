@@ -24,17 +24,13 @@ Prioritize issues in this order:
 
 1. Establish the review target.
 
-   Use the user's specified base, branch, PR, plan, or file list. If no target is specified, inspect the working tree diff.
-
-   Completion criterion: the exact change set and comparison base are known, including untracked files that belong to the change.
+   Use the user's specified base, branch, PR, plan, or file list. If no target is specified, inspect the working tree diff, including untracked files that belong to the change.
 
 2. Read intent.
 
    Read the request, issue, chat context, canon, acceptance tests, prototypes, or other observed artifacts needed to know what the change was supposed to do.
 
    When the change affects a user-facing surface, look for an existing project-local `verify-*` skill in the repository's skill root. If it covers the surface, read the applicable feature files as review evidence. Do not create, repair, or maintain the verifier during a read-only review.
-
-   Completion criterion: every intended outcome and explicit non-goal has a source; missing intent is recorded as an open question rather than guessed.
 
 3. Trace affected behavior.
 
@@ -44,13 +40,9 @@ Prioritize issues in this order:
 
    Look for vague names, mixed abstraction levels, leaky abstractions, costly indirection, hidden control flow, behavior tested through implementation details, and inconsistency with established local patterns.
 
-   Completion criterion: every changed behavior has been traced through its meaningful callers, effects, and tests, and every applicable review priority has been considered.
-
 4. Validate and prioritize findings.
 
    Keep only issues with concrete evidence and a credible impact. Treat personal taste and optional rewrites as non-findings. Group repeated instances under one root finding.
-
-   Completion criterion: every retained finding states the broken or risky behavior, evidence, impact, and smallest useful remediation.
 
 5. Report findings first.
 
@@ -63,10 +55,12 @@ Prioritize issues in this order:
 
    Report in this order: findings, open questions, short summary, and verification. Attach each finding to the tightest stable file and line range available.
 
-   Completion criterion: findings are ordered by severity and leverage; the absence of findings is stated explicitly when no actionable issue remains.
-
 6. State residual risk.
 
    Name unreviewed surfaces, unrun checks, uncertain assumptions, and the checks that would add confidence.
 
-   Completion criterion: the user can distinguish verified safety from remaining uncertainty.
+## Completion
+
+- The change set and intended behavior are grounded in the request and repository evidence.
+- Findings state evidence, impact, and the smallest useful correction, ordered by severity. Group repeated instances under one cause; state when no actionable finding remains.
+- Report verification gaps and unreviewed surfaces. Keep the review read-only unless fixes are authorized.

@@ -28,7 +28,7 @@ Do not mirror module trees, routes, schemas, commands, dependency lists, or test
 
 Write canon in present tense as specific, compact, source-grounded current intent. Convert decision history into current constraints, represent uncertainty explicitly, and keep each durable meaning in one prose or executable home.
 
-Use this read order when the files exist: `language.md`, `product.md`, `trajectory.md`, `system.md`, then `engineering.md`.
+Read canon only when its subject affects the task: `language.md` for terms and naming, `product.md` for scope and behavior, `trajectory.md` for product direction, `system.md` for architecture and invariants, and `engineering.md` for relevant engineering and verification rules. Pair adapter links with these use conditions. Do not require the full set before every edit.
 
 ## Canon metadata
 

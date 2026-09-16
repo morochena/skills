@@ -53,6 +53,8 @@ $start-work — "add team invites without overbuilding the org model"
 
 Skills are reusable playbooks the agent loads on demand. You invoke them by name (for example `$start-work`). This package is **explicit-invocation by default**: the agent should not silently run the whole workflow unless you ask.
 
+Skill selection does not create a new approval step. A planning-only request ends with a plan. When you also request implementation, the agent continues through the authorized work and required checks without requiring another skill call. New scope or external actions still require the appropriate authorization.
+
 You do not need a deep model of skills to use this package. Install them, call the ones you need, and let `$start-work` choose when you are unsure.
 
 ## Install
@@ -87,7 +89,7 @@ Omit `-g` to install into the current project only. Use `-a <agent>` to target a
 
 | Skill | Use |
 | --- | --- |
-| `init-project` | Create project instructions with lifecycle, product precedent, durable architecture, and verification rules. |
+| `init-project` | Create compact project instructions with lifecycle, project constraints, and verification rules. |
 | `start-work` | Choose the right workflow for a task. |
 | `brainblast` | Explore ideas from multiple angles before shaping or planning. |
 | `shape-work` | Resolve product and design decisions through conversation or cheap working probes. |
@@ -120,7 +122,7 @@ start-work
 
 `improve-architecture` is a focused structural workflow. It can assess in chat, document durable architectural intent, or implement a selected bounded improvement with an executable guardrail.
 
-`init-project` is a setup workflow. It creates or updates `AGENTS.md` with an explicit `pre-release` or `released` lifecycle, product precedent, durable architecture, and a verification policy based on feature maturity and churn.
+`init-project` is a setup workflow. It creates or updates `AGENTS.md` with a confirmed `pre-release` or `released` lifecycle and a short verification policy. It adds product precedent, architectural durability, or detailed test classifications when requested or established by project decisions.
 
 ## Routing
 
@@ -168,11 +170,11 @@ Adjacent modes:
 
 ### `init-project`
 
-Use this when a project needs a root `AGENTS.md` or its current instructions do not state the project lifecycle. It records whether the project is `pre-release` or `released`. It tells agents to study established product patterns and choose a long-term architecture before they build a solution. It also defines three baked levels and three churn levels so agents can match durable test investment to feature maturity without skipping basic verification.
+Use this when a project needs a root `AGENTS.md` or its current instructions do not state the project lifecycle. It records whether the project is `pre-release` or `released`, preserves established project rules, and applies revisions already authorized by the user. The default verification policy follows behavioral risk and reuses valid checks. Detailed maturity and churn guidance lives in a separate reference for decisions where it changes test investment. Product research and architectural durability policies are optional unless the project has adopted them.
 
 ### `start-work`
 
-Use this when the path is unclear. For a routing-only request, it recommends the smallest workflow that fits: direct action, shaping, planning, debugging, reviewing, or documentation cleanup. If you also requested implementation, it can complete clear, local, reversible work directly when intent is settled and no shared boundary needs coordination. It does not invoke another workflow skill automatically.
+Use this when the path is unclear. For a routing-only request, it recommends the smallest workflow that fits: direct action, shaping, planning, debugging, reviewing, or documentation cleanup. When you also request work, it follows that approach through completion within the authorized scope. It resolves material decisions and coordination needs before dependent work, without requiring another skill call.
 
 `start-work` works best after the agent has at least a little context. You can invoke it at the beginning with a rough idea, or after chatting for a while when the conversation starts turning into real work.
 
@@ -205,11 +207,11 @@ Use this when an idea is interesting but not ready to become requirements. It re
 
 ### `shape-work`
 
-Use this when the idea is still fuzzy. The agent resolves one decision at a time, looks up codebase facts, and creates a cheap working probe when discussion alone cannot supply useful evidence. It updates `docs/canon/language.md` only when durable language has settled.
+Use this when the idea is still fuzzy. The agent resolves one decision at a time, looks up codebase facts, and creates a cheap working probe when discussion alone cannot supply useful evidence. It updates `docs/canon/language.md` only when durable language has settled. It stops when shaping is complete unless you have also requested implementation.
 
 ### `plan-work`
 
-Use this when the work needs coordination, migration order, shared-interface ownership, a costly commitment, or a durable handoff. The plan records established evidence, remaining assumptions, scope, blocking edges, integration points, verification, and a full-scope check. It reviews every draft and applies a deep independent council automatically only for a concrete high-consequence commitment with a material evidence gap. It returns one refined plan, then recommends `do-work` when the plan is executable.
+Use this when the work needs coordination, migration order, shared-interface ownership, a costly commitment, or a durable handoff. The plan records evidence, assumptions, scope, dependencies, ownership, and verification. It reviews the draft and uses a deep independent council only for a concrete high-consequence commitment with a material evidence gap. A planning-only request receives one refined plan. A request that includes implementation continues through the authorized work and required checks.
 
 Plans usually stay in chat. Write a file only when coordination must survive the current execution context:
 
@@ -256,6 +258,8 @@ Use this when the question is not whether one change is good, but whether the re
 ### `canonize` and `canonize-mark`
 
 Use these to keep project documentation trustworthy. `canonize` preserves non-derivable intent in `docs/canon/`, leaves executable truth with code and configuration, and removes stale planning sediment. `canonize-mark` keeps non-canonical docs in place but marks them so agents know they are not trusted canon.
+
+Both skills make document links conditional on the task. Agents read terms, product scope, direction, architecture, or engineering guidance only when that subject affects their work.
 
 ## Rationale
 

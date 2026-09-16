@@ -46,4 +46,4 @@ Return one refined plan. Include `Review Applied` only when it helps execution:
 - List material changes that the review made to the plan.
 - Record a rejected concern only when it is likely to return during execution.
 
-If review exposes a missing user-owned decision, state the exact decision and stop before implementation. Do not guess the answer.
+If review exposes a missing material user decision, state the exact decision and pause only the work that depends on it. Continue independent authorized work. Do not guess the answer or treat a settled decision as missing.

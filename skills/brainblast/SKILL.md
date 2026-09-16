@@ -12,23 +12,13 @@ Diverge before converging. Keep the exploration in chat and hand off to another 
 
 1. Ground the idea.
 
-   Read relevant canon when present, especially:
-
-   - `docs/canon/language.md`
-   - `docs/canon/product.md`
-   - `docs/canon/trajectory.md`
-   - `docs/canon/system.md`
-   - `docs/canon/engineering.md`
+   Read canon only where its subject constrains the idea: language for terms, product for scope, trajectory for direction, system for architecture, or engineering for non-obvious constraints.
 
    Inspect enough of the codebase to separate product facts from assumptions. Stop once further inspection would not materially change the exploration.
-
-   Completion criterion: every fact used to constrain the idea is source-grounded, and every remaining uncertainty is labeled as an assumption.
 
 2. Frame the idea.
 
    Restate the idea in the product's language. Name the beneficiary, the problem or opportunity, why it might matter, and the visible assumptions.
-
-   Completion criterion: the framing is concrete enough that the user can correct the premise before divergence begins.
 
 3. Diverge through lenses.
 
@@ -43,19 +33,13 @@ Diverge before converging. Keep the exploration in chat and hand off to another 
    - `Delight pass`: what would make it unusually useful, polished, or memorable.
    - `Weird option`: one non-obvious version that might reveal a better direction.
 
-   Completion criterion: each relevant lens contributes a distinct observation or is explicitly marked inapplicable; the skeptic and weird-option lenses are included unless they genuinely do not fit.
-
 4. Converge on directions.
 
    Synthesize a small set of genuinely distinct directions. For each, name its value, tradeoffs, assumptions, and simplest plausible shape. Preserve meaningful disagreement between viable directions.
 
-   Completion criterion: the directions are distinguishable by a material choice, and the user can compare their consequences.
-
 5. Ask what to pull next.
 
    Recommend the strongest direction while keeping alternatives visible. Ask one focused question about what to explore, sharpen, or discard. Recommend `$shape-work` when material decisions remain, `$do-work` when intent is settled and execution is clear, and `$plan-work` only when durable coordination or a costly commitment requires it.
-
-   Completion criterion: the response ends with one clear recommendation and one user choice, without creating files or starting implementation.
 
 ## Output Shape
 
@@ -72,3 +56,9 @@ Diverge before converging. Keep the exploration in chat and hand off to another 
 
 ## What To Pull Next
 ```
+
+## Completion
+
+- Ground the idea in relevant project facts and distinguish assumptions from evidence.
+- Present distinct directions with their value, tradeoffs, and simplest plausible form.
+- End with a recommendation and one useful user choice. Keep exploration in chat unless the user requests an artifact.

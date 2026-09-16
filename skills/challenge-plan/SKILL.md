@@ -1,12 +1,14 @@
 ---
 name: challenge-plan
-description: Adversarially stress-test a completed implementation plan through independent review lenses, anonymized cross-review, and an evidence-weighted readiness verdict. Use only when the user explicitly asks for a council, pressure test, red-team review, or adversarial review of an existing plan. Plan Work already includes proportional review during plan creation.
+description: Stress-test an existing plan when the user explicitly requests an adversarial review, pressure test, red-team review, or council.
 disable-model-invocation: true
 ---
 
 # Challenge Plan
 
 Stress-test a completed plan before implementation. Operate read-only unless the user explicitly asks to revise the plan.
+
+Plan Work already includes proportional review during plan creation. This skill provides a separate review through independent lenses and anonymized cross-review.
 
 Be adversarial without manufacturing objections. Retain only challenges with concrete evidence, credible impact, and a useful plan amendment. A council member may report no material finding.
 
@@ -44,8 +46,6 @@ Add one narrowly defined specialist only when project evidence shows material se
 
    Give every advisor the same neutral packet: plan text or path, goal, constraints, supporting sources, and known unknowns. Separate observed facts from plan claims.
 
-   Completion criterion: every advisor can inspect the same plan, intent, and evidence without reconstructing missing context.
-
 2. Run independent adversarial passes.
 
    Dispatch the five advisors as separate subagents, in parallel where capacity permits. When capacity requires batches, preserve independence by withholding every other advisor's output until all first passes finish.
@@ -59,8 +59,6 @@ Add one narrowly defined specialist only when project evidence shows material se
 
    Do not ask advisors to be balanced, reach consensus, rewrite the entire plan, or fill a criticism quota.
 
-   Completion criterion: all default lenses ran independently, and every proposed finding is falsifiable or tied to observable project evidence.
-
 3. Run anonymized cross-review.
 
    Start a second pass with every first-pass advisor, including any specialist. Remove role names, label the first-pass responses `A`, `B`, and so on, and randomize their order separately for each reviewer. Give every reviewer the complete set without revealing authorship. Ask:
@@ -71,8 +69,6 @@ Add one narrowly defined specialist only when project evidence shows material se
    4. What material concern, if any, did every response miss?
 
    Keep peer reviews concise. Their purpose is to test the findings, not create a second pile of unranked commentary. Wait for every reviewer before synthesis.
-
-   Completion criterion: every first-pass advisor completed peer review, every challenge faced independent scrutiny, and newly introduced concerns meet the same evidence and impact standard.
 
 4. Synthesize by evidence, not votes.
 
@@ -90,15 +86,11 @@ Add one narrowly defined specialist only when project evidence shows material se
    - `Revise`: the approach remains sound, but material plan edits are required.
    - `Replan`: the goal, premise, or implementation approach needs fundamental reconsideration.
 
-   Completion criterion: the verdict follows from surviving evidence, every required amendment names its target in the plan, and the result does not smuggle rejected challenges back in as vague caution.
-
 5. Hand off one next move.
 
    Recommend `$do-work` when the plan is ready, `$plan-work` when amendments or replanning are needed, or `$shape-work` when the council uncovered a user-owned product decision. Do not invoke the next skill automatically.
 
    If the user asks to revise the plan, apply only accepted amendments, preserve the original scope ledger, and rerun the plan's traceability check.
-
-   Completion criterion: the user receives one unambiguous next action and knows which risks were resolved, retained, or rejected.
 
 ## Output Format
 
@@ -128,3 +120,9 @@ Add one narrowly defined specialist only when project evidence shows material se
 ```
 
 Omit empty sections. Keep individual advisor transcripts out of the main result unless the user asks for them.
+
+## Completion
+
+- All council members complete independent review and anonymized cross-review of the same plan and evidence.
+- The verdict follows from supported findings; each required amendment identifies its plan target, consequence, and useful correction.
+- Report one next action and remaining risks. Revise the plan only when authorized, preserving its full scope.

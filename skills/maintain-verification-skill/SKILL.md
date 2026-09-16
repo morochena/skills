@@ -35,13 +35,9 @@ Edit only the target verification skill directory: its `SKILL.md`, `agents/`, `f
 
    If several candidates exist and the request does not identify one, ask which one to maintain. If no candidate exists, stop and recommend `$create-verification-skill`.
 
-   Completion criterion: exactly one target directory and one feature map are in scope.
-
 2. Check index hygiene.
 
    Read `features/README.md` and list its sibling feature files. Correct missing, extra, duplicate, and dead index entries. Do not add a generated inventory.
-
-   Completion criterion: every feature file has one index entry, and every index entry resolves to one feature file.
 
 3. Run the source pass.
 
@@ -50,8 +46,6 @@ Edit only the target verification skill directory: its `SKILL.md`, `agents/`, `f
    When worker agents are available, give them independent read-only feature reviews in parallel. Use one feature per worker when useful, or use bounded batches when feature count exceeds useful concurrency. Workers must not control the app or edit files. Require this return shape from each worker: feature summary, source entry points, likely drift or none, and one live-check recipe.
 
    The coordinator must receive a source result for every feature. Merge overlapping recipes into as few app states as practical. Check cited drift before editing. Sweep recent user-facing source changes for a feature missing from the map, and require a concrete source path before adding it.
-
-   Completion criterion: every mapped feature has source evidence, and every proposed addition or correction has a concrete source path.
 
 4. Run the live pass.
 
@@ -67,15 +61,11 @@ Edit only the target verification skill directory: its `SKILL.md`, `agents/`, `f
 
    Run final teardown after the last control action and after all correction checks. Preserve evidence.
 
-   Completion criterion: every feature is live-verified or has a precise unreachable result, the target leaves no owned process or scratch state, and evidence remains.
-
 5. Triage and correct drift.
 
    Correct user-path descriptions that no longer match the app. Correct a control recipe or owned helper when the app works but the verifier cannot control it. Report broken product behavior as a product gap.
 
    Document the invocation of each changed helper, make executable helpers executable, and run every changed control or doctor path again before handoff.
-
-   Completion criterion: every edit is supported by source and a live result, and no product-code change is in the diff.
 
 6. Report the outcome.
 
@@ -83,4 +73,8 @@ Edit only the target verification skill directory: its `SKILL.md`, `agents/`, `f
 
    For a clean or blocked outcome, do not create an empty change. For a changed outcome, re-read each changed file and leave one coherent diff. Create a branch, commit, or pull request only when the user requests it.
 
-   Completion criterion: the user can distinguish source coverage, live coverage, corrections, product gaps, and blockers.
+## Completion
+
+- One target verifier and a consistent feature index are in scope. Every mapped feature has source evidence and a live result or a precise unreachable prerequisite.
+- Every correction stays within the verifier directory and has a confirming live check. Report product gaps separately.
+- Teardown removes owned processes and scratch state while preserving evidence. Report clean, changed, or blocked with coverage and remaining gaps.

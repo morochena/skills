@@ -1,6 +1,6 @@
-# AGENTS.md Policy Blocks
+# Default Project Policy
 
-Use these blocks when `$init-project` creates or updates root project instructions. Select one lifecycle clause. Keep the verification policy for both lifecycle values.
+Use the confirmed lifecycle clause and concise verification guidance. Adapt them to established project rules. Do not copy these authoring instructions into `AGENTS.md`.
 
 ## Project Profile
 
@@ -8,59 +8,27 @@ Use these blocks when `$init-project` creates or updates root project instructio
 
 ### Pre-release Compatibility
 
-Use when `Lifecycle` is `pre-release`:
-
-- Do not preserve backward compatibility. Remove obsolete paths instead of adding compatibility layers, fallbacks, aliases, dual writes, or migrations.
-- Prefer the clean target design over a staged transition. Replace old interfaces and update all in-repository callers in the same change.
-- Do not preserve development-only data unless the user asks for it.
+- Prefer the target design and update affected in-repository callers together. Remove obsolete paths instead of adding compatibility layers for development-only behavior.
+- Preserve development data when the user requests it or an established project rule requires it.
 
 ### Released Compatibility
 
-Use when `Lifecycle` is `released`:
+- Preserve externally visible behavior and user data unless the user has authorized a specific compatibility, migration, or rollout decision.
+- Give a required transition an owner, a safe migration path, and a removal condition for temporary compatibility code.
 
-- Preserve externally visible behavior and user data by default.
-- Do not remove or change a public interface without an explicit compatibility, migration, or rollout decision.
-- When a compatibility layer or migration is necessary, define its owner, removal condition, and safe transition path. Do not keep it indefinitely by default.
+## Verification
 
-## Product Precedent
+- Match checks and durable test coverage to changed behavior and regression cost. Inspect existing coverage before adding tests. Use temporary probes for unsettled behavior when they provide the needed evidence.
+- Keep required coverage for security, permissions, money, user data, data integrity, and irreversible effects. Preserve accepted regression contracts.
+- Complete required checks. Reuse passing results that cover the final code and environment. Repeat or expand checks only when a change invalidates a result, a failure occurs, or a material risk remains uncovered.
 
-Before you design a product, interaction, or workflow solution, study how established products solve the same problem. Use proven patterns, terms, and conventions as the default. Create a new approach only when project constraints or a clear product benefit justify the difference.
+Add exact local check commands only after confirming them. State that local checks may run and retry without further approval only when their use of disposable state and lack of production effects are established facts.
 
-State which products or patterns informed the design and which parts you adopted. If you depart from an established pattern, state the reason. Skip this study for local maintenance work and for work that already has a settled design.
+## Optional Project Rules
 
-## Architectural Durability
+Include these only when requested or established by project decisions. Preserve existing adopted meanings unless the user authorizes a change.
 
-Make production architecture decisions for the intended long-term design. Do not accept a stopgap that only works for now and is meant to be replaced later.
+- **Product precedent:** For unresolved product or interaction design, consult relevant established patterns and explain material departures. Skip research for settled designs and local maintenance.
+- **Architectural durability:** Choose a simple design that fits the intended architecture. Use a disposable probe for unresolved feasibility. Give any necessary temporary production stage an explicit target and removal condition.
 
-Choose the simplest design that can remain in place. Long-term design does not mean speculative abstractions, unused extension points, or features outside the current scope.
-
-When uncertainty blocks a durable decision, use a disposable probe outside the production path and remove it after it answers the question. Do not let probe structure become production architecture. A released system can require migration stages, but each stage must move directly toward the target design and have an explicit removal condition.
-
-## Feature Maturity And Verification
-
-Before implementation of a new or changed feature, classify it on both axes:
-
-- Baked level: `1` (unbaked), `2` (moderately baked), or `3` (very baked).
-- Churn: `high`, `medium`, or `low`.
-
-Inspect existing coverage before adding tests. Reuse tests that already protect the relevant behavior. Baked level sets the required depth of coverage for the changed behavior; add or update tests only to close meaningful gaps or satisfy explicit requirements:
-
-- Level 1 — unbaked: The behavior is exploratory or unsettled. Do not add durable automated regression tests for it. Use only the minimum smoke check, type check, manual check, or disposable probe needed to show that the slice works.
-- Level 2 — moderately baked: The main contract is settled, but details can change. Use a small number of high-level contract or integration tests for the stable behavior and critical failure path. Avoid exhaustive variants and tests of internal structure.
-- Level 3 — very baked: The behavior is stable and its regression cost matters. Ensure regression coverage includes main paths, important edge cases, failure and recovery behavior, and integration boundaries affected by the change.
-
-Churn sets test coupling:
-
-- High churn: Test only stable observable behavior and established boundaries. Avoid snapshots, call-count assertions, and implementation-detail tests.
-- Medium churn: Test public behavior and the main integration seams. Use focused unit tests where the units are stable.
-- Low churn: Add detailed tests when they improve regression detection and remain clear to maintain.
-
-Use baked level to decide how much to test. Use churn to decide where to test. When the signals differ, apply both. For example, a very baked feature with high implementation churn needs broad coverage at stable external boundaries, not broad coverage of its internals.
-
-Treat the two axes as independent. Never use stable behavior as proof of low churn. Never use frequent code changes as proof that behavior is unbaked.
-
-These classifications do not remove the need to verify a change. They control durable regression investment. Always test established behavior whose failure can affect security, permissions, money, user data, data integrity, or irreversible side effects. Keep tests already required by an accepted specification or regression contract.
-
-Complete required checks and reuse passing results from the current run when they cover the final code and relevant environment. Once relevant checks pass, stop. Repeat checks only when relevant changes invalidate results, or a failure or unresolved concern justifies another run. Expand checks only for an uncovered risk, failure, or explicit requirement.
-
-State the selected baked level and churn, with a short reason, in the implementation ledger or plan. If the classification is not supplied, infer it from settled project evidence. Ask the user only when the choice would materially change scope, risk, or acceptance.
+For projects that need a detailed test investment model, use [verification-depth.md](verification-depth.md). Load it only when maturity or expected change affects the verification decision.

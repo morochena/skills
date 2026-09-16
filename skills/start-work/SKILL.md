@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Start Work
 
-Inspect only enough local context to choose the smallest useful workflow. For a routing-only request, recommend one immediate move. When the user has also requested implementation, do clear, local, reversible work directly if intent is settled and no shared boundary needs coordination. Stay within the authorized scope. Another user-invoked skill starts only when the user invokes it; direct work does not require another skill call.
+Inspect only enough local context to choose the smallest useful workflow. For a routing-only request, recommend one immediate move. When the user also requests work, use that approach to complete the authorized task and its required checks. Direct work does not require another skill call. Invoke another explicit-only skill only when the user requests it. Keep scope and external actions within existing authorization.
 
 ## Workflow
 
@@ -14,11 +14,9 @@ Inspect only enough local context to choose the smallest useful workflow. For a 
 
    Read the task and inspect only the repository facts needed to distinguish intent, dominant uncertainty, reversibility, coordination, and risk. Ask the user only for a decision, priority, constraint, or missing intent that cannot be discovered locally.
 
-   Completion criterion: the routing decision depends on known facts rather than assumptions about the repository.
-
 2. Route specialized intent first.
 
-   Use the first matching branch:
+   Use the first matching branch. For a routing-only request, recommend the named skill. When the corresponding work is already authorized, perform it directly; the recommendation is not a required handoff.
 
    - Initialize or revise repository agent instructions: recommend `$init-project`.
    - Explore an idea without committing to requirements: recommend `$brainblast`.
@@ -30,25 +28,25 @@ Inspect only enough local context to choose the smallest useful workflow. For a 
    - Establish or audit repository architecture: recommend `$improve-architecture`.
    - Normalize canon and remove planning sediment: recommend `$canonize`.
    - Normalize canon while preserving and marking sediment: recommend `$canonize-mark`.
-   - Implement settled intent or execute a coordination plan: do authorized work directly when it meets the conditions above; otherwise recommend `$do-work`.
-
-   Completion criterion: a specialized branch wins whenever the user's primary intent matches it, regardless of task size.
+   - Implement settled intent or execute a coordination plan: do authorized work directly; for routing only, recommend `$do-work` when its structure would help.
 
 3. Route ordinary delivery work.
 
    When no specialized branch matches, choose the first applicable route:
 
-   - When a user-owned product or design decision could materially change behavior, scope, architecture, or acceptance, recommend `$shape-work`.
-   - When a cheap reversible artifact can answer the dominant uncertainty, recommend `$shape-work` if the evidence informs a user-owned decision; recommend `$do-work` if intent is settled and the uncertainty is technical. Useful probes include wireframes, scripts, focused tests, traces, benchmarks, contracts, and narrow working slices.
+   - When a user-owned product or design decision could materially change behavior, scope, architecture, or acceptance, ask for that decision and continue independent authorized work. For routing only, recommend `$shape-work`.
+   - When a cheap reversible artifact can answer the dominant uncertainty, run that probe within the authorized scope and use its result for the next decision or implementation step. For routing only, recommend `$shape-work` if the evidence informs a user-owned decision, or `$do-work` if intent is settled and the uncertainty is technical. Useful probes include wireframes, scripts, focused tests, traces, benchmarks, contracts, and narrow working slices.
    - When intent is settled, feedback is quick, and no shared boundary needs coordination, do clear local work directly if implementation is authorized. For a routing-only request, recommend direct work or `$do-work`.
-   - When parallel lanes, migrations, shared interfaces, costly or irreversible commitments, or cross-session handoff require durable coordination, recommend `$plan-work`.
+   - When parallel lanes, migrations, shared interfaces, costly or irreversible commitments, or cross-session handoff require durable coordination, establish the necessary plan before affected work. For routing only, recommend `$plan-work`.
 
    Task size may reveal coordination or risk, but never triggers planning by itself.
-
-   Completion criterion: the recommendation targets the actual uncertainty or coordination cost and uses the cheapest safe way to produce evidence.
 
 4. Report the result or recommend one immediate move.
 
    After direct work, state the result, verification, and any unresolved issue. Otherwise, state the recommendation, the evidence for it, and the first action. Mention likely later skills only as orientation, not as an automatically started sequence. Include canon, verification, parallelism, or workspace-isolation notes only when they affect the immediate choice.
 
-   Completion criterion: the user receives a verified result with any gaps stated, or one unambiguous next action.
+## Completion
+
+- Base the route on the actual intent, uncertainty, coordination, and risk. Task size alone does not trigger planning.
+- Return one immediate recommendation for a routing-only request, or complete the authorized work with checks and any gaps stated.
+- Recommend another skill only when useful; do not make its invocation a new approval requirement for work already authorized.

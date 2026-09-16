@@ -32,23 +32,17 @@ When an improve request does not select a boundary or finding, establish the evi
 
    Classify the repository and inspect its instructions, structure, representative behavior, tests, configuration, and architectural material. Run focused dependency queries, static checks, tests, traces, or other non-destructive probes when they can replace speculation with observed behavior. Before choosing coverage, read [references/evidence.md](references/evidence.md) for repository-type inventories, evidence precedence, rule confidence, and large-repository sampling.
 
-   Completion criterion: every major application or bounded area has representative coverage; the assessment records what was inspected and excluded; every candidate rule is labeled `Established`, `Inferred`, or `Proposed` from concrete evidence.
-
 2. Establish the architecture contract.
 
    Before choosing a contract path or writing rules, read [references/architecture-contract.md](references/architecture-contract.md). Build or validate a concise contract from established and inferred rules. Put proposed rules and unresolved choices in `Open Questions`.
 
    In `document` mode, create or update the selected contract. In `assess` mode, present the candidate contract in chat. In `improve` mode, update the contract only when the selected change alters durable intent. Report documentation drift when an existing contract conflicts with current dependencies, accepted decisions, or runtime behavior.
 
-   Completion criterion: the contract path is explicit; every normative rule is testable and labeled by evidence strength; proposed rules create no conformance findings.
-
 3. Test conformance.
 
    Trace representative behavior and dependencies across the contract's boundaries. Look for misplaced business rules, reversed or circular dependencies, parallel patterns, inconsistent domain representation, leaking infrastructure details, costly indirection, dependency magnets, brittle test boundaries, incomplete migrations, obsolete seams, and rules too vague to apply.
 
    Inspect enough call sites, tests, history, and counterexamples to distinguish violations from intentional exceptions. When cheap, turn a suspected violation into a reproducible dependency query, architecture test, lint rule, type check, or focused behavioral test. Group repeated instances under one architectural issue.
-
-   Completion criterion: every suspected issue is confirmed by observable evidence against an established or inferred rule, recorded as an accepted exception, moved to an open decision, or discarded with contrary evidence.
 
 4. Produce the mode-specific result.
 
@@ -58,10 +52,12 @@ When an improve request does not select a boundary or finding, establish the evi
    - In `document` mode, write the contract and keep findings in chat unless a durable audit was requested or is necessary for a cross-session remediation program.
    - In `improve` mode, implement only the selected finding, verify it incrementally, and add an executable boundary check when its value exceeds its maintenance cost.
 
-   Completion criterion: every reported or implemented finding cites its rule, concrete evidence, impact, target state, safe migration order, and verification; every production change is within the selected scope.
-
 5. Reconcile the result.
 
    Verify that every finding maps to an established or inferred rule, proposed concerns live in open decisions, accepted exceptions remain explicit, and any refactoring order respects dependency and migration constraints. Run the original conformance signal, relevant regression checks, and documentation checks for changed durable intent.
 
-   Completion criterion: executable behavior, contract, findings, exceptions, open decisions, and remediation order agree; the user can distinguish observed improvement from remaining proposals.
+## Completion
+
+- The selected scope has representative evidence; report inspected and excluded areas and label rules Established, Inferred, or Proposed.
+- Each finding cites an established or inferred rule, evidence, impact, target state, safe migration order, and verification. Keep proposed rules and unresolved choices separate from violations.
+- Edits match the requested mode and selected scope. Contract, findings, accepted exceptions, and observed behavior agree, with verification gaps stated.

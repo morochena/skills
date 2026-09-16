@@ -27,8 +27,6 @@ Preserve non-canonical documents while making their status unmistakable. Let cod
 
    For each candidate claim, identify whether its proper authority is executable—code, configuration, schema, test, or generated output—or prose canon.
 
-   Completion criterion: every relevant root or `docs/` Markdown file has one classification; every candidate claim has an authoritative home, repository source, or uncertainty marker; every excluded file is accounted for by an explicit scope rule.
-
 2. Normalize canon and reconcile active constraints.
 
    Before editing canon or status markers, read [references/preservation-model.md](references/preservation-model.md) for canonical homes, writing rules, and marking formats. Prefer a coherent existing `docs/canon/` convention; otherwise use the model in that reference.
@@ -37,28 +35,24 @@ Preserve non-canonical documents while making their status unmistakable. Let cod
 
    When a temporary document names a constraint that should be enforced in code, configuration, schema, or tests, verify the existing enforcement. Preserve an established normative constraint as intent and report any enforcement gap instead of claiming that implementation conforms. Treat an unaccepted constraint as an unresolved decision.
 
-   Completion criterion: language canon lives in `docs/canon/language.md`, every temporary or stale document has been checked for durable intent and active constraints, and each meaning has one prose or executable authority.
-
 3. Update adapters and authority links.
 
-   Make existing adapters point to the canon read order. Point authoritative links only to canon, protected references, or stable executable sources. When an unknown document could otherwise appear authoritative, identify it as unknown and non-authoritative in the nearest maintained index or adapter without presenting it as guidance. Keep adapters compact and preserve the repository's existing agent ecosystems.
-
-   Completion criterion: adapters make canon and authoritative executable sources discoverable, duplicate no canon at length, and present no temporary, stale, or unknown document as authoritative.
+   Make existing adapters link to relevant canon with a use condition for each file. Point authoritative links only to canon, protected references, or stable executable sources. When an unknown document could otherwise appear authoritative, identify it as unknown and non-authoritative in the nearest maintained index or adapter without presenting it as guidance. Keep adapters compact and preserve the repository's existing agent ecosystems.
 
 4. Mark planning sediment in place.
 
    Preserve each temporary or stale document at its current path and retain its content and existing metadata. Add or update the repository-appropriate status marker from the preservation reference. Preserve `unknown` documents without modification and report them for human judgment.
 
-   Completion criterion: every temporary or stale document, including every ADR-like file, remains in place and is visibly marked with its exact non-canonical status; every unknown remains unmodified.
-
 5. Reconcile the preserved documentation surface.
 
    Verify status markers, canonical ownership, executable authority, adapter links, and references among maintained documentation. Make canon the destination for non-derivable intent and executable sources the destination for mechanics while leaving preserved material available as explicitly non-authoritative context.
-
-   Completion criterion: a future agent can identify canon, protected references, temporary material, stale material, and unknowns without inferring status from directory names.
 
 6. Report the result.
 
    Summarize changed canon files, adapter changes, temporary and stale documents marked, protected and unknown documents left intact, authority-link cleanup, and facts requiring human judgment.
 
-   Completion criterion: the user can account for every in-scope document and distinguish trusted canon from every preserved non-canonical category.
+## Completion
+
+- Each durable meaning has one authoritative home, and active constraints are reconciled with source.
+- Temporary and stale documents retain their content with accurate non-canonical markers. Protected material remains intact and unknown documents remain unmodified.
+- Adapters and maintained links identify valid authoritative sources and when to read them. Report unresolved facts and enforcement gaps.

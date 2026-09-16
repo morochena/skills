@@ -8,6 +8,8 @@ disable-model-invocation: true
 
 Implement settled intent through the smallest useful working slices. Act as coordinator and final integrator when real parallel streams exist; keep architectural judgment, shared interfaces, and final verification centralized.
 
+Continue until the full requested scope and required checks are complete, or a concrete blocker prevents dependent work. Complete independent authorized work before reporting a blocker. Do not stop after the first slice or ask again for permission already supplied by the request or settled conversation. Existing authorization does not cover extra scope or external actions.
+
 Use the current workspace. Create a branch or worktree only when the user requests that isolation.
 
 ## Implementation Standard
@@ -21,11 +23,9 @@ Use the current workspace. Create a branch or worktree only when the user reques
 
 1. Establish the implementation ledger.
 
-   Read the user's request, settled chat context, or coordination plan. Record the goal, non-goals, acceptance signals, and every intended outcome. Keep this ledger compact; show it only when it helps the user assess scope or make a decision. Route unresolved user-owned product decisions to `$shape-work`.
+   Read the user's request, settled chat context, or coordination plan. Track the goal, non-goals, acceptance signals, and every intended outcome. Show a ledger only when it helps the user assess scope or make a decision. Ask only for unresolved material product decisions; a separate `$shape-work` invocation is optional.
 
-   Do not return to `$plan-work` merely because execution structure was not written in advance. Use it only when implementation reveals real parallel coordination, migration order, shared-interface ownership, a costly commitment, or a cross-session handoff.
-
-   Completion criterion: every intended outcome is represented in the ledger, and no material product or design decision is being guessed.
+   Add a plan only when implementation reveals real parallel coordination, migration order, shared-interface ownership, a costly commitment, or a cross-session handoff. Do not require a separate `$plan-work` invocation to continue authorized work.
 
 2. Inspect the repo.
 
@@ -33,25 +33,17 @@ Use the current workspace. Create a branch or worktree only when the user reques
 
    When the work changes a user-facing surface, look for an existing project-local `verify-*` skill in the repository's skill root. If it covers the surface, read its applicable feature files and add those user paths to the verification work. Do not create or maintain a verifier inside `$do-work`.
 
-   Completion criterion: each intended outcome has a grounded implementation location, a verification path, and a safe relationship to existing changes.
-
 3. Build the first evidence-producing slice.
 
    Choose the smallest end-to-end slice that can run, render, or otherwise expose real behavior. When technical feasibility remains uncertain, use a disposable probe or narrow harness before committing production structure. Apply what the result teaches, and do not let throwaway structure enter the product without review. For a purely mechanical change where slicing adds no signal, use the smallest coherent batch instead.
-
-   Completion criterion: the first slice or probe produces observable evidence about behavior, integration, or feasibility and informs the remaining implementation.
 
 4. Assign implementation streams.
 
    Create streams only where independence improves delivery. Give each stream one owner, narrow context, expected outputs, likely files, and verification. Delegate independent modules, separate research, isolated test work, stable frontend/backend slices, and reviewable mechanical changes when worker agents are available. Keep overlapping files, shared interfaces, migrations, architecture boundaries, and design-sensitive changes with the coordinator.
 
-   Completion criterion: every ledger item has one owner; delegated streams are independent; integration-sensitive decisions have one coordinating owner.
-
 5. Integrate and verify continuously.
 
    Implement coordinator-owned work and review each delegated result before relying on it. After each meaningful slice, run the closest relevant check and use the result to refine the next slice. Reconcile interfaces, behavior, style, naming, and abstractions as streams land.
-
-   Completion criterion: every ledger item is implemented, explicitly user-deferred, or blocked with evidence; each meaningful slice has a passing signal or an explicit verification gap; the combined change reads as one coherent implementation.
 
 6. Verify the integrated behavior.
 
@@ -61,16 +53,16 @@ Use the current workspace. Create a branch or worktree only when the user reques
 
    Treat this verifier use as part of `$do-work`; it does not start `$create-verification-skill` or `$maintain-verification-skill`. When a check is unavailable or disproportionately expensive, run the best substitute and explain the gap.
 
-   Completion criterion: every changed behavior has a passing check or an explicit verification gap, and integration checks cover every changed shared boundary.
-
 7. Clean up.
 
    Remove temporary instrumentation and artifacts created during this run. Leave pre-existing plans and documentation cleanup to the user; recommend `$canonize` when durable facts should enter `docs/canon/`.
-
-   Completion criterion: the final diff contains only intentional implementation, tests, and authorized documentation changes.
 
 8. Report.
 
    For a small change, report the result, verification, and any unresolved issue in a short paragraph. For larger work, add the scope and file details needed to assess completion. Always disclose user-deferred or blocked outcomes and material verification gaps or residual risk. Omit empty categories and do not reproduce the ledger by default.
 
-   Completion criterion: the user can account for every intended outcome and judge the implementation's remaining risk.
+## Completion
+
+- Every requested outcome is implemented, explicitly user-deferred, or blocked with evidence. Complete independent authorized work before reporting a blocker.
+- Required checks cover the final code and changed integration boundaries. Disclose any unavailable check or remaining risk.
+- The diff contains intentional implementation, tests, and authorized documentation changes. Remove temporary artifacts and report the result concisely.

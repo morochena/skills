@@ -10,19 +10,17 @@ Discover repository facts locally, reserve product judgment for the user, and re
 
 Keep prose in chat. Keep probes disposable unless the user asks to preserve them or later execution needs them. Write to canon only when a durable term or constraint has clearly settled.
 
+For a shaping-only request, stop when intent is ready. When the user also requests implementation, continue with that authorized work once material decisions are settled. Do not require another skill invocation or repeat an approval already supplied by the user.
+
 ## Workflow
 
 1. Orient.
 
-   Read existing canon when present, especially `docs/canon/language.md`. Inspect the codebase for facts that bear on the user's idea.
-
-   Completion criterion: discoverable codebase facts are separated from user-owned decisions, priorities, and constraints.
+   Read canon only where its subject affects the idea; use `docs/canon/language.md` when terms need clarification. Inspect the codebase for relevant facts.
 
 2. Establish the readiness ledger.
 
    Track the intended outcome, in-scope behavior, explicit non-goals, acceptance signals, domain terms, constraints, and unresolved product or design decisions. Preserve the user's full intended scope unless they choose a deferral.
-
-   Completion criterion: every known requirement or concern has one place in the ledger, and silent scope shrinkage would be visible.
 
 3. Choose the next decision and evidence source.
 
@@ -37,21 +35,15 @@ Keep prose in chat. Keep probes disposable unless the user asks to preserve them
 
    Avoid probes whose cost, destructive effect, security exposure, or production impact exceeds the decision they inform. Keep temporary artifacts outside production paths when practical and identify anything that must survive the shaping session.
 
-   Completion criterion: the next decision has a concrete evidence source, and any probe has an explicit question it can answer.
-
 4. Produce evidence or ask.
 
    Run and inspect the chosen probe before drawing conclusions. Report what it demonstrates and what it cannot demonstrate. Ask only when a material user decision remains unresolved by the request and settled context. When a probe would add little, offer only viable, mutually exclusive options, put the recommendation first, and explain the material tradeoff of each. Use one focused open question when honest options do not yet exist.
 
    While an answer is pending, continue authorized repository checks or other work that does not depend on it. Wait for the answer before work that depends on the decision; elapsed time does not settle it.
 
-   Completion criterion for each turn: at most one unresolved material user decision is presented, with an explicit recommendation when evidence supports one. No question repeats a settled decision or delays the readiness check when intent is clear.
-
 5. Sharpen language.
 
    Challenge overloaded or vague terms. If a term conflicts with existing canon, surface the conflict and ask which meaning should win.
-
-   Completion criterion: every term that changes scope, behavior, ownership, or acceptance has one settled meaning or is listed as an unresolved blocker.
 
 6. Capture settled canon.
 
@@ -67,13 +59,11 @@ Keep prose in chat. Keep probes disposable unless the user asks to preserve them
    ---
    ```
 
-   Completion criterion: each canon edit records only a settled durable meaning and preserves the repository's existing canon conventions.
-
 7. Test readiness.
 
    Review the ledger after each answer. Continue while an unresolved user decision could materially change scope, behavior, architecture, or acceptance. When ready, remove disposable probes that later work does not need, identify any preserved artifact and why it remains, then summarize settled decisions, explicit non-goals, acceptance signals, canon updates, and remaining implementation questions.
 
-   Completion criterion: product intent can be built without guessing; every remaining open question is either implementation-discoverable or explicitly non-blocking. Recommend `$plan-work` only for durable coordination, migration order, shared boundaries, or costly commitments; otherwise recommend direct implementation or `$do-work`.
+   Continue authorized implementation when ready. For a shaping-only request, recommend `$plan-work` only for real coordination or costly commitments; otherwise recommend direct implementation or `$do-work`.
 
 ## Decision Prompts
 
@@ -84,3 +74,9 @@ Use the environment's native structured-choice prompt when it is available and p
 Write durable domain terms, product terms, roles, business concepts, and naming boundaries to `docs/canon/language.md`. Keep brainstorming, plans, issue work, rationale, decision logs, probe output, and unconfirmed guesses in temporary context.
 
 Use `$canonize` later to absorb or remove temporary planning artifacts.
+
+## Completion
+
+- Preserve the full requested scope and settled decisions. Present at most one unresolved material user decision at a time.
+- Keep evidence, assumptions, and user choices distinct. Canon edits contain only settled durable meanings; remove unneeded probes and identify retained artifacts.
+- When intent is ready, state acceptance signals and remaining implementation questions. Continue authorized implementation, or recommend one next move for a shaping-only request.

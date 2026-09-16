@@ -29,13 +29,9 @@ Use `$canonize-mark` when the user wants non-canonical documents preserved in pl
 
    For each candidate claim, identify whether its proper authority is executable—code, configuration, schema, test, or generated output—or prose canon.
 
-   Completion criterion: every relevant root or `docs/` Markdown file has one classification; every candidate claim has an authoritative home, repository source, or uncertainty marker; every excluded file is accounted for by an explicit scope rule.
-
 2. Normalize the canon model.
 
-   Before creating or restructuring canon files, read [references/canon-model.md](references/canon-model.md) for file ownership, trajectory rules, writing rules, metadata, and adapter consumption order. Prefer a coherent existing `docs/canon/` convention; otherwise use the model in that reference.
-
-   Completion criterion: language canon lives in `docs/canon/language.md`, each durable meaning has one prose or executable home, product truth and trajectory do not compete, and no root adapter is required to own canon.
+   Before creating or restructuring canon files, read [references/canon-model.md](references/canon-model.md) for file ownership, trajectory rules, writing rules, metadata, and when agents should read each file. Prefer a coherent existing `docs/canon/` convention; otherwise use the model in that reference.
 
 3. Reconcile active constraints.
 
@@ -43,28 +39,24 @@ Use `$canonize-mark` when the user wants non-canonical documents preserved in pl
 
    When a temporary document names a constraint that should be enforced in code, configuration, schema, or tests, verify the existing enforcement. Preserve an established normative constraint as intent and report any enforcement gap instead of claiming that implementation conforms. Treat an unaccepted constraint as an unresolved decision.
 
-   Completion criterion: every temporary or stale document has been checked for durable intent and active constraints; each meaning has one authoritative home; canon contains non-derivable current intent rather than repository inventory or planning history.
-
 4. Update adapters.
 
-   Make existing adapters point to the canon read order. Create an adapter only when repository convention or the user requires one. Keep legacy `CONTEXT.md` files compact; `docs/canon/language.md` remains the owner of language canon.
-
-   Completion criterion: every adapter points to existing canonical files or authoritative executable sources, duplicates no canon at length, and contains no authoritative link to temporary, stale, or unknown material.
+   Make existing adapters link to relevant canon with a use condition for each file. Create an adapter only when repository convention or the user requires one. Keep legacy `CONTEXT.md` files compact; `docs/canon/language.md` remains the owner of language canon.
 
 5. Remove absorbed sediment.
 
    For each document classified `temporary` or `stale`, verify that its active constraints were reconciled with their authoritative prose or executable home, then remove the exact file and any now-empty ADR or decision-record directory. Preserve canonical files, adapters, protected references, source files, tests, generated tool state, out-of-scope nested projects, and `unknown` documents. Report every preserved unknown.
 
-   Completion criterion: every temporary or stale document is removed after reconciliation; every unknown and protected document remains; no removed document can continue steering implementation through an authoritative link.
-
 6. Reconcile references and canon ownership.
 
    Search maintained documentation and adapters for the paths and titles of removed files. Also search for important project terms from removed documents. Rewrite stale links, remove competing canonical statements, and verify the canon file metadata and ownership rules from the reference.
-
-   Completion criterion: no removed path or title remains as a live reference; representative searches for important project concepts return current executable sources or canon without competing statements from temporary or stale documentation; every durable meaning has one prose or executable owner; every canonical file changed in this run was genuinely reviewed.
 
 7. Report the result.
 
    Summarize changed canon files, adapter changes, removed sediment, protected and unknown documents left in place, reference cleanup, and facts requiring human judgment.
 
-   Completion criterion: the user can account for every in-scope document and distinguish trusted canon from preserved uncertainty.
+## Completion
+
+- Every in-scope document has a classification. Reconcile active constraints before removing temporary or stale material.
+- Each durable meaning has one authoritative home. Preserve protected and unknown documents, and report uncertainty or enforcement gaps.
+- Changed adapters point to valid sources with reading conditions. Removed files have no live references, and changed canon metadata reflects actual review.

@@ -88,12 +88,12 @@ When a constraint can be enforced at reasonable cost, prefer a type, test, lint 
 
 ## Agent consumption
 
-Use this read order when the files exist:
+Read a canon file only when its subject affects the task:
 
-1. `docs/canon/language.md`
-2. `docs/canon/product.md`
-3. `docs/canon/trajectory.md`
-4. `docs/canon/system.md`
-5. `docs/canon/engineering.md`
+- `language.md`: terms or naming boundaries need clarification.
+- `product.md`: product scope, behavior, or non-goals need clarification.
+- `trajectory.md`: a proposed change depends on current product direction.
+- `system.md`: architecture, runtime boundaries, or invariants are affected.
+- `engineering.md`: a relevant engineering constraint or verification rule is needed.
 
-Adapters such as `AGENTS.md`, `CLAUDE.md`, root `CONTEXT.md`, `CONTEXT-MAP.md`, and `docs/agents/domain.md` may point to this order. Other Markdown becomes authoritative only when canon or repository instructions identify it as such.
+Adapters such as `AGENTS.md`, `CLAUDE.md`, root `CONTEXT.md`, `CONTEXT-MAP.md`, and `docs/agents/domain.md` should pair each document link with its use condition. Do not require the full set before every edit. Other Markdown becomes authoritative only when canon or repository instructions identify it as such.
