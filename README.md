@@ -101,6 +101,7 @@ Omit `-g` to install into the current project only. Use `-a <agent>` to target a
 | `create-verification-skill` | Create and prove a project-local skill that controls the real app and records its user-facing feature map. |
 | `maintain-verification-skill` | Audit a project-local verification skill against source and live user behavior. |
 | `improve-architecture` | Assess, document, or improve architecture with evidence and executable guardrails. |
+| `improve-loop` | Analyze previous development chats and recommend measurable improvements to the agentic loop. |
 | `canonize` | Normalize `docs/canon/` and remove planning sediment. |
 | `canonize-mark` | Normalize canon while preserving and marking non-canonical docs. |
 
@@ -121,6 +122,8 @@ start-work
 `brainblast` and `debug-work` sit outside the main implementation workflow. Use `brainblast` before shaping when the idea is still exploratory. Use `debug-work` when the problem is broken behavior rather than planned product work.
 
 `improve-architecture` is a focused structural workflow. It can assess in chat, document durable architectural intent, or implement a selected bounded improvement with an executable guardrail.
+
+`improve-loop` looks across previous development chats for recurring friction in the agentic workflow. It produces evidence-backed recommendations and a first experiment; implementation follows when requested.
 
 `init-project` is a setup workflow. It creates or updates `AGENTS.md` with a confirmed `pre-release` or `released` lifecycle and a short verification policy. It adds product precedent, architectural durability, or detailed test classifications when requested or established by project decisions.
 
@@ -165,6 +168,7 @@ Adjacent modes:
 | `create-verification-skill` | The project has no repeatable way to control and prove its real user surface. | Use the generated `verify-<app>` skill during later implementation and review work. |
 | `maintain-verification-skill` | An existing verifier or feature map needs a full source and live audit. | Return a clean result, a coherent proven correction, or a precise blocker. |
 | `improve-architecture` | The repository lacks a clear architecture contract or applies its patterns inconsistently. | Assess in chat, document durable intent, or implement a selected bounded finding. |
+| `improve-loop` | Previous development chats reveal recurring rework, weak feedback, or avoidable human intervention. | Recommend the smallest supported workflow change and how to evaluate it; implement when requested. |
 
 ## Skill details
 
@@ -254,6 +258,18 @@ Use this to audit an existing project-local verifier. It checks every mapped fea
 ### `improve-architecture`
 
 Use this when the question is not whether one change is good, but whether the repository applies its architectural decisions consistently. It can assess the system in chat, update a concise architecture contract, or implement a selected bounded remediation. Prefer executable boundary checks over prose-only rules when the constraint can be enforced.
+
+### `improve-loop`
+
+Use this to learn from previous agentic development chats. It reconstructs consequential decisions and feedback, groups repeated symptoms by cause, and checks the relevant tools, skills, instructions, and guardrails before recommending a change. A bare invocation analyzes the current project's development chats from the last two weeks, finds recurring sources of rework, and recommends the first change to try. Additional instructions can override the scope or focus.
+
+The default result stays in chat: prioritized findings with source evidence, concrete change targets, practices worth preserving, and a way to measure improvement on comparable future tasks. It distinguishes agent mistakes from changing requirements and useful exploration. Mechanical failures favor deterministic checks; judgment calls belong in focused workflow or review guidance.
+
+Example:
+
+```txt
+$improve-loop
+```
 
 ### `canonize` and `canonize-mark`
 

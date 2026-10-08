@@ -1,0 +1,6 @@
+interface:
+  display_name: "Improve Loop"
+  short_description: "Find workflow improvements in past development chats"
+  default_prompt: "Use $improve-loop to analyze this project's development chats from the last two weeks, find recurring sources of rework, and recommend the first change to try."
+policy:
+  allow_implicit_invocation: false
