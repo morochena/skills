@@ -36,9 +36,15 @@ Prioritize issues in this order:
 
    Review the diff, affected call paths, state transitions, data boundaries, user-visible behavior, and relevant tests. Run focused checks that distinguish a suspected issue from a harmless pattern.
 
+   Look beyond symbol references when safety depends on a serialized shape, persisted state, dependency version or patch, scheduling order, feature flag, or downstream consumer. Identify the few assumptions that make the change safe and use the cheapest isolated check of the real behavior that can refute them. Mark an assumption unproven when the evidence stops short; do not alter the reviewed files or run unsafe probes to complete a read-only review.
+
    When a matching project-local verifier exists, run its doctor check and the affected feature recipes when they use isolated scratch state. Follow its evidence and cleanup rules. Do not run recipes that can affect live services, user data, money, or people without separate authorization. Report stale verifier instructions or unsafe prerequisites as verification gaps; do not correct them inside `$review-work`.
 
-   Look for vague names, mixed abstraction levels, leaky abstractions, costly indirection, hidden control flow, behavior tested through implementation details, and inconsistency with established local patterns.
+   Assess important tests against two counterfactuals: would an incorrect result, missing effect, or duplicate effect fail the test, and would a behavior-preserving internal refactor keep it passing? Derive expected results from the contract. An assertion about a request to an external service can be behavioral; an assertion about which private helper ran usually is not. Use a mutation in an isolated copy only when it safely resolves a real coverage question, and leave the reviewed files unchanged.
+
+   Look for vague names, mixed abstraction levels, leaky abstractions, costly indirection, hidden control flow, and inconsistency with established local patterns. Assess reader load through both the layers a reader must trace and the mutable state they must remember. Neither line count nor a single caller establishes a problem on its own.
+
+   When a performance claim affects the review verdict, check correct completed work, comparable conditions, and run-to-run variation. If installed, read [../benchmark-checklist/SKILL.md](../benchmark-checklist/SKILL.md) for detailed guidance within this review's scope.
 
 4. Validate and prioritize findings.
 

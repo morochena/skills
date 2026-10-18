@@ -98,6 +98,7 @@ Omit `-g` to install into the current project only. Use `-a <agent>` to target a
 | `do-work` | Implement settled intent in small verifiable slices. |
 | `review-work` | Review implementation quality, clarity, scope, tests, and polish. |
 | `debug-work` | Diagnose broken, flaky, slow, or surprising behavior. |
+| `benchmark-checklist` | Audit measured performance claims for correct work, fair comparisons, repeatability, and relevance. |
 | `create-verification-skill` | Create and prove a project-local skill that controls the real app and records its user-facing feature map. |
 | `maintain-verification-skill` | Audit a project-local verification skill against source and live user behavior. |
 | `improve-architecture` | Assess, document, or improve architecture with evidence and executable guardrails. |
@@ -165,6 +166,7 @@ Adjacent modes:
 | `brainblast` | The idea may be interesting, but is not requirements yet. | Hand off to `shape-work` when decisions remain; otherwise use `do-work` or `plan-work` when coordination requires it. |
 | `challenge-plan` | The user explicitly asks for a council, pressure test, red-team review, or adversarial review of an existing plan. | Return a readiness verdict, then hand off to `plan-work`, `shape-work`, or `do-work` as needed. |
 | `debug-work` | Something is broken, slow, flaky, or surprising. | Fix directly when obvious; otherwise use `shape-work` for product decisions, `plan-work` for coordination, or `do-work` for a settled fix. |
+| `benchmark-checklist` | A benchmark or measured speedup or regression claim needs validation. | Report the supported conclusion and evidence gaps; return to the authorized work. |
 | `create-verification-skill` | The project has no repeatable way to control and prove its real user surface. | Use the generated `verify-<app>` skill during later implementation and review work. |
 | `maintain-verification-skill` | An existing verifier or feature map needs a full source and live audit. | Return a clean result, a coherent proven correction, or a precise blocker. |
 | `improve-architecture` | The repository lacks a clear architecture contract or applies its patterns inconsistently. | Assess in chat, document durable intent, or implement a selected bounded finding. |
@@ -247,6 +249,12 @@ When the reviewed user surface has a project-local `verify-<app>` skill, `review
 
 Use this for broken, flaky, slow, or surprising behavior. It is a diagnosis loop: state the claim, gather facts, reproduce or narrow the signal, localize the fault, test hypotheses, then fix or brief the fix.
 
+### `benchmark-checklist`
+
+Use this when producing or reviewing a measured performance claim. It checks that correct work happened, configurations are comparable, the result separates from noise, and the claim matters to the user's workload. Sampling follows the decision and observed variation. A measured effect can be supported while its causal explanation remains unproven.
+
+Invoke `$benchmark-checklist` for a focused measurement audit. When it is installed, `debug-work` and `review-work` also read it as guidance when a performance comparison affects their result; that does not start a separate workflow or authorize broader benchmarking.
+
 ### `create-verification-skill`
 
 Use this when a project has no repeatable way to control its real app surface and capture proof. It inspects the repository, creates a project-local `verify-<app>` skill and feature map, then runs one mapped feature from launch through cleanup before handoff. Project verifiers permit automatic selection by default. Configure an individual verifier as explicit-only only when that project needs it.
@@ -298,4 +306,4 @@ The intended value is a calmer workflow: clarify what matters, test uncertainty 
 
 This suite draws on ideas and working patterns from [pstack](https://github.com/cursor/plugins/tree/main/pstack) and [Matt Pocock's agent skills](https://github.com/mattpocock/skills). It adapts those influences to this suite's explicit, evidence-first workflow.
 
-`create-verification-skill` and `maintain-verification-skill` are direct adaptations of pstack's [creation](https://github.com/cursor/plugins/blob/main/pstack/skills/create-verification-skill/SKILL.md) and [maintenance](https://github.com/cursor/plugins/blob/main/pstack/skills/maintain-verification-skill/SKILL.md) workflows. Each adapted skill includes the upstream MIT License.
+`create-verification-skill`, `maintain-verification-skill`, and `benchmark-checklist` adapt pstack's [creation](https://github.com/cursor/plugins/blob/main/pstack/skills/create-verification-skill/SKILL.md), [maintenance](https://github.com/cursor/plugins/blob/main/pstack/skills/maintain-verification-skill/SKILL.md), and [benchmark](https://github.com/cursor/plugins/blob/main/pstack/skills/benchmark-checklist/SKILL.md) workflows. Each adapted skill includes the upstream MIT License.

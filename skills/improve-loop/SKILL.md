@@ -36,6 +36,8 @@ With no additional instructions, analyze the current project's development chats
 
    Connect each change to an observed cause and put it where it can affect the next run. Prefer removing duplication, correcting routing, exposing existing information, or wiring an existing check before adding new process. Mechanical constraints belong in deterministic checks; reserve prose for decisions requiring judgment.
 
+   For a new or repaired automated guardrail, demonstrate that it rejects a representative instance of the target mistake and accepts a legitimate case. Prefer a scoped reconstruction of an observed failure in disposable state. Verify that rejection is for the intended reason and that the check runs where future work will encounter it. If this cannot be demonstrated safely or practically, report enforcement as unproven; do not count a passing clean run as detection evidence.
+
    Assess changes by outcome quality, recurrence, avoidable effort, human interruption, and maintenance cost. Do not optimize call count or speed by weakening necessary verification or autonomy boundaries. A serious single incident can justify action; a one-off preference rarely justifies a global rule.
 
 5. Report and define an experiment.
@@ -43,6 +45,8 @@ With no additional instructions, analyze the current project's development chats
    Present findings in descending order of consequence, then observed recurrence and expected benefit relative to effort. Use the finding format below. Separate observed facts, likely causes, and untested hypotheses. State when no actionable improvement is supported rather than filling a quota.
 
    Recommend which change to try first and how to evaluate it on comparable future work. Change one mechanism at a time when attribution matters. If implementation is requested, complete the selected changes and relevant checks; label the benefit unproven until subsequent runs provide evidence. Schedule future evaluation only when the user requests it.
+
+   When a consequential skill or workflow change warrants a controlled comparison, define observable success criteria before examining candidate results. Use comparable tasks and starting conditions, retain unsuccessful attempts, and hide variant identity from an evaluator when practical. Judge outputs, actions, and verification evidence rather than claims of instruction compliance. Respect the available budget and label small or confounded samples; a retrospective does not automatically start an evaluation run or require a review panel.
 
 ## Analysis Lenses
 

@@ -37,9 +37,15 @@ Use the current workspace. Create a branch or worktree only when the user reques
 
    Choose the smallest end-to-end slice that can run, render, or otherwise expose real behavior. When technical feasibility remains uncertain, use a disposable probe or narrow harness before committing production structure. Apply what the result teaches, and do not let throwaway structure enter the product without review. For a purely mechanical change where slicing adds no signal, use the smallest coherent batch instead.
 
+   When state transitions or repeated branches drive the slice, choose a data shape that captures their invariants before adding logic. A discriminated union, state machine, registry, or better collection can remove coordinated booleans and duplicated decisions. Keep straightforward local code when a new structure would add more complexity than it removes.
+
+   For commands, jobs, migrations, or lifecycle operations subject to retries or interruption, check repetition and partial completion before relying on their effects. Reconcile existing state with the intended result; use the relevant transaction, idempotency key, or recovery mechanism where partial work could duplicate or lose an effect. Verify changed repeat and recovery behavior with isolated state.
+
 4. Assign implementation streams.
 
    Create streams only where independence improves delivery. Give each stream one owner, narrow context, expected outputs, likely files, and verification. Delegate independent modules, separate research, isolated test work, stable frontend/backend slices, and reviewable mechanical changes when worker agents are available. Keep overlapping files, shared interfaces, migrations, architecture boundaries, and design-sensitive changes with the coordinator.
+
+   Check what concurrent actors can mutate, including application state and verification data. Split independent outputs into separately owned files, keys, or instances before adding synchronization. When a shared write target is inherent, enforce single-writer ownership, atomic updates, or locking; an instruction to avoid collisions is not concurrency control.
 
 5. Integrate and verify continuously.
 

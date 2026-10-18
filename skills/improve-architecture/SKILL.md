@@ -40,7 +40,7 @@ When an improve request does not select a boundary or finding, establish the evi
 
 3. Test conformance.
 
-   Trace representative behavior and dependencies across the contract's boundaries. Look for misplaced business rules, reversed or circular dependencies, parallel patterns, inconsistent domain representation, leaking infrastructure details, costly indirection, dependency magnets, brittle test boundaries, incomplete migrations, obsolete seams, and rules too vague to apply.
+   Trace representative behavior and dependencies across the contract's boundaries. Look for misplaced business rules, reversed or circular dependencies, parallel patterns, inconsistent domain representation, leaking infrastructure details, costly indirection, dependency magnets, brittle test boundaries, incomplete migrations, obsolete seams, and rules too vague to apply. When investigating structural complexity or ownership, read [references/structural-review.md](references/structural-review.md) for focused questions and counterexamples. These lenses do not establish new repository rules.
 
    Inspect enough call sites, tests, history, and counterexamples to distinguish violations from intentional exceptions. When cheap, turn a suspected violation into a reproducible dependency query, architecture test, lint rule, type check, or focused behavioral test. Group repeated instances under one architectural issue.
 

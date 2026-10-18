@@ -26,7 +26,13 @@ Establish a trustworthy red signal, explain it, then turn it green or brief the 
 
    Test one hypothesis at a time with targeted instrumentation, temporary logging, focused tests, measurements, or code reading. Prefer the simplest explanation that accounts for all observed evidence.
 
+   After two attempted fixes that share a premise fail the same signal, state that premise and test it before another fix relies on it. Choose an observation that would differ if the premise were false. If it cannot yet be tested, name the evidence gap and seek a discriminating measurement instead of layering on another speculative patch.
+
+   When a performance comparison drives the diagnosis, check correct completed work, comparable conditions, and run-to-run variation. If installed, read [../benchmark-checklist/SKILL.md](../benchmark-checklist/SKILL.md) for detailed measurement guidance within this workflow.
+
 5. Resolve or brief.
+
+   Before adding a guard, retry, or fallback, determine whether the triggering state is legitimate. Handle a legitimate state at the responsible boundary; otherwise trace the invalid state to its producer. Preserve necessary containment while correcting the cause.
 
    When resolution is authorized and the diagnosis is conclusive, implement the smallest readable change at the localized boundary. When resolution needs a product decision, produce a concise brief and recommend `$shape-work`. Recommend `$plan-work` only when the diagnosed fix creates durable coordination, migration order, shared-interface ownership, or a costly commitment.
 

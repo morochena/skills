@@ -1,0 +1,6 @@
+interface:
+  display_name: "Benchmark Checklist"
+  short_description: "Validate performance measurements and comparisons"
+  default_prompt: "Use $benchmark-checklist to audit this performance claim and the evidence behind it."
+policy:
+  allow_implicit_invocation: false

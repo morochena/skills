@@ -20,6 +20,7 @@ Inspect only enough local context to choose the smallest useful workflow. For a 
 
    - Initialize or revise repository agent instructions: recommend `$init-project`.
    - Explore an idea without committing to requirements: recommend `$brainblast`.
+   - Audit a benchmark or measured performance comparison: recommend `$benchmark-checklist`.
    - Diagnose broken, flaky, slow, or surprising behavior: recommend `$debug-work`.
    - Create a project-local way to control and prove real app behavior: recommend `$create-verification-skill`.
    - Audit or correct an existing project-local verification skill: recommend `$maintain-verification-skill`.
