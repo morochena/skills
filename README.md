@@ -97,6 +97,7 @@ Omit `-g` to install into the current project only. Use `-a <agent>` to target a
 | `challenge-plan` | Run a user-requested adversarial review of an existing plan. |
 | `do-work` | Implement settled intent in small verifiable slices. |
 | `review-work` | Review implementation quality, clarity, scope, tests, and polish. |
+| `investigate-work` | Explain current code behavior and design rationale, read-only, using sources relevant to the question. |
 | `debug-work` | Diagnose broken, flaky, slow, or surprising behavior. |
 | `benchmark-checklist` | Audit measured performance claims for correct work, fair comparisons, repeatability, and relevance. |
 | `create-verification-skill` | Create and prove a project-local skill that controls the real app and records its user-facing feature map. |
@@ -121,6 +122,8 @@ start-work
 ```
 
 `brainblast` and `debug-work` sit outside the main implementation workflow. Use `brainblast` before shaping when the idea is still exploratory. Use `debug-work` when the problem is broken behavior rather than planned product work.
+
+Use `investigate-work` when understanding the code or its design rationale is the deliverable. It returns a sourced answer in chat and keeps the investigation read-only.
 
 `improve-architecture` is a focused structural workflow. It can assess in chat, document durable architectural intent, or implement a selected bounded improvement with an executable guardrail.
 
@@ -165,6 +168,7 @@ Adjacent modes:
 | `init-project` | The repository needs durable agent instructions or an explicit lifecycle. | Return to the requested work after project setup. |
 | `brainblast` | The idea may be interesting, but is not requirements yet. | Hand off to `shape-work` when decisions remain; otherwise use `do-work` or `plan-work` when coordination requires it. |
 | `challenge-plan` | The user explicitly asks for a council, pressure test, red-team review, or adversarial review of an existing plan. | Return a readiness verdict, then hand off to `plan-work`, `shape-work`, or `do-work` as needed. |
+| `investigate-work` | The user wants to understand how code works or why it was designed that way. | Return a read-only explanation with relevant sources and evidence gaps. |
 | `debug-work` | Something is broken, slow, flaky, or surprising. | Fix directly when obvious; otherwise use `shape-work` for product decisions, `plan-work` for coordination, or `do-work` for a settled fix. |
 | `benchmark-checklist` | A benchmark or measured speedup or regression claim needs validation. | Report the supported conclusion and evidence gaps; return to the authorized work. |
 | `create-verification-skill` | The project has no repeatable way to control and prove its real user surface. | Use the generated `verify-<app>` skill during later implementation and review work. |
@@ -244,6 +248,18 @@ Branches or worktrees are not the default. Use them when you explicitly want che
 Use this after implementation or when reviewing a diff. It focuses on correctness, scope fidelity, readability, complexity, naming, abstraction quality, pragmatic test coverage, performance, polish, and edge cases.
 
 When the reviewed user surface has a project-local `verify-<app>` skill, `review-work` uses its applicable feature recipes with isolated scratch state. It reports verifier drift but does not repair it during a read-only review.
+
+### `investigate-work`
+
+Use this for code walkthroughs, ownership or placement questions, and design rationale. It traces current behavior through code, types, tests, and configuration. For historical rationale, it follows relevant commits, PRs, issues, and design records; connected sources are used only when they can resolve a material gap. It distinguishes recorded intent from inference and says when the rationale is unknown.
+
+The result stays in chat. It does not edit code or docs, change application state, or post to external systems. There is no mandatory source sweep, delegation, or report template.
+
+Example:
+
+```txt
+$investigate-work — explain how cancellation reaches the worker and why ownership lives in the coordinator
+```
 
 ### `debug-work`
 

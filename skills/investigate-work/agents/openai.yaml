@@ -1,0 +1,6 @@
+interface:
+  display_name: "Investigate Work"
+  short_description: "Explain code behavior and design rationale"
+  default_prompt: "Use $investigate-work to explain how this code works and why it was designed this way, using sources relevant to the question."
+policy:
+  allow_implicit_invocation: false

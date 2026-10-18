@@ -26,6 +26,7 @@ Inspect only enough local context to choose the smallest useful workflow. For a 
    - Audit or correct an existing project-local verification skill: recommend `$maintain-verification-skill`.
    - Adversarially stress-test a completed plan before implementation: recommend `$challenge-plan`.
    - Review an existing change: recommend `$review-work`.
+   - Explain current code behavior or investigate the rationale for a design choice: recommend `$investigate-work`.
    - Analyze previous development chats and improve the agentic workflow: recommend `$improve-loop`.
    - Establish or audit repository architecture: recommend `$improve-architecture`.
    - Normalize canon and remove planning sediment: recommend `$canonize`.
