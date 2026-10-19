@@ -43,9 +43,21 @@ Use the current workspace. Create a branch or worktree only when the user reques
 
 4. Assign implementation streams.
 
-   Create streams only where independence improves delivery. Give each stream one owner, narrow context, expected outputs, likely files, and verification. Delegate independent modules, separate research, isolated test work, stable frontend/backend slices, and reviewable mechanical changes when worker agents are available. Keep overlapping files, shared interfaces, migrations, architecture boundaries, and design-sensitive changes with the coordinator.
+   Treat available worker capacity as a ceiling. Create streams only when their expected benefit exceeds coordination and integration overhead. Delegate independent modules, separate research, isolated test work, stable frontend/backend slices, and reviewable mechanical changes when worker agents are available. Give each stream one owner. Keep overlapping files, shared interfaces, migrations, architectural decisions and boundaries, design-sensitive changes, and final integration with the coordinator.
+
+   Default to focused-context workers. Where supported, use `fork_turns: "none"` and provide the planned context packet: objective and expected output, owned files, relevant instruction/reference paths, settled contracts and decisions, dependencies, acceptance checks, and shared-state restrictions. Without a plan, assemble the same packet from settled intent. Reference authoritative files instead of copying the conversation or entire documents. Respect configured worker model and reasoning-effort defaults; do not silently inherit the coordinator's higher effort through full-history forks.
+
+   If more context is needed, send the missing facts or reference paths before replacing the worker or copying full history. Reuse an existing worker for related follow-ups while its context remains relevant. Avoid duplicate exploration already covered by another worker.
 
    Check what concurrent actors can mutate, including application state and verification data. Split independent outputs into separately owned files, keys, or instances before adding synchronization. When a shared write target is inherent, enforce single-writer ownership, atomic updates, or locking; an instruction to avoid collisions is not concurrency control.
+
+   Require a concise worker handoff:
+
+   1. Outcome and changed files.
+   2. Checks run, their results, and evidence paths.
+   3. Unrun checks, blockers, assumptions, or integration actions.
+
+   Keep full logs, large diffs, and supporting artifacts in files and reference their paths. Include enough detail to assess correctness without reproducing the work transcript.
 
 5. Integrate and verify continuously.
 

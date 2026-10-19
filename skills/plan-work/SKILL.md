@@ -20,7 +20,9 @@ Read only the code, canon, tests, and prior results needed to establish affected
 
 Record the goal, constraints, non-goals, acceptance signals, and every requested outcome. Mark user-chosen deferrals explicitly. Do not silently reduce scope to make the plan easier to execute.
 
-For each outcome, identify its implementation location, dependencies, and verification. Create independent work streams only when they help. Each stream needs an owner, required context, likely files, expected output, and checks. Keep sequential work on the critical path.
+For each outcome, identify its implementation location, dependencies, and verification. Treat available worker capacity as a ceiling. Create streams only when their expected benefit exceeds coordination and integration overhead. Keep sequential work on the critical path.
+
+For each delegated stream, name one owner and define a focused context packet: objective and expected output, owned files, relevant instruction/reference paths, settled contracts and decisions, dependencies, acceptance checks, and shared-state restrictions. Reference authoritative files instead of copying the conversation or entire documents.
 
 Give one coordinator ownership of shared interfaces, overlapping files, migrations, architecture decisions, and final integration. State what makes each dependent step ready to start. Use the current workspace; propose branches or worktrees only when the user requests isolation or likely conflicts justify asking.
 
