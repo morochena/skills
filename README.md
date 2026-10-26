@@ -237,7 +237,7 @@ Use this only when you explicitly want a separate adversarial review of an exist
 
 ### `do-work`
 
-Use this to implement settled intent or execute a coordination plan. Start with the smallest slice that can run and teach the agent something. Worker agents can handle independent streams in the current workspace when the platform supports them, but shared interfaces, architecture, and final verification stay with the coordinator.
+Use this to implement settled intent or execute a coordination plan. Start with the smallest slice that can run and teach the agent something. Default to one agent loop with relevant skills and references loaded as needed, and batch independent tool calls. Use workers when separate context, independently useful parallel output, or an independent check earns the handoff and integration cost. Separate files alone do not establish independence. Shared interfaces, architecture, and final verification stay with the coordinator, with capacity reserved within any shared budget.
 
 When the changed user surface has a project-local `verify-<app>` skill, `do-work` uses its applicable feature recipes for final verification. It does not create or maintain the verifier automatically.
 
@@ -269,6 +269,8 @@ Use this for broken, flaky, slow, or surprising behavior. It is a diagnosis loop
 
 Use this when producing or reviewing a measured performance claim. It checks that correct work happened, configurations are comparable, the result separates from noise, and the claim matters to the user's workload. Sampling follows the decision and observed variation. A measured effect can be supported while its causal explanation remains unproven.
 
+For agent workflow comparisons, it also checks actual delegation, shared budgets, failed attempts, output quality, citation accuracy, and usage accounting. A faster successful run does not establish a more accurate audit, and reported tokens alone do not establish monetary savings.
+
 Invoke `$benchmark-checklist` for a focused measurement audit. When it is installed, `debug-work` and `review-work` also read it as guidance when a performance comparison affects their result; that does not start a separate workflow or authorize broader benchmarking.
 
 ### `create-verification-skill`
@@ -277,7 +279,7 @@ Use this when a project has no repeatable way to control its real app surface an
 
 ### `maintain-verification-skill`
 
-Use this to audit an existing project-local verifier. It checks every mapped feature against source, runs every feature through one coordinated live pass, and leaves only corrections that it proves. Product regressions stay out of the verifier diff and are reported separately.
+Use this to audit an existing project-local verifier. It checks every mapped feature against source, runs every feature through one coordinated live pass, and leaves only corrections that it proves. The source pass defaults to one loop; bounded feature groups can use workers when the benefit exceeds handoff and synthesis overhead. Product regressions stay out of the verifier diff and are reported separately.
 
 ### `improve-architecture`
 
@@ -314,7 +316,9 @@ These skills aim for a few defaults:
 - **Pragmatic verification.** Tests and checks should buy confidence. They are tools, not rituals.
 - **Real user proof.** A project-local verifier can preserve exact launch, control, evidence, and cleanup knowledge when ordinary test commands do not prove the full user path.
 - **Canon over sediment.** Code, configuration, schemas, and tests own mechanically discoverable truth. Canon preserves durable intent and constraints they cannot express.
-- **Parallel where useful.** Shape work into independent streams only where independence is real, with one coordinating agent session owning shared boundaries and final integration.
+- **One loop by default.** Keep coupled reasoning together and load skills as needed. Add workers when separate context, useful parallel output, or independent verification justifies the overhead. Preserve required execution and authority boundaries, and reserve shared budget for integration and verification.
+
+The [2026-10-24 example-task comparison](evals/agent-loops/results/2026-10-24.md) supports keeping delegation conditional. Verifier maintenance used fewer reported tokens in one loop; independent utilities finished faster with workers. The updated ledger profile was slower. These skills establish a coordination default, with elapsed time, usage, and output quality assessed separately.
 
 The intended value is a calmer workflow: clarify what matters, test uncertainty cheaply, coordinate only where needed, implement with readable defaults, and preserve only the context the repository cannot express for itself.
 

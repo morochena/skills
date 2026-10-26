@@ -6,7 +6,7 @@ disable-model-invocation: true
 
 # Do Work
 
-Implement settled intent through the smallest useful working slices. Act as coordinator and final integrator when real parallel streams exist; keep architectural judgment, shared interfaces, and final verification centralized.
+Implement settled intent through the smallest useful working slices in one agent loop by default. Load relevant skills and references as needed. Act as coordinator and final integrator when real parallel streams exist; keep architectural judgment, shared interfaces, and final verification centralized.
 
 Continue until the full requested scope and required checks are complete, or a concrete blocker prevents dependent work. Complete independent authorized work before reporting a blocker. Do not stop after the first slice or ask again for permission already supplied by the request or settled conversation. Existing authorization does not cover extra scope or external actions.
 
@@ -41,9 +41,13 @@ Use the current workspace. Create a branch or worktree only when the user reques
 
    For commands, jobs, migrations, or lifecycle operations subject to retries or interruption, check repetition and partial completion before relying on their effects. Reconcile existing state with the intended result; use the relevant transaction, idempotency key, or recovery mechanism where partial work could duplicate or lose an effect. Verify changed repeat and recovery behavior with isolated state.
 
-4. Assign implementation streams.
+4. Choose execution boundaries.
 
-   Treat available worker capacity as a ceiling. Create streams only when their expected benefit exceeds coordination and integration overhead. Delegate independent modules, separate research, isolated test work, stable frontend/backend slices, and reviewable mechanical changes when worker agents are available. Give each stream one owner. Keep overlapping files, shared interfaces, migrations, architectural decisions and boundaries, design-sensitive changes, and final integration with the coordinator.
+   Keep tightly coupled investigation, implementation, and verification in the same loop. Batch independent tool calls for routine reads. Separate files or specialties alone do not establish independent work; a shared workspace does not give workers shared reasoning context.
+
+   Delegate when a bounded task benefits from a separate context, independently useful parallel output, or an independent check, and that benefit exceeds context transfer, coordination, and integration overhead. Stable module contracts, a self-contained research question, or a reviewable mechanical transformation can provide such a boundary. Treat available worker capacity as a ceiling. Give each stream one owner. Keep shared interfaces, overlapping edits, migrations, architectural decisions, design-sensitive changes, and final integration with the coordinator.
+
+   Before dispatch, check whether parent and workers share turn, time, or usage limits. Bound worker scope and concurrency and reserve capacity for integration and final verification. Preserve required sandbox, credential, and publication boundaries regardless of how many reasoning loops are used.
 
    Default to focused-context workers. Where supported, use `fork_turns: "none"` and provide the planned context packet: objective and expected output, owned files, relevant instruction/reference paths, settled contracts and decisions, dependencies, acceptance checks, and shared-state restrictions. Without a plan, assemble the same packet from settled intent. Reference authoritative files instead of copying the conversation or entire documents. Respect configured worker model and reasoning-effort defaults; do not silently inherit the coordinator's higher effort through full-history forks.
 

@@ -48,6 +48,8 @@ With no additional instructions, analyze the current project's development chats
 
    When a consequential skill or workflow change warrants a controlled comparison, define observable success criteria before examining candidate results. Use comparable tasks and starting conditions, retain unsuccessful attempts, and hide variant identity from an evaluator when practical. Judge outputs, actions, and verification evidence rather than claims of instruction compliance. Respect the available budget and label small or confounded samples; a retrospective does not automatically start an evaluation run or require a review panel.
 
+   If installed, read [../benchmark-checklist/SKILL.md](../benchmark-checklist/SKILL.md) for measurement guidance, including its agent-workflow checks. Keep a rollout recommendation scoped to the measured task family and constraints; output quality and completion must remain visible alongside speed and usage.
+
 ## Analysis Lenses
 
 | Lens | Evidence to look for | Useful intervention |
@@ -59,7 +61,7 @@ With no additional instructions, analyze the current project's development chats
 | Implementation and review | The same correction repeatedly arrives from the user; review misses it; mechanical conventions rely on memory | Automate fixed patterns, banned APIs, import shapes, or file placement. Put judgment calls in the existing review guidance; do not burden implementation context with every review concern. |
 | Skills and steering | Conflicting or redundant instructions, unnecessary ceremony, ignored no-ops, oversized project or global `AGENTS.md` / `CLAUDE.md` | Remove or clarify the ineffective instruction; move details to an existing reference or narrowly triggered skill. Keep always-loaded guidance short and consequential. |
 | Tools and information | Oversized or truncated outputs, repeated polling, rediscovered commands, missing logs, unavailable runtime or service evidence | Narrow queries, batch independent reads, reuse an existing CLI, retain useful logs, or identify the specific read-only access needed. |
-| Coordination and autonomy | Premature stops, avoidable approval requests, overlapping edits, stale handoffs, integration gaps, parallel work with no net benefit | Clarify ownership, dependencies, completion criteria, or authorized continuation in the relevant workflow. Respect decisions and approvals the user actually needs to make. |
+| Coordination and autonomy | Premature stops, avoidable approval requests, overlapping edits, context lost across handoffs, shared-budget exhaustion, integration gaps, parallel work with no net benefit | Keep coupled reasoning in one loop and batch independent tool calls. Retain delegation when separate context, parallel output, or an independent check earns its overhead. Clarify ownership, budgets, completion criteria, and authorized continuation. Respect decisions and approvals the user actually needs to make. |
 
 ## Findings and Follow-Through
 

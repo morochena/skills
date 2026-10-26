@@ -19,6 +19,8 @@ When another workflow reads this file as guidance, apply the checks relevant to 
 
    State the metric, unit, workload, and comparison the decision depends on. Record the relevant revisions, build mode, dependencies, configuration, environment, data size, and concurrency. Read the harness to establish what the timed region includes and excludes, including setup, warmup, lazy work, and asynchronous completion.
 
+   For agent or delegation comparisons, read [references/agent-workflows.md](references/agent-workflows.md). Evaluate completed output quality alongside latency and usage; successful execution alone does not establish a correct result.
+
    For an explicitly requested ballpark estimate, one run can suffice if the work and output are verified. Label it as a single observation. Do not turn it into an option ranking or an established regression claim.
 
 2. Verify that the work completed correctly.

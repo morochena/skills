@@ -20,7 +20,9 @@ Read only the code, canon, tests, and prior results needed to establish affected
 
 Record the goal, constraints, non-goals, acceptance signals, and every requested outcome. Mark user-chosen deferrals explicitly. Do not silently reduce scope to make the plan easier to execute.
 
-For each outcome, identify its implementation location, dependencies, and verification. Treat available worker capacity as a ceiling. Create streams only when their expected benefit exceeds coordination and integration overhead. Keep sequential work on the critical path.
+For each outcome, identify its implementation location, dependencies, and verification. Default to one agent loop with relevant skills and references loaded as needed. Keep tightly coupled reasoning together and batch independent tool calls before adding workers. Delegate only when a separate context, independently useful parallel output, or an independent check justifies context transfer and integration overhead. Separate files or specialties alone do not establish independence. Keep sequential work on the critical path.
+
+Treat available worker capacity as a ceiling. When delegation is useful, check shared turn, time, and usage limits; bound scope and concurrency and reserve capacity for synthesis and final verification. Required sandbox, credential, and publication isolation can remain in place within a single reasoning loop.
 
 For each delegated stream, name one owner and define a focused context packet: objective and expected output, owned files, relevant instruction/reference paths, settled contracts and decisions, dependencies, acceptance checks, and shared-state restrictions. Reference authoritative files instead of copying the conversation or entire documents.
 

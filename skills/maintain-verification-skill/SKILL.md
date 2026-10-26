@@ -43,9 +43,9 @@ Edit only the target verification skill directory: its `SKILL.md`, `agents/`, `f
 
    Explain how each mapped feature works from current source. Identify its source entry points, likely map drift, and one concise live-check recipe.
 
-   When worker agents are available, give them independent read-only feature reviews in parallel. Use one feature per worker when useful, or use bounded batches when feature count exceeds useful concurrency. Workers must not control the app or edit files. Require this return shape from each worker: feature summary, source entry points, likely drift or none, and one live-check recipe.
+   Default to one source investigation loop and batch independent reads. Keep features that share behavior or state together. Delegate a bounded read-only feature group only when its separate context or parallel result is worth the handoff and synthesis overhead. Worker availability or feature count alone does not justify delegation. Check shared turn, time, and usage limits and leave capacity for the live pass and corrections. Workers must not control the app or edit files. Require this return shape from each worker: feature summary, source entry points, likely drift or none, and one live-check recipe.
 
-   The coordinator must receive a source result for every feature. Merge overlapping recipes into as few app states as practical. Check cited drift before editing. Sweep recent user-facing source changes for a feature missing from the map, and require a concrete source path before adding it.
+   Record a source result for every feature, including any delegated result. Merge overlapping recipes into as few app states as practical. Check cited drift before editing. Sweep recent user-facing source changes for a feature missing from the map, and require a concrete source path before adding it.
 
 4. Run the live pass.
 
