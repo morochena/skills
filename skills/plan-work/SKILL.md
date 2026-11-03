@@ -1,6 +1,6 @@
 ---
 name: plan-work
-description: Plan work that needs coordination across shared interfaces, migrations, parallel streams, or costly commitments. Review and refine the plan before execution.
+description: Plan coordinated work around dependencies, material assumptions, and evidence of completion.
 disable-model-invocation: true
 ---
 
@@ -39,11 +39,13 @@ cleanup: absorb-with-canonize
 ---
 ```
 
-## Review and Refine
+## Check the Plan
 
-Read [references/adversarial-review.md](references/adversarial-review.md) when reviewing the draft. Apply the standard review once. Use deep independent review only for a listed high-consequence commitment with a material evidence gap.
+Trace the plan back to the user's intended outcomes and constraints, including workflows that might otherwise be omitted. Identify assumptions and failure modes that could materially change the approach, sequencing, recovery, or acceptance. Prefer a cheap probe, rehearsal, contract check, or narrow implementation slice to speculative debate. Record what each check can establish and what remains unproven.
 
-Apply accepted amendments to the plan and check that every requested outcome still has an owner, execution path, and verification method. Resolve material findings before affected implementation. Do not add another review workflow by default.
+When a consequential assumption remains uncertain and a shared blind spot could be costly, seek focused independent scrutiny if available and authorized. Give it the specific question, relevant evidence, and desired discriminator; use the result to choose a check or amend the plan. Do not start a fixed council or repeat review passes by default. Where independent scrutiny or a check is unavailable, disclose the gap and its effect on the decision.
+
+Check that every requested outcome still has an owner, execution path, and verification method. Resolve material uncertainties before the work that depends on them when feasible; continue independent authorized work.
 
 ## Deliver or Execute
 
@@ -57,5 +59,5 @@ Report the result, checks, and any user-deferred or blocked outcome. When implem
 
 - Every requested outcome is covered or explicitly deferred by the user; facts and assumptions remain distinct.
 - The plan identifies dependencies, one owner for each shared boundary, and a verification method for each outcome.
-- Accepted review findings are resolved in the plan; remaining risks have a named check or decision.
+- Material uncertainties have a named check or decision, and consequential evidence gaps are disclosed.
 - A planning-only request ends with a usable plan. An implementation request ends with verified work or a precise blocker and completed independent work.

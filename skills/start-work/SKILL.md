@@ -25,7 +25,7 @@ Inspect only enough local context to choose the smallest useful workflow. For a 
    - Create a project-local way to control and prove real app behavior: recommend `$create-verification-skill`.
    - Audit or correct an existing project-local verification skill: recommend `$maintain-verification-skill`.
    - Adversarially stress-test a completed plan before implementation: recommend `$challenge-plan`.
-   - Review an existing change: recommend `$review-work`.
+   - Review an existing change when requested: recommend `$review-work`.
    - Explain current code behavior or investigate the rationale for a design choice: recommend `$investigate-work`.
    - Analyze previous development chats and improve the agentic workflow: recommend `$improve-loop`.
    - Establish or audit repository architecture: recommend `$improve-architecture`.
@@ -38,7 +38,7 @@ Inspect only enough local context to choose the smallest useful workflow. For a 
    When no specialized branch matches, choose the first applicable route:
 
    - When a user-owned product or design decision could materially change behavior, scope, architecture, or acceptance, ask for that decision and continue independent authorized work. For routing only, recommend `$shape-work`.
-   - When a cheap reversible artifact can answer the dominant uncertainty, run that probe within the authorized scope and use its result for the next decision or implementation step. For routing only, recommend `$shape-work` if the evidence informs a user-owned decision, or `$do-work` if intent is settled and the uncertainty is technical. Useful probes include wireframes, scripts, focused tests, traces, benchmarks, contracts, and narrow working slices.
+   - When a cheap reversible artifact can answer the dominant uncertainty, run that probe within the authorized scope and use its result for the next decision or implementation step. For routing only, recommend `$shape-work` if the evidence informs a user-owned decision, or `$do-work` if intent is settled and the uncertainty is technical. Useful probes include wireframes, scripts, focused tests, traces, benchmarks, contracts, and narrow working slices. Verify implementation as part of the work; do not add a separate review by default.
    - When intent is settled, feedback is quick, and no shared boundary needs coordination, do clear local work directly if implementation is authorized. For a routing-only request, recommend direct work or `$do-work`.
    - When parallel lanes, migrations, shared interfaces, costly or irreversible commitments, or cross-session handoff require durable coordination, establish the necessary plan before affected work. For routing only, recommend `$plan-work`.
 

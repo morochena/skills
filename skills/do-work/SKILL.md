@@ -69,6 +69,10 @@ Use the current workspace. Create a branch or worktree only when the user reques
 
 6. Verify the integrated behavior.
 
+   Derive expected behavior from the user's intent and established contracts, not only from the implementation or its tests. Identify the consequential failure modes and choose the cheapest convincing checks: for example, existing tests, real user paths, integration or property tests, type or schema checks, or a migration rehearsal. Do not add tests that merely mirror the implementation.
+
+   For a consequential invariant, consider formal methods such as model checking or theorem proving when suitable tooling and the risk justify their cost. State the property, assumptions, and limits; a passing proof does not establish that its model or requirements match production. When a shared blind spot could be costly and evidence remains weak, seek focused independent scrutiny if available and authorized, aimed at a specific assumption or question.
+
    Check changed integration boundaries and use the highest-signal end-to-end path appropriate to the change. Reuse passing results from this run when they cover the final code and relevant environment. When a matching project-local verifier exists, run its doctor check and the feature recipes affected by the change unless valid results already cover them. Follow its isolation, evidence, and cleanup rules. Do not run unrelated mapped features.
 
    Complete required checks. Once relevant checks pass, stop verification. Repeat checks only when changes to code, dependencies, or the environment invalidate their results, or a failure or unresolved concern justifies another run. Expand coverage only for an uncovered risk, failure, or explicit requirement.

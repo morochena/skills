@@ -44,8 +44,8 @@ Add the rest when you hit fuzzy product work (`$shape-work`), real coordination 
 $start-work — "add team invites without overbuilding the org model"
   → $shape-work   (settle boundaries; probe the invite flow if seeing it helps)
     ├─ local implementation → $do-work
-    └─ shared interfaces or parallel work → $plan-work (review and refine) → $do-work
-  → $review-work  (optional quality pass)
+    └─ shared interfaces or parallel work → $plan-work (coordinate and check assumptions) → $do-work
+  → $review-work  (when an independent review is requested)
   → $canonize     (if durable docs changed)
 ```
 
@@ -93,10 +93,10 @@ Omit `-g` to install into the current project only. Use `-a <agent>` to target a
 | `start-work` | Choose the right workflow for a task. |
 | `brainblast` | Explore ideas from multiple angles before shaping or planning. |
 | `shape-work` | Resolve product and design decisions through conversation or cheap working probes. |
-| `plan-work` | Coordinate work, then review and refine the plan in the same run. |
+| `plan-work` | Coordinate work and check material assumptions. |
 | `challenge-plan` | Run a user-requested adversarial review of an existing plan. |
 | `do-work` | Implement settled intent in small verifiable slices. |
-| `review-work` | Review implementation quality, clarity, scope, tests, and polish. |
+| `review-work` | Review implementation against intent and consequential risks. |
 | `ui-craft` | Make interfaces clear and improve UX, developer experience, and agent experience. Automatically available for UI work. |
 | `investigate-work` | Explain current code behavior and design rationale, read-only, using sources relevant to the question. |
 | `debug-work` | Diagnose broken, flaky, slow, or surprising behavior. |
@@ -116,9 +116,9 @@ Start with the smallest useful workflow.
 start-work
   -> direct action for clear, local, reversible work
   -> shape-work for unresolved intent or an evidence-producing probe
-  -> plan-work only for coordination, migration order, or costly commitments; review is included
-  -> do-work for the smallest verifiable implementation slice
-  -> review-work for post-build quality review
+  -> plan-work only for coordination, migration order, or costly commitments
+  -> do-work for implementation and risk-matched verification
+  -> review-work when an independent review is requested
   -> canonize for documentation hygiene
 ```
 
@@ -144,9 +144,9 @@ flowchart LR
   SH --> C
   C -->|"Yes"| P["plan-work"]
   C -->|"No"| DW["do-work or direct action"]
-  P --> PR["proportional review and refinement"]
+  P --> PR["check material assumptions"]
   PR --> DW
-  DW --> R{"Quality pass?"}
+  DW --> R{"Review requested?"}
   R -->|"Yes"| RW["review-work"]
   R -->|"No"| DC{"Docs changed?"}
   RW --> DC
@@ -222,7 +222,7 @@ Use this when the idea is still fuzzy. The agent resolves one decision at a time
 
 ### `plan-work`
 
-Use this when the work needs coordination, migration order, shared-interface ownership, a costly commitment, or a durable handoff. The plan records evidence, assumptions, scope, dependencies, ownership, and verification. It reviews the draft and uses a deep independent council only for a concrete high-consequence commitment with a material evidence gap. A planning-only request receives one refined plan. A request that includes implementation continues through the authorized work and required checks.
+Use this when the work needs coordination, migration order, shared-interface ownership, a costly commitment, or a durable handoff. The plan records evidence, assumptions, scope, dependencies, ownership, and verification. It checks material assumptions with targeted evidence and uses focused independent scrutiny when a consequential blind spot remains and scrutiny is available and authorized. A planning-only request receives one refined plan. A request that includes implementation continues through the authorized work and required checks.
 
 Plans usually stay in chat. Write a file only when coordination must survive the current execution context:
 
@@ -234,7 +234,7 @@ Those files should use temporary frontmatter and later be absorbed or removed by
 
 ### `challenge-plan`
 
-Use this only when you explicitly want a separate adversarial review of an existing plan. Five independent lenses test reuse opportunities, goal alignment, alternative approaches, failure modes, and evidence-backed deliverability. Their anonymized cross-review produces a `Ready`, `Revise`, or `Replan` verdict. Normal Plan Work already includes proportional review and refinement.
+Use this when you explicitly want a separate pressure test of an existing plan. It focuses on consequential assumptions, uses safe probes where useful, and returns a `Ready`, `Revise`, or `Replan` verdict. Independent scrutiny is targeted to a specific question; there is no fixed council or cross-review by default.
 
 ### `do-work`
 
@@ -246,7 +246,7 @@ Branches or worktrees are not the default. Use them when you explicitly want che
 
 ### `review-work`
 
-Use this after implementation or when reviewing a diff. It focuses on correctness, scope fidelity, readability, complexity, naming, abstraction quality, pragmatic test coverage, performance, polish, and edge cases.
+Use this when you request a review of an implementation or diff. It focuses on intent, correctness, consequential risks, and the evidence behind them. Maintainability, accessibility, and interaction concerns remain relevant when they have a credible effect.
 
 When the reviewed user surface has a project-local `verify-<app>` skill, `review-work` uses its applicable feature recipes with isolated scratch state. It reports verifier drift but does not repair it during a read-only review.
 

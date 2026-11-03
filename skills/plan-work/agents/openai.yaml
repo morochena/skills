@@ -1,6 +1,6 @@
 interface:
   display_name: "Plan Work"
-  short_description: "Plan, review, and refine coordinated work"
-  default_prompt: "Use $plan-work to plan, review, and refine this coordinated work from established evidence."
+  short_description: "Plan coordinated work around evidence"
+  default_prompt: "Use $plan-work to plan this coordinated work and identify checks for material assumptions."
 policy:
   allow_implicit_invocation: false

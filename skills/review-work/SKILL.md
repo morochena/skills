@@ -1,6 +1,6 @@
 ---
 name: review-work
-description: Run a findings-first review of implementation correctness, scope, risk, readability, and verification.
+description: Review an implementation against intent and consequential risks, using focused evidence and checks.
 disable-model-invocation: true
 ---
 
@@ -17,8 +17,7 @@ Prioritize issues in this order:
 3. Security, data safety, and privacy risks
 4. Performance, reliability, and operational risks
 5. Test gaps where missing coverage creates real risk
-6. Complexity, readability, naming, and abstraction leakage
-7. UI polish, accessibility, and interaction rough edges
+6. Maintainability, accessibility, and interaction problems with a credible effect on users or future changes
 
 ## Workflow
 
@@ -42,7 +41,7 @@ Prioritize issues in this order:
 
    Assess important tests against two counterfactuals: would an incorrect result, missing effect, or duplicate effect fail the test, and would a behavior-preserving internal refactor keep it passing? Derive expected results from the contract. An assertion about a request to an external service can be behavioral; an assertion about which private helper ran usually is not. Use a mutation in an isolated copy only when it safely resolves a real coverage question, and leave the reviewed files unchanged.
 
-   Look for vague names, mixed abstraction levels, leaky abstractions, costly indirection, hidden control flow, and inconsistency with established local patterns. Assess reader load through both the layers a reader must trace and the mutable state they must remember. Neither line count nor a single caller establishes a problem on its own.
+   Report maintainability or interaction issues when evidence shows a credible effect, such as hidden control flow that makes a consequential change error-prone or an inaccessible user path. Do not search for stylistic differences or propose speculative simplifications merely to produce findings. Neither line count nor a single caller establishes a problem on its own.
 
    When a performance claim affects the review verdict, check correct completed work, comparable conditions, and run-to-run variation. If installed, read [../benchmark-checklist/SKILL.md](../benchmark-checklist/SKILL.md) for detailed guidance within this review's scope.
 
@@ -57,7 +56,7 @@ Prioritize issues in this order:
    - `P0`: Blocks release or risks data/security.
    - `P1`: Likely bug, regression, or serious mismatch.
    - `P2`: Important quality, maintainability, or test risk.
-   - `P3`: Minor polish or optional improvement.
+   - `P3`: Lower-impact actionable issue with a concrete effect.
 
    Report in this order: findings, open questions, short summary, and verification. Attach each finding to the tightest stable file and line range available.
 
