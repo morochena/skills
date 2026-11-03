@@ -51,7 +51,7 @@ $start-work — "add team invites without overbuilding the org model"
 
 ## What is a skill? (TLDR)
 
-Skills are reusable playbooks the agent loads on demand. You invoke them by name (for example `$start-work`). This package is **explicit-invocation by default**: the agent should not silently run the whole workflow unless you ask.
+Skills are reusable playbooks the agent loads on demand. You invoke them by name (for example `$start-work`). This package is **explicit-invocation by default**: the agent should not silently run the whole workflow unless you ask. The `ui-craft` skill is an exception and may be selected automatically for UI work.
 
 Skill selection does not create a new approval step. A planning-only request ends with a plan. When you also request implementation, the agent continues through the authorized work and required checks without requiring another skill call. New scope or external actions still require the appropriate authorization.
 
@@ -97,6 +97,7 @@ Omit `-g` to install into the current project only. Use `-a <agent>` to target a
 | `challenge-plan` | Run a user-requested adversarial review of an existing plan. |
 | `do-work` | Implement settled intent in small verifiable slices. |
 | `review-work` | Review implementation quality, clarity, scope, tests, and polish. |
+| `ui-craft` | Make interfaces clear and improve UX, developer experience, and agent experience. Automatically available for UI work. |
 | `investigate-work` | Explain current code behavior and design rationale, read-only, using sources relevant to the question. |
 | `debug-work` | Diagnose broken, flaky, slow, or surprising behavior. |
 | `benchmark-checklist` | Audit measured performance claims for correct work, fair comparisons, repeatability, and relevance. |
